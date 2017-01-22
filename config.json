@@ -1,0 +1,7 @@
+{
+    "token" : "UserToken",
+    "ownerID": "UserID",
+    "commandPath": "commands/",
+    "commandPrefix": "--",
+    "eval": false
+}
