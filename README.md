@@ -52,6 +52,6 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | delEmote      | Delete a custom emote                                                                             |
 | listEmotes    | List all currently available custom commands                                                      |
 | eval          | Have the selfbot evaluate javascript input and output the results                                 |
-| indicator     | Hake the selfbot spell a phrase in regional indicators                                            |
+| indicator     | Have the selfbot spell a phrase in regional indicators                                            |
 | ping          | Measure the delay between command calls and command execution in ms                               |
 | nitro         | Have the selfbot post a fake embed about a "Nitro-only message"                                   |
