@@ -1,0 +1,32 @@
+{
+  "name": "motiful",
+  "version": "1.0.0",
+  "description": "Discord selfbot built with discord.js",
+  "main": "motiful.js",
+  "dependencies": {
+    "discord.js": "^11.0.0",
+    "moment": "^2.17.1",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robflop/motiful.git"
+  },
+  "keywords": [
+    "discord",
+    "discord.js",
+    "selfbot",
+    "robflop",
+    "twitch",
+    "emotes",
+    "motiful"
+  ],
+  "author": "robflop",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robflop/motiful/issues"
+  },
+  "homepage": "https://github.com/robflop/motiful#readme"
+}
