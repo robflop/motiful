@@ -6,6 +6,9 @@ npm-debug.log*
 # ignore vscode files
 .vscode
 
+# ignore custom emotes
+customemotes
+
 # Runtime data
 pids
 *.pid
