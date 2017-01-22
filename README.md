@@ -4,6 +4,8 @@ A Discord selfbot written using discord.js.
 The selfbot also uses the request and moment packages, plus some standard node modules.
 
 ## Self-hosting usage
+(It is assumed you have node.js installed)
+
 - Get your token from within Discord Dev Tools -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
 - Fill out your token and change the ownerID in config.json to your devmode discord ID (Enable Developer Mode -> Rightclick on yourself -> Copy ID)
 - Adjust other config settings to your liking 
