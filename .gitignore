@@ -9,6 +9,11 @@ npm-debug.log*
 # ignore custom emotes
 customemotes
 
+# ignore some files
+config.json
+disabled_commands.json
+favorite_emotes.json
+
 # Runtime data
 pids
 *.pid
