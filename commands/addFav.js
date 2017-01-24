@@ -53,5 +53,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     };
 };
 
-exports.desc = "Add a twitch subscriber emote to your favorites"; // Export command description
+exports.desc = "Add a twitch subscriber emote to your favorites, allowing you to use it without naming the channel it is from"; // Export command description
 exports.syntax = "<channelname> <emotename>"; // Export command syntax 

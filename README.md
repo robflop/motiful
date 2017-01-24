@@ -50,7 +50,10 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | emote         | Make the selfbot post a global/subscriber twitch emote or custom emote into chat                  |
 | addEmote      | Add a custom emote                                                                                |
 | delEmote      | Delete a custom emote                                                                             |
-| listEmotes    | List all currently available custom commands                                                      |
+| listEmotes    | List all currently available custom Emotes                                                      |
+| addFav        | Add an emote to your favorites list
+| delFav        | Remove an emote from your favorites list
+| listFavs      | List all your favorite emotes
 | eval          | Have the selfbot evaluate javascript input and output the results                                 |
 | indicator     | Have the selfbot spell a phrase in regional indicators                                            |
 | ping          | Measure the delay between command calls and command execution in ms                               |
