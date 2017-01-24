@@ -7,8 +7,6 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     var input = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"'));
     // Define eval input
     if(input == "") {msg.edit("No input given.").then(msg => msg.delete(2000)); return;};
-    msg.delete();
-    // Delete command call
     try {
     // Try evaluating the input
         var output = eval(input);
@@ -29,12 +27,12 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
             output = output.replace(regex, "<token>");
             // ...and finally replace all occurences of the user token with "<token>".
         };
-        msg.channel.sendMessage(`INPUT:\`\`\`${input}\`\`\`\n\nOUTPUT: \`\`\`${output}\`\`\``);
+        msg.edit(`INPUT:\`\`\`${input}\`\`\`\n\nOUTPUT: \`\`\`${output}\`\`\``);
         // Send the message with the eval output
     }
     catch(error) {
     // If there is an error evaluating the input...
-        msg.channel.sendMessage(`INPUT:\`\`\`${input}\`\`\`\n\nERROR: \`\`\`${error}\`\`\``);
+        msg.edit(`INPUT:\`\`\`${input}\`\`\`\n\nERROR: \`\`\`${error}\`\`\``);
         // ...notify the user.
     };
 };

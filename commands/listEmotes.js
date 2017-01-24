@@ -1,11 +1,8 @@
 const config = require('../config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
-var Commands = require('../command_handler.js'); // Load command handler
 
 exports.main = function(selfbot, msg, msgArray) { // Export command's function   
     var command = "listEmotes";
-    msg.delete();
-    // Delete the command call
     var customPath = require("path").join(__dirname, "../customemotes/");
     // Set the path the custom emotes are stored in
     var emotes = [];
@@ -20,9 +17,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
 		    // ...and then put it in the emotes array.
 	    };
     });
-    if(emotes == 0) {msg.channel.sendMessage("No custom emotes have been added.").then(msg => msg.delete(10000)); return;};
+    if(emotes == 0) {msg.edit("No custom emotes have been added.").then(msg => msg.delete(10000)); return;};
     // If no custom emotes have been added, post that instead of the list and auto-delete after 10 seconds
-    msg.channel.sendMessage(`Available custom emotes are: \`\`\`${emotes.join(", ")}\`\`\``).then(msg => msg.delete(30000));
+    msg.edit(`Available custom emotes are: \`\`\`${emotes.join(", ")}\`\`\``).then(msg => msg.delete(30000));
     // Send the emote list and delete it after 30 seconds
 };
 

@@ -5,7 +5,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 	var args = msgArray.shift();
 	var fullarg = msgArray.join(" ");
 	// Define argument out of the array
-	if(msg.content.length == config.commandPrefix.length + command.length) {
+	if(msg.content == config.commandPrefix + command.toLowerCase()) { 
 	// If there is no argument (only prefix and command)...
 		msg.edit("Specify a username to set yourself to!").then(msg => msg.delete(2000));
 		// ...notify the user...
