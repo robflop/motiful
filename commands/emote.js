@@ -2,10 +2,11 @@ const config = require('../config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const globalEmotes = require('../twitchemotes/global.json'); // Load global emotes list
 const subEmotes = require('../twitchemotes/subscriber.json') // Load subscriber emote list
+const favs = require('../favorite_emotes.json'); // Favorite emotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command's function
     var command = "emote";
-    if(msg.content == config.commandPrefix + command) { 
+    if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
         msg.edit('Specify an emote!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s.
@@ -28,7 +29,8 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     var isGlobalEmote = false;
     var isSubscriberEmote = false;
     var isCustomEmote = false;
-    // For deciding whether emote is global, sub-based or custom
+    var isFavoriteEmote = false;
+    // For deciding whether emote is global, sub-based, custom or favorite
     var customPath = require("path").join(__dirname, "../customemotes/");
     // Set path to pull custom emotes from
     if(globalEmotes["emotes"][msgArray[1]] !== undefined) {
@@ -46,10 +48,23 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         twChannel = "";
         // ...and empty the twitch channel argument.
     };
-    if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined) {
-    // If the channel argument can be found within the subscriber emotes...
-        isSubscriberEmote = true;
-        // set to true...
+    if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined || favs.hasOwnProperty(twChannel)) {
+    // If the channel argument can be found within the subscriber emotes or the favorites list...
+        if(favs.hasOwnProperty(twChannel)) {
+        // If the emote is on the favorites list...
+            isFavoriteEmote = true;
+            // set to true.
+            emoteName = favs[twChannel].substring(favs[twChannel].indexOf("-")+1);
+            twChannel = favs[twChannel].substring(0,favs[twChannel].indexOf("-"));
+            // Redefine twChannel and emoteName to favorite values
+            if(msgArray[2] == "2.0" || msgArray[2] == "3.0") {emoteSize = msgArray[2];}
+            // Redefine emote size from message array, if one was given
+        }
+        else {
+        // If emote is not a favorite...
+            isSubscriberEmote = true; 
+            // ...set to true.
+        };
     };
     if(fs.existsSync(`${customPath + twChannel}.png`) || fs.existsSync(`${customPath + twChannel}.jpg`) || fs.existsSync(`${customPath + twChannel}.gif`)) {
     // If the channel argument can be found within the custom emotes as png, jpg or gif...
@@ -104,9 +119,26 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     else if(isCustomEmote) {
     // If the emote is custom...
         msg.channel.sendFile(emoteURL, emoteName);
-        // ... send the emote.
+        // ...send the emote into the channel the command was called in...
+        return; // ...and abort command execution.
     }
+    else if(isFavoriteEmote) {
+    // If the emote is a favorite...
+        for(var i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
+        // ...loop through the specified channel's emotes...
+            if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
+                // ...if the emote name matches up with the argument...
+                emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
+                emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`
+                // emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/1.0`
+                // ...specify the image id of the matched emote as emoteID...
+            };
+        };
+        msg.channel.sendFile(emoteURL, emoteName + ".png");
+        // ...send the emote into the channel the command was called in...
+        return; // ...and abort command execution.
+    };
 };
 
 exports.desc = "Post a twitch (global or subscriber) emote or custom emote into chat"; // Export command description
-exports.syntax = "<global emote, custom emote or twitch channel> <channel emote if twitch channel or emote size if global emote> <emote size if sub emote>" // Export command syntax 
+exports.syntax = "<global emote, custom emote, favorite emote or twitch channel> <channel emote if twitch channel or emote size if global or fav emote> <emote size if subcriber emote>" // Export command syntax 

@@ -1,9 +1,9 @@
 const config = require('../config.json'); // Import configuration
-const fs = require('fs'); // For custom emotesr
+const fs = require('fs'); // For custom emotes
 
 exports.main = function(selfbot, msg, msgArray) { // Export command's function
     var command = "delEmote";
-    if(msg.content == config.commandPrefix + command) {
+    if(msg.content == config.commandPrefix + command.toLowerCase()) { 
         // If no emote was specified...
         msg.edit('Specify an emote!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s.
