@@ -66,6 +66,39 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
             // ...set to true.
         };
     };
+    require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${twChannel}&page=1&private=on`, function(error, response, body) {
+    // Search FrankerFaceZ for the twChannel (emote input)
+	    if(error) {console.log('Error searching FrankerFaceZ emote list occurred: ' + error)};
+		// Log any errors|undefined responses
+       	if(response == undefined) {console.log('FrankerFaceZ emote list response undefined')};
+        if(body) {
+        // Once body exists...
+            emoteName = twChannel;
+            // ...reassign emoteName to channel value...
+            if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "4" )) { msgArray[2] = "1" };
+            // ...check the value of the 2nd argument, if it not 1, 2 or 4 default to 1
+            emoteSize = msgArray[2];
+            // ...reassign emoteSize to name value...
+            twChannel = "";
+            // ...empty channel value...
+            var emoteList = JSON.parse(body);
+            // ...define the emote list as parsed body...
+            for(var i = 0; i < emoteList["emoticons"].length; i++) {
+            // ...loop through the list of emotes from the body...
+                if(emoteList["emoticons"][i]["name"] == emoteName && emoteID == "") {
+                // ...and if the emote name matches up with the argument while the emoteID is not yet assigned...
+                    emoteID = emoteList["emoticons"][i]["id"];
+                    // ...specify the emote id of the matched emote as emoteID...
+                    emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`
+                    // ...assign the emoteURL accordingly...
+                    isFFZEmote = true;
+                    // ...and set to true.
+                    msg.channel.sendFile(emoteURL, emoteName + ".png");
+                    return; // Abort command execution to prevent multi-post of emotes with same name
+                };
+            };
+        };
+    });
     if(fs.existsSync(`${customPath + twChannel}.png`) || fs.existsSync(`${customPath + twChannel}.jpg`) || fs.existsSync(`${customPath + twChannel}.gif`)) {
     // If the channel argument can be found within the custom emotes as png, jpg or gif...
         isCustomEmote = true;
@@ -140,5 +173,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     };
 };
 
-exports.desc = "Post a twitch (global or subscriber) emote or custom emote into chat"; // Export command description
-exports.syntax = "<global emote, custom emote, favorite emote or twitch channel> <channel emote if twitch channel or emote size if global or fav emote> <emote size if subcriber emote>" // Export command syntax 
+exports.desc = "Post a twitch (global or subscriber) emote, FrankerFaceZ emote or custom emote into chat"; // Export command description
+exports.syntax = "<global emote, FrankerFaceZ emote, custom emote, favorite emote or twitch channel> <channel emote if twitch channel or emote size if global, fav emote or FFZ emote> <emote size if subscriber emote>" // Export command syntax 
