@@ -45,13 +45,73 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         // If emote was found and matched, notify user of success
         return; // ...and abort command execution.
     }
+    else if(twChannel.toLowerCase() == "ffz") {
+        require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
+        // ...search FrankerFaceZ for the emote name (emote input).
+	        if(error) {console.log('Error searching FrankerFaceZ emote list occurred: ' + error)};
+		    // Log any errors|undefined responses
+       	    if(response == undefined) {console.log('FrankerFaceZ emote list response undefined')};
+            if(body) {
+            // Once body exists...
+                var emoteList = JSON.parse(body);
+                // ...define the emote list as parsed body...
+                for(var i = 0; i < emoteList["emoticons"].length; i++) {
+                // ...loop through the list of emotes from the body...
+                    if(emoteList["emoticons"][i]["name"] == emoteName) {
+                    // ...and if the emote name matches up with the argument....
+                        emoteFound = true;
+                        // ...set the found value to true.
+                        favs[emoteName] = twChannel + "-" + emoteName;
+                        // Save the favorite in the favs list under the emote name with the channel and emote name as value
+                        fs.writeFileSync('favorite_emotes.json', JSON.stringify(favs));
+                        // Save the favorites list to the file
+                        msg.edit(`Emote '${emoteName}' added to FFZ favorites!`).then(msg => msg.delete(2000));
+                        // If emote was found and matched, notify user of success
+                        return; // Abort command execution to prevent multi-post of emotes with same name
+                    };
+                };
+                if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on FrankerFaceZ!`).then(msg => msg.delete(2000)); return};
+                // If emote was not found, notify user and abort command execution
+            };
+        });         
+    }
+    else if(twChannel.toLowerCase() == "bttv") {
+        require('request').get(`https://api.betterttv.net/2/emotes`, function(error, response, body) {
+        // Search BTTV emotes for emote input
+            if(error) {console.log('Error searching BetterTwitchTV emote list occurred: ' + error)};
+		    // Log any errors|undefined responses
+       	    if(response == undefined) {console.log('BetterTwitchTV emote list response undefined')};
+            if(body) {
+            // Once body exists...
+                var emoteList = JSON.parse(body);
+                // ...define the emote list as parsed body...
+                for(var i = 0; i < emoteList["emotes"].length; i++) {
+                // ...loop through the list of emotes from the body...
+                    if(emoteList["emotes"][i]["code"] == emoteName) {
+                    // ...and if the emote name matches up with the argument...
+                        emoteFound = true;
+                        // ...set the found value to true.
+                        favs[emoteName] = twChannel + "-" + emoteName;
+                        // Save the favorite in the favs list under the emote name with the channel and emote name as value
+                        fs.writeFileSync('favorite_emotes.json', JSON.stringify(favs));
+                        // Save the favorites list to the file
+                        msg.edit(`Emote '${emoteName}' added to BTTV favorites!`).then(msg => msg.delete(2000));
+                        // If emote was found and matched, notify user of success
+                        return; // Abort command execution to prevent multi-post of emotes with same name
+                    };
+                };
+                if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on BetterTwitchTV!`).then(msg => msg.delete(2000)); return};
+                // If emote was not found, notify user and abort command execution                
+            };
+        });        
+    }
     else {
     // If the channel argument can't be found...
-        msg.edit(`Twitch channel '${twChannel}' not found!`).then(msg => msg.delete(2000));
+        msg.edit(`Twitch channel / Extension '${twChannel}' not found!`).then(msg => msg.delete(2000));
         // ...notify the user...
         return; // ...and abort command execution.
     };
 };
 
-exports.desc = "Add a twitch subscriber emote to your favorites, allowing you to use it without naming the channel it is from"; // Export command description
-exports.syntax = "<channelname> <emotename>"; // Export command syntax 
+exports.desc = "Add a twitch subscriber emote, a FrankerFaceZ or BetterTwitchTV emote to your favorites, allowing you to use it without naming the channel/source it is from"; // Export command description
+exports.syntax = "<channelname or ffz/bttv> <emotename>"; // Export command syntax 
