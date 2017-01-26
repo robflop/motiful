@@ -91,12 +91,45 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
                     // ...specify the emote id of the matched emote as emoteID...
                     emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`
                     // ...assign the emoteURL accordingly...
-                    isFFZEmote = true;
-                    // ...and set to true.
                     msg.channel.sendFile(emoteURL, emoteName + ".png");
+                    // ...and send the emote.
                     return; // Abort command execution to prevent multi-post of emotes with same name
                 };
             };
+        };
+    });
+    require('request').get(`https://api.betterttv.net/2/emotes`, function(error, response, body) {
+    // Search BTTV emotes for emote input
+        if(error) {console.log('Error searching FrankerFaceZ emote list occurred: ' + error)};
+		// Log any errors|undefined responses
+       	if(response == undefined) {console.log('FrankerFaceZ emote list response undefined')};
+        if(body) {
+        // Once body exists...
+            if(twChannel !== "bttv") {return;}
+            if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "3" )) { msgArray[3] = "1" };
+            // ...check the value of the 2nd argument, if it not 1, 2 or 3 default to 1
+            emoteName = msgArray[2];
+            // ...reassign emoteName to channel value...
+            emoteSize = msgArray[3];
+            // ...reassign emoteSize to name value...
+            twChannel = "";
+            // ...empty channel value...
+            var emoteList = JSON.parse(body);
+            // ...define the emote list as parsed body...
+            for(var i = 0; i < emoteList["emotes"].length; i++) {
+            // ...loop through the list of emotes from the body...
+                if(emoteList["emotes"][i]["code"] == emoteName && emoteID == "") {
+                // ...and if the emote name matches up with the argument while the emoteID is not yet assigned...
+                    emoteID = emoteList["emotes"][i]["id"];
+                    // ...specify the emote id of the matched emote as emoteID...
+                    emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`
+                    // ...assign the emoteURL accordingly...
+                    msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]);
+                    // ...and send the emote.
+                    return; // Abort command execution to prevent multi-post of emotes with same name
+                };
+            };
+            
         };
     });
     if(fs.existsSync(`${customPath + twChannel}.png`) || fs.existsSync(`${customPath + twChannel}.jpg`) || fs.existsSync(`${customPath + twChannel}.gif`)) {
@@ -174,4 +207,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
 };
 
 exports.desc = "Post a twitch (global or subscriber) emote, FrankerFaceZ emote or custom emote into chat"; // Export command description
-exports.syntax = "<global emote, FrankerFaceZ emote, custom emote, favorite emote or twitch channel> <channel emote if twitch channel or emote size if global, fav emote or FFZ emote> <emote size if subscriber emote>" // Export command syntax 
+exports.syntax = "<global emote, FrankerFaceZ emote, 'bttv', custom emote, favorite emote or twitch channel> <bttv emote if bttv, channel emote if twitch channel or emote size if global, fav emote or FFZ emote> <emote size if subscriber emote or bttv emote>" // Export command syntax 
