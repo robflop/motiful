@@ -10,10 +10,23 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution
     };
-    var emoteName = msgArray[1];
-    // Assign emote name out of the array
-    var emoteURL = msgArray[2];
-    // Assign emote url out of the array
+    var emoteName = "";
+    var emoteURL = "";
+    // Define placeholders
+    if(msgArray[1].startsWith('"')) {
+    // If the emote name is a multi-word emote...
+        emoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
+        // ...assign the emote value to the cut-out "" part and replace all spaces with underscores...
+        emoteURL = msg.content.substring(msg.content.lastIndexOf('"')+2);
+        // ...and assign the emoteURL out of the remaining message content.
+    }
+    else {
+    // If the emote is a single-word emote...
+        emoteName = msgArray[1];
+        // ...assign the emote value out of the array...
+        emoteURL = msgArray[2];
+        // ...and assign emote url out of the array.
+    }
     if(emoteName.startsWith("http") && !emoteURL) {
     // If the emote name starts with http (so is a url in most cases)...
         emoteName = msgArray[1].substring(msgArray[1].lastIndexOf("/")+1, msgArray[1].lastIndexOf("."));
@@ -61,17 +74,17 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     // Set Timeout to 60s
     getFile.on('error', () => {
     // If there is an error writing the file...
-        msg.edit(`Error writing file for the '${emoteName}' emote!`).then(msg => msg.delete(2000));
+        msg.edit(`Error writing file for the '${emoteName.replace(/_/g," ")}' emote!`).then(msg => msg.delete(2000));
         // ...notify the user and set auto delete to 2s.
         getFile.end();
         // End the filestream
     });
     getFile.on('finish', () => {
     // Once the transfer is done (file is written fully)...
-        msg.edit(`Successfully added emote '${emoteName}'!`).then(msg => msg.delete(2000));
+        msg.edit(`Successfully added emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
         // ...notify user of success and set auto-delete to 2s.
     });
 };
 
-exports.desc = "Add a custom emote"; // Export command description
+exports.desc = "Add a custom emote - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
 exports.syntax = "<emotename or url if no name> <url if name specified>" // Export command syntax 
