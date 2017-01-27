@@ -12,8 +12,18 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution
     };
-    var twChannel = msgArray[1];
-    // Assign twitch channel out of array
+    var twChannel = "";
+    // Define twChannel placeholder
+    if(msgArray[1].startsWith('"')) {
+    // If the twChannel name is a multi-word channel...
+        twChannel = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
+        // ...assign the twChannel value to the cut-out "" part and replace all spaces with underscores.
+    }
+    else {
+    // If the twChannel is a single-word channel...
+        twChannel = msgArray[1];
+        // Assign twitch channel out of array
+    };
     var emoteName = msgArray[2];
     // Assing emote name out of array
     var emoteURL = "";
@@ -116,7 +126,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
             };
         });
     };
-    if(fs.existsSync(`${customPath + twChannel}.png`) || fs.existsSync(`${customPath + twChannel}.jpg`) || fs.existsSync(`${customPath + twChannel}.gif`)) {
+    if(fs.existsSync(`${customPath + twChannel.replace(/ /g,"_")}.png`) || fs.existsSync(`${customPath + twChannel.replace(/ /g,"_")}.jpg`) || fs.existsSync(`${customPath + twChannel.replace(/ /g,"_")}.gif`)) {
     // If the channel argument can be found within the custom emotes as png, jpg or gif...
         isCustomEmote = true;
         // set to true...
@@ -274,5 +284,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     };
 };
 
-exports.desc = "Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat"; // Export command description
+exports.desc = "Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
 exports.syntax = "<global emote, 'ffz', 'bttv', custom emote, favorite emote or twitch channel> <bttv emote if bttv, ffz emote if ffz, channel emote if twitch channel or emote size if global or fav emote> <emote size if subscriber, bttv or ffz emote>" // Export command syntax 
