@@ -13,7 +13,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
 	};
 	// If there is an argument given,...
 	msg.guild.member(selfbot.user).setNickname(fullarg); // ...then set the user's nickname to the arg...
-	msg.edit(`Successfully set my nickname to '${fullarg}' ! \n(May not have worked you aren't allowed to set your own nickname)`).then(msg => msg.delete(2000));
+	msg.edit(`Successfully set your nickname to '${fullarg}' ! \n(May not have worked you aren't allowed to set your own nickname)`).then(msg => msg.delete(2000));
 	// Notify user of successful command execution
 };
 exports.desc = "Set your own nickname for this server"; // Export command description

@@ -17,7 +17,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     };
     selfbot.user.setGame(fullarg);
     // Set the user's playing status to the arg
-    msg.edit(`Successfully set my game to '${fullarg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)); 
+    msg.edit(`Successfully set your game to '${fullarg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)); 
     // Notify the user of successful change
 };
 
