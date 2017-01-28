@@ -1,8 +1,8 @@
 const config = require('../config.json'); // Import configuration
 var Commands = require('../command_handler.js'); // Load command handler
-var command = "setStatus";
 
 exports.main = function(selfbot, msg, msgArray) { // Export command's function
+    var command = "setStatus";
     var args = msgArray.shift()
     var fullarg = msgArray.join(" ");
     // Define argument to set user playing status to
