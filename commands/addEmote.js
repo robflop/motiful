@@ -51,7 +51,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     };
     var getFile = request.get(emoteURL, function(error, response, body) {
         if(!response || error) {
-        // If there is an error...
+        // If there is an error or no response...
             msg.edit('Error contacting website!').then(msg => msg.delete(2000));
             // ...notify the user and set auto-delete to 2s.
             return; // Abort command execution
@@ -75,9 +75,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
     getFile.on('error', () => {
     // If there is an error writing the file...
         msg.edit(`Error writing file for the '${emoteName.replace(/_/g," ")}' emote!`).then(msg => msg.delete(2000));
-        // ...notify the user and set auto delete to 2s.
+        // ...notify the user and set auto delete to 2s...
         getFile.end();
-        // End the filestream
+        // ...and end the filestream.
     });
     getFile.on('finish', () => {
     // Once the transfer is done (file is written fully)...
