@@ -39,4 +39,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 };
 
 exports.desc = "Toggle a command on/off or list toggled commands" // Export command description
-exports.syntax = "<command to toggle>" // Export command syntax 
+exports.syntax = "<command to toggle OR 'dcom' to list disabled commands>" // Export command syntax 

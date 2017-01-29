@@ -15,7 +15,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         return;
         // ...and abort further command execution.
     };
-    selfbot.user.setGame(fullarg);
+    selfbot.user.setGame(fullarg).catch(console.error);
     // Set the user's playing status to the arg
     msg.edit(`Successfully set your game to '${fullarg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)); 
     // Notify the user of successful change

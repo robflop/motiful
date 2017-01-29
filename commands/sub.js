@@ -6,9 +6,11 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Define part of original message to be replaced
     var replaceWith = msg.content.substring(msg.content.indexOf("/")+1);
     // Define what to replace the above part with out of message
+    if(toReplace == ""){ msg.edit("Specify a part to replace!").then(msg => msg.delete(2000)); return; }
+    // If the toReplace arg is empty, notify user and set auto-delete to 2s
     msg.channel.fetchMessages({limit: 100}).then((messages) => {
     // Get last 100 messages
-        msg.delete();
+        msg.delete().catch(console.error);
         // Delete the command call
         messages = messages.array();
         // Convert messages collection to array
@@ -18,12 +20,12 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
             // If the message is by the bot owner and contains the part to be replaced...
                 var newMsg = messages[i].content.replace(toReplace, replaceWith);
                 // ...define the new message as original message with replaced content...
-                messages[i].edit(newMsg);
+                messages[i].edit(newMsg).catch(console.error);
                 // ...and replace the content of the old message with the new message.
                 return; // Abort command execution as to not edit other messages
             };
         };
-    });
+    }).catch(console.error);
 };
 
 exports.desc = "Replace a part of one of your messages (Only from last 50 overall Messages)" // Export command description
