@@ -27,6 +27,12 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
             output = output.replace(regex, "<token>");
             // ...and finally replace all occurences of the user token with "<token>".
         };
+        if(output.length + input.length > 1950) {
+        // If the output + input is longer than 1950 characters...
+            msg.edit("Output too long! Try another script.").then(msg => msg.delete(3000));
+            // ...notify user, then set auto-delete to 3s.
+            return; // Abort command execution
+        };
         msg.edit(`INPUT:\`\`\`${input}\`\`\`\n\nOUTPUT: \`\`\`${output}\`\`\``);
         // Send the message with the eval output
     }
