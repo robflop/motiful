@@ -88,7 +88,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
                         // ...specify the emote id of the matched emote as emoteID...
                         emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`
                         // ...assign the emoteURL accordingly...
-                        msg.channel.sendFile(emoteURL, emoteName + ".png");
+                        msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);
                         // ...and send the emote.
                         return; // Abort command execution to prevent multi-post of emotes with same name
                     };
@@ -118,7 +118,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
                         // ...specify the emote id of the matched emote as emoteID...
                         emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`
                         // ...assign the emoteURL accordingly...
-                        msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]);
+                        msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]).catch(console.error);;
                         // ...and send the emote.
                         return; // Abort command execution to prevent multi-post of emotes with same name
                     };
@@ -159,7 +159,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         // If favorite is a BTTV emote...
             isBTTVFavoriteEmote = true;
             // ...set to true.
-            if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "3" )) { emoteSize = "1" };
+            if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "3" )) { msgArray[2] = "1" };
             // Redefine emote size from message array, if one was given
             emoteSize = msgArray[2];
         }
@@ -184,7 +184,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         emoteID = globalEmotes["emotes"][emoteName]["image_id"];
         emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`
         // ...grab the emote's ID out of the global emotes list..
-        msg.channel.sendFile(emoteURL, `${emoteName}.png`);
+        msg.channel.sendFile(emoteURL, `${emoteName}.png`).catch(console.error);;
         // ...send the emote into the channel the command was called in...
         return; // ...and abort command execution.
     } 
@@ -203,13 +203,13 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
         }
         if(emoteID == "") {return};
         // If emoteID is empty (no name could be matched, emote not found), abort command execution 
-        msg.channel.sendFile(emoteURL, emoteName + ".png");
+        msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);;
         // ...send the emote into the channel the command was called in...
         return; // ...and abort command execution.
     }
     else if(isCustomEmote) {
     // If the emote is custom...
-        msg.channel.sendFile(emoteURL, emoteName);
+        msg.channel.sendFile(emoteURL, emoteName).catch(console.error);;
         // ...send the emote into the channel the command was called in...
         return; // ...and abort command execution.
     }
@@ -223,7 +223,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
                     emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
                     emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`
                     // ...specify the image id of the matched emote as emoteID...
-                    msg.channel.sendFile(emoteURL, emoteName + ".png");
+                    msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);;
                     // ...send the emote into the channel the command was called in...
                     return; // ...and abort command execution.
                 };
@@ -247,7 +247,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
                             // ...specify the emote id of the matched emote as emoteID...
                             emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`
                             // ...assign the emoteURL accordingly...
-                            msg.channel.sendFile(emoteURL, emoteName + ".png");
+                            msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);;
                             // ...and send the emote.
                             return; // Abort command execution to prevent multi-post of emotes with same name
                         };
@@ -273,7 +273,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command's function
                             // ...specify the emote id of the matched emote as emoteID...
                             emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`
                             // ...assign the emoteURL accordingly...
-                            msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]);
+                            msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]).catch(console.error);;
                             // ...and send the emote.
                             return; // Abort command execution to prevent multi-post of emotes with same name
                         };
