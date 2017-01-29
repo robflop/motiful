@@ -3,7 +3,7 @@ const fs = require('fs'); // For custom emotes
 const subEmotes = require('../twitchemotes/subscriber.json') // Load subscriber emote list
 const favs = require('../favorite_emotes.json'); // Favorite emotes object
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "addFav";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...

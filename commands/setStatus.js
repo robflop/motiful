@@ -1,7 +1,7 @@
 const config = require('../config.json'); // Import configuration
 var Commands = require('../command_handler.js'); // Load command handler
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "setStatus";
     var args = msgArray.shift()
     var fullarg = msgArray.join(" ");

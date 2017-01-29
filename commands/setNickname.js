@@ -1,6 +1,6 @@
 const config = require('../config.json'); // Import configuration
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
 	var command = "setNickname"; 
 	var args = msgArray.shift();
 	var fullarg = msgArray.join(" ");

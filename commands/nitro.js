@@ -1,7 +1,7 @@
 const Discord = require('discord.js'); // For defining the embed
 var Commands = require('../command_handler.js'); // Load command handler
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "nitro";
     var embed = new Discord.RichEmbed();
     // Define the embed
