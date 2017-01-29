@@ -6,8 +6,8 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Define part of original message to be replaced
     var replaceWith = msg.content.substring(msg.content.indexOf("/")+1);
     // Define what to replace the above part with out of message
-    msg.channel.fetchMessages({limit: 50}).then((messages) => {
-    // Get last 50 messages
+    msg.channel.fetchMessages({limit: 100}).then((messages) => {
+    // Get last 100 messages
         msg.delete();
         // Delete the command call
         messages = messages.array();
