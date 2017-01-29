@@ -11,7 +11,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
          .setAuthor(`Discord Nitro message`, 'https://cdn.discordapp.com/emojis/263043051339907072.png')
          .setDescription('Discord Nitro is required to view this message.')
          .setThumbnail('https://cdn.discordapp.com/emojis/264287569687216129.png')
-    msg.channel.sendEmbed(embed);
+    msg.channel.sendEmbed(embed).catch(console.error);
     // Send the embed to the channel the command call came from
 };
 

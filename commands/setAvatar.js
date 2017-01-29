@@ -22,10 +22,10 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 		msg.edit("Invalid file format! Only png, jpg/jpeg, gif and webp are allowed.").then(msg => msg.delete(2000));
 		return;
 	};
-	selfbot.user.setAvatar(arg); // Set the user's avatar to the arg...
-	// If the bot can send to the channel...
+	selfbot.user.setAvatar(arg).catch(console.error); 
+	// Set the user's avatar to the arg...
 	msg.edit(`Successfully set your avatar to '${arg}' ! \n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000));
-	// ...notify the user of the successful command execution.
+	// ...and notify the user of the successful command execution.
 };
 exports.desc = "Change your avatar"; // Export command description
 exports.syntax = "<url to a picture>" // Export command syntax

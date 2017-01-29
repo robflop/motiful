@@ -5,7 +5,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     msg.delete()
     msg.channel.sendMessage('Pong?').then(message => {
             message.edit(`Pong'ed in ${message.createdTimestamp - msg.createdTimestamp}ms!`)
-            message.delete(2000);
+            message.delete(2000).catch(console.error);
     });
 };
 
