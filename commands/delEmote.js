@@ -1,7 +1,7 @@
 const config = require('../config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "delEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
         // If no emoteName was specified...

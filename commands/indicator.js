@@ -1,6 +1,6 @@
 const config = require('../config.json'); // Import configuration
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "indicator";
     var phrase = msg.content.replace(config.commandPrefix + command, '').trim().toLowerCase();
     // Cut out the phrase to be spelled in regional indicators

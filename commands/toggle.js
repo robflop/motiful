@@ -3,7 +3,7 @@ const fs = require('fs'); // For file writing
 var disabledCommands = require('../disabled_commands.json'); // Load list of toggled commands
 var Commands = require('../command_handler.js'); // Load command handler (to get list of commands)
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "toggle";
     var arg = msgArray[1];
     // Assign argument out of the array

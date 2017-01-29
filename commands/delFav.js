@@ -2,7 +2,7 @@ const config = require('../config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const favs = require('../favorite_emotes.json'); // Favorite emotes object
 
-exports.main = function(selfbot, msg, msgArray) { // Export command's function
+exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "delFav";
     var favmote = msgArray[1];
     // Define favorite emote argument out of the array
