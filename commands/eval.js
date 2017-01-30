@@ -43,5 +43,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     };
 };
 
-exports.desc = "Evaluate user javascript input -- **USE WITH CAUTION.**" // Export command description
+exports.desc = "Evaluate user javascript input -- USE WITH CAUTION." // Export command description
 exports.syntax = "<input to evaluate enclosed by quotes>" // Export command syntax 

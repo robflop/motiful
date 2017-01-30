@@ -28,5 +28,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     }).catch(console.error);
 };
 
-exports.desc = "Replace a part of one of your messages (Only from last 50 overall Messages)" // Export command description
+exports.desc = "Replace a part of one of your messages (Only from last 100 overall Messages)" // Export command description
 exports.syntax = "<word or phrase to replace>/<word or phrase to replace with>" // Export command syntax
