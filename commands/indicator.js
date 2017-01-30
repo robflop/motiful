@@ -25,4 +25,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 };
 
 exports.desc = "Spell out input in regional indicators" // Export command description
-exports.syntax = "<phrase to indicatorfy>" // Export command syntax 
+exports.syntax = "<phrase/word to indicatorfy>" // Export command syntax 

@@ -2,9 +2,9 @@ const config = require('../config.json'); // Import configuration
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "sub";
-    var toReplace = msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.indexOf("/"));
+    var toReplace = msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.lastIndexOf("/"));
     // Define part of original message to be replaced
-    var replaceWith = msg.content.substring(msg.content.indexOf("/")+1);
+    var replaceWith = msg.content.substring(msg.content.lastIndexOf("/")+1);
     // Define what to replace the above part with out of message
     if(toReplace == ""){ msg.edit("Specify a part to replace!").then(msg => msg.delete(2000)); return; }
     // If the toReplace arg is empty, notify user and set auto-delete to 2s

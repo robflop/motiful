@@ -1,5 +1,3 @@
-var Commands = require('../command_handler.js'); // Load command handler
-
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "ping";
     msg.delete()
