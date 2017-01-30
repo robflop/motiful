@@ -4,7 +4,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "purge";
     var amount = parseInt(msgArray[1], 10);
     // Define amount to purge out of array
-    if(typeof amount !== "number") {msg.edit("Amount only accepts numbers!").then(msg => msg.delete(2000)); return;};
+    if(typeof amount !== "number" || isNaN(amount)) {msg.edit("Amount only accepts numbers!").then(msg => msg.delete(2000)); return;};
     // If the amount isn't a number, notify the user, set auto-delete to 2s and abort command execution
     msg.delete().catch(console.error);
     // Delete the command call

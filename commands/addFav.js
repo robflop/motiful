@@ -48,9 +48,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     else if(twChannel.toLowerCase() == "ffz") {
         require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
         // ...search FrankerFaceZ for the emote name (emote input).
-	        if(error) {console.log('Error searching FrankerFaceZ emote list occurred: ' + error)};
-		    // Log any errors|undefined responses
-       	    if(response == undefined) {console.log('FrankerFaceZ emote list response undefined')};
+	        if(error) {msg.edit('Error searching FrankerFaceZ emote list occurred: \n\n' + error).then(msg => msg.delete(2000))};
+		    // Notify the user of errors|undefined responses
+       	    if(response == undefined) {msg.edit('Error contacting website, FrankerFaceZ emote list response undefined').then(msg => msg.delete(2000))};
             if(body) {
             // Once body exists...
                 var emoteList = JSON.parse(body);
@@ -78,9 +78,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     else if(twChannel.toLowerCase() == "bttv") {
         require('request').get(`https://api.betterttv.net/2/emotes`, function(error, response, body) {
         // Search BTTV emotes for emote input
-            if(error) {console.log('Error searching BetterTwitchTV emote list occurred: ' + error)};
+            if(error) {msg.edit('Error searching BetterTwitchTV emote list occurred: \n\n' + error).then(msg => msg.delete(2000))};
 		    // Log any errors|undefined responses
-       	    if(response == undefined) {console.log('BetterTwitchTV emote list response undefined')};
+       	    if(response == undefined) {msg.edit('Error contacting website, BetterTwitchTV emote list response undefined').then(msg => msg.delete(2000))};
             if(body) {
             // Once body exists...
                 var emoteList = JSON.parse(body);
@@ -113,5 +113,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     };
 };
 
-exports.desc = "Add a twitch subscriber emote, a FrankerFaceZ or BetterTwitchTV emote to your favorites, allowing you to use it without naming the channel/source it is from"; // Export command description
+exports.desc = "Add a twitch subscriber, FrankerFaceZ or BetterTwitchTV emote to your favorites, allowing you to use it without naming the channel/source it is from"; // Export command description
 exports.syntax = "<channelname or ffz/bttv> <emotename>"; // Export command syntax 
