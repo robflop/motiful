@@ -2,7 +2,7 @@ const config = require('../config.json'); // Import configuration
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "setStatus";
-    var args = msgArray.shift()
+    var args = msgArray.shift();
     var fullarg = msgArray.join(" ");
     // Define argument to set user playing status to
     if(fullarg == "") {
@@ -14,11 +14,11 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         return;
         // ...and abort further command execution.
     };
-    selfbot.user.setGame(fullarg).catch(console.error);
+    selfbot.user.setGame(fullarg);
     // Set the user's playing status to the arg
     msg.edit(`Successfully set your game to '${fullarg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)); 
     // Notify the user of successful change
 };
 
-exports.desc = "Change your current status" // Export command description
-exports.syntax = "<status to set to>" // Export command syntax 
+exports.desc = "Change your current status"; // Export command description
+exports.syntax = "<status to set to>"; // Export command syntax 

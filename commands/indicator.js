@@ -24,5 +24,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Join the indicators from the indicatorPhrase array and edit the message to the result
 };
 
-exports.desc = "Spell out input in regional indicators" // Export command description
-exports.syntax = "<phrase/word to indicatorfy>" // Export command syntax 
+exports.desc = "Spell out input in regional indicators"; // Export command description
+exports.syntax = "<phrase/word to indicatorfy>"; // Export command syntax 

@@ -33,15 +33,15 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
             // ...notify user, then set auto-delete to 3s.
             return; // Abort command execution
         };
-        msg.edit(`INPUT:\`\`\`${input}\`\`\`\n\nOUTPUT: \`\`\`${output}\`\`\``);
+        msg.edit(`INPUT:\`\`\`js\n${input}\n\`\`\`\n\nOUTPUT: \`\`\`js\n${output}\n\`\`\``);
         // Send the message with the eval output
     }
     catch(error) {
     // If there is an error evaluating the input...
-        msg.edit(`INPUT:\`\`\`${input}\`\`\`\n\nERROR: \`\`\`${error}\`\`\``);
+        msg.edit(`INPUT:\`\`\`js\n${input}\n\`\`\`\n\nERROR: \`\`\`js\n${error}\n\`\`\``);
         // ...notify the user.
     };
 };
 
-exports.desc = "Evaluate user javascript input -- USE WITH CAUTION." // Export command description
-exports.syntax = "<input to evaluate enclosed by quotes>" // Export command syntax 
+exports.desc = "Evaluate user javascript input -- USE WITH CAUTION."; // Export command description
+exports.syntax = "<input to evaluate enclosed by quotes>"; // Export command syntax 

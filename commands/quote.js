@@ -54,7 +54,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     };
     msg.channel.fetchMessages({limit: 100}).then((messages) => {
     // Get last 100 messages
-        msg.delete().catch(console.error);
+        msg.delete();
         // Delete the command call
         messages = messages.array();
         // Convert messages collection to array
@@ -67,19 +67,19 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     embed.setColor(5267072) // ...set the embed properties.
                          .setAuthor(`${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.guild.member(user).user.avatarURL)
                          .setDescription(messages[j].content);
-                    msg.channel.sendEmbed(embed).catch(console.error).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
+                    msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
                     return; // Abort command execution
                 };
                 // ...2) and the channel is a DM channel...
                 embed.setColor(5267072) // ...set the embed properties.
                      .setAuthor(`${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.channel.recipient.avatarURL)
                      .setDescription(messages[j].content);
-                msg.channel.sendEmbed(embed).catch(console.error).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
+                msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
                 return; // Abort command execution
             };
         };
-    }).catch(console.error);
+    })
 };
 
-exports.desc = "Quote a user's message (only from the last 100 overall messages)" // Export command description
-exports.syntax = "<username> <message snippet> / <response, optional>" // Export command syntax
+exports.desc = "Quote a user's message (only from the last 100 overall messages)"; // Export command description
+exports.syntax = "<username> <message snippet> / <response, optional>"; // Export command syntax

@@ -74,6 +74,10 @@ selfbot.on('message', msg => { // Listen to all messages sent
 		msg.edit(`Command '${cmdFile.slice(0, -3)}' successfully reloaded!`).then(msg => msg.delete(2000));
 		// Notify the user of success and set auto-delete to 2s
 	};
+	process.on("unhandledRejection", err => {
+  		console.error("Uncaught Promise Error: \n" + err.stack);
+	});
+	// Log unhandled errors
 	return; // Just in case, return empty for anything else.
 });
 selfbot.login(config.token); // Log the selfbot in

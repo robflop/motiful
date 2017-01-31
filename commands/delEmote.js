@@ -56,4 +56,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 };
 
 exports.desc = "Delete a custom emote - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
-exports.syntax = "<emotename>" // Export command syntax 
+exports.syntax = "<emotename>"; // Export command syntax 

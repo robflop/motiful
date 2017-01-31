@@ -5,7 +5,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "listEmotes";
     var customPath = require("path").join(__dirname, "../customemotes/");
     // Set the path the custom emotes are stored in
-    var emotes = []
+    var emotes = [];
     // Define emotes array placeholder
     fs.readdirSync(customPath).forEach(function(file) {
 	// Look at all the files in the specificed folder
@@ -23,5 +23,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Send the emote list and delete it after 30 seconds
 };
 
-exports.desc = "List all custom emotes available" // Export command description
-exports.syntax = "" // Export command syntax 
+exports.desc = "List all custom emotes available"; // Export command description
+exports.syntax = ""; // Export command syntax 
