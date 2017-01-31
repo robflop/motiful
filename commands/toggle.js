@@ -38,5 +38,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Notify the user of success and set auto-delete to 2s
 };
 
-exports.desc = "Toggle a command on/off or list toggled commands" // Export command description
-exports.syntax = "<command to toggle OR 'dcom' to list disabled commands>" // Export command syntax 
+exports.desc = "Toggle a command on/off or list toggled commands"; // Export command description
+exports.syntax = "<command to toggle OR 'dcom' to list disabled commands>"; // Export command syntax 

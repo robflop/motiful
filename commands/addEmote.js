@@ -31,7 +31,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If the emote name starts with http (so is a url in most cases)...
         emoteName = msgArray[1].substring(msgArray[1].lastIndexOf("/")+1, msgArray[1].lastIndexOf("."));
         // ...assign name based on emote url... 
-        emoteURL = msgArray[1]
+        emoteURL = msgArray[1];
         // ...and re-assign URL from msg array.
     };
     if(emoteURL && emoteURL.startsWith("http")) { var emoteExt = emoteURL.substr(-4, 4); }
@@ -87,4 +87,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 };
 
 exports.desc = "Add a custom emote - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
-exports.syntax = "<emotename or url if no name> <url if name specified>" // Export command syntax 
+exports.syntax = "<emotename or url if no name> <url if name specified>"; // Export command syntax 

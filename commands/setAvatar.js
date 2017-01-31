@@ -1,5 +1,5 @@
 const config = require('../config.json'); // Import configuration
-var fs = require('fs'); // For checking if file exists locally
+const fs = require('fs'); // For checking if file exists locally
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
 	var command = "setAvatar";
@@ -22,10 +22,10 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 		msg.edit("Invalid file format! Only png, jpg/jpeg, gif and webp are allowed.").then(msg => msg.delete(2000));
 		return;
 	};
-	selfbot.user.setAvatar(arg).catch(console.error); 
+	selfbot.user.setAvatar(arg);
 	// Set the user's avatar to the arg...
 	msg.edit(`Successfully set your avatar to '${arg}' ! \n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000));
 	// ...and notify the user of the successful command execution.
 };
 exports.desc = "Change your avatar"; // Export command description
-exports.syntax = "<url to a picture>" // Export command syntax
+exports.syntax = "<url to a picture>"; // Export command syntax

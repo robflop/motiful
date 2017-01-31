@@ -25,5 +25,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Send the command list and the disabled commands list and then set auto-delete to 30s.
 };
 
-exports.desc = "Display this mesage" // Export command description
-exports.syntax = "<command to get help on, optional>" // Export command syntax
+exports.desc = "Display this mesage"; // Export command description
+exports.syntax = "<command to get help on, optional>"; // Export command syntax

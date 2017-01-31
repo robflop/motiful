@@ -13,4 +13,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 	// Set timeout for shutting down the selfbot to 2sec after the command is triggered.
 };
 exports.desc = "Shut down the selfbot remotely"; // Export command description
-exports.syntax = "" // Export command syntax 
+exports.syntax = ""; // Export command syntax 

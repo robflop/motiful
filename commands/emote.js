@@ -1,7 +1,7 @@
 const config = require('../config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const globalEmotes = require('../twitchemotes/global.json'); // Load global emotes list
-const subEmotes = require('../twitchemotes/subscriber.json') // Load subscriber emote list
+const subEmotes = require('../twitchemotes/subscriber.json'); // Load subscriber emote list
 const favs = require('../favorite_emotes.json'); // Favorite emotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
@@ -86,9 +86,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     // ...and if the emote name matches up with the argument while the emoteID is not yet assigned...
                         emoteID = emoteList["emoticons"][i]["id"];
                         // ...specify the emote id of the matched emote as emoteID...
-                        emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`
+                        emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
                         // ...assign the emoteURL accordingly...
-                        msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);
+                        msg.channel.sendFile(emoteURL, emoteName + ".png");
                         // ...and send the emote.
                         return; // Abort command execution to prevent multi-post of emotes with same name
                     };
@@ -116,9 +116,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     // ...and if the emote name matches up with the argument while the emoteID is not yet assigned...
                         emoteID = emoteList["emotes"][i]["id"];
                         // ...specify the emote id of the matched emote as emoteID...
-                        emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`
+                        emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
                         // ...assign the emoteURL accordingly...
-                        msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]).catch(console.error);;
+                        msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]);
                         // ...and send the emote.
                         return; // Abort command execution to prevent multi-post of emotes with same name
                     };
@@ -182,9 +182,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     if(isGlobalEmote) {
     // If the emote is global...
         emoteID = globalEmotes["emotes"][emoteName]["image_id"];
-        emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`
+        emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
         // ...grab the emote's ID out of the global emotes list..
-        msg.channel.sendFile(emoteURL, `${emoteName}.png`).catch(console.error);;
+        msg.channel.sendFile(emoteURL, `${emoteName}.png`);
         // ...send the emote into the channel the command was called in...
         return; // ...and abort command execution.
     } 
@@ -197,19 +197,19 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
             if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
                 // ...if the emote name matches up with the argument...
                 emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
-                emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`
+                emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
                 // ...specify the image id of the matched emote as emoteID...
             };
         }
         if(emoteID == "") {return};
         // If emoteID is empty (no name could be matched, emote not found), abort command execution 
-        msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);;
+        msg.channel.sendFile(emoteURL, emoteName + ".png");
         // ...send the emote into the channel the command was called in...
         return; // ...and abort command execution.
     }
     else if(isCustomEmote) {
     // If the emote is custom...
-        msg.channel.sendFile(emoteURL, emoteName).catch(console.error);;
+        msg.channel.sendFile(emoteURL, emoteName);
         // ...send the emote into the channel the command was called in...
         return; // ...and abort command execution.
     }
@@ -221,9 +221,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                 if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
                     // ...if the emote name matches up with the argument...
                     emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
-                    emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`
+                    emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
                     // ...specify the image id of the matched emote as emoteID...
-                    msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);;
+                    msg.channel.sendFile(emoteURL, emoteName + ".png");
                     // ...send the emote into the channel the command was called in...
                     return; // ...and abort command execution.
                 };
@@ -245,9 +245,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                         // ...and if the emote name matches up with the argument while the emoteID is not yet assigned...
                             emoteID = emoteList["emoticons"][i]["id"];
                             // ...specify the emote id of the matched emote as emoteID...
-                            emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`
+                            emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
                             // ...assign the emoteURL accordingly...
-                            msg.channel.sendFile(emoteURL, emoteName + ".png").catch(console.error);;
+                            msg.channel.sendFile(emoteURL, emoteName + ".png");
                             // ...and send the emote.
                             return; // Abort command execution to prevent multi-post of emotes with same name
                         };
@@ -271,9 +271,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                         // ...and if the emote name matches up with the argument while the emoteID is not yet assigned...
                             emoteID = emoteList["emotes"][i]["id"];
                             // ...specify the emote id of the matched emote as emoteID...
-                            emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`
+                            emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
                             // ...assign the emoteURL accordingly...
-                            msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]).catch(console.error);;
+                            msg.channel.sendFile(emoteURL, emoteName + "." + emoteList["emotes"][i]["imageType"]);
                             // ...and send the emote.
                             return; // Abort command execution to prevent multi-post of emotes with same name
                         };
@@ -285,4 +285,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 };
 
 exports.desc = "Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
-exports.syntax = "<global emote, 'ffz', 'bttv', custom emote, favorite emote or twitch channel> <bttv emote if bttv, ffz emote if ffz, channel emote if twitch channel or emote size if global or fav emote> <emote size if subscriber, bttv or ffz emote>" // Export command syntax 
+exports.syntax = "<global emote, 'ffz', 'bttv', custom emote, favorite emote or twitch channel> <bttv emote if bttv, ffz emote if ffz, channel emote if twitch channel or emote size if global or fav emote> <emote size if subscriber, bttv or ffz emote>"; // Export command syntax 
