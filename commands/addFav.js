@@ -2,6 +2,7 @@ const config = require('../config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const subEmotes = require('../twitchemotes/subscriber.json'); // Load subscriber emote list
 const favs = require('../favorite_emotes.json'); // Favorite emotes object
+const bttv = require('../twitchemotes/bttv.json') // Load bttv emote list
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "addFav";
@@ -76,18 +77,10 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         });         
     }
     else if(twChannel.toLowerCase() == "bttv") {
-        require('request').get(`https://api.betterttv.net/2/emotes`, function(error, response, body) {
-        // Search BTTV emotes for emote input
-            if(error) {msg.edit('Error searching BetterTwitchTV emote list occurred: \n\n' + error).then(msg => msg.delete(2000))};
-		    // Log any errors|undefined responses
-       	    if(response == undefined) {msg.edit('Error contacting website, BetterTwitchTV emote list response undefined').then(msg => msg.delete(2000))};
-            if(body) {
-            // Once body exists...
-                var emoteList = JSON.parse(body);
-                // ...define the emote list as parsed body...
-                for(var i = 0; i < emoteList["emotes"].length; i++) {
-                // ...loop through the list of emotes from the body...
-                    if(emoteList["emotes"][i]["code"] == emoteName) {
+    // If the favorite is a bttv emote...
+                for(var i = 0; i < bttv["emotes"].length; i++) {
+                // ...loop through the list of emotes...
+                    if(bttv["emotes"][i]["code"] == emoteName) {
                     // ...and if the emote name matches up with the argument...
                         emoteFound = true;
                         // ...set the found value to true.
@@ -101,9 +94,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     };
                 };
                 if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on BetterTwitchTV!`).then(msg => msg.delete(2000)); return};
-                // If emote was not found, notify user and abort command execution                
-            };
-        });        
+                // If emote was not found, notify user and abort command execution                     
     }
     else {
     // If the channel argument can't be found...
