@@ -58,3 +58,6 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | indicator     | Have the selfbot spell a phrase in regional indicators                                            |
 | ping          | Measure the delay between command calls and command execution in ms                               |
 | nitro         | Have the selfbot post a fake embed about a "Nitro-only message"                                   |
+| purge         | Purge a given amount of your own message out of the last 100 overall messages                     |
+| sub           | Replace a chosen part of one of your messages with another (out of 100 last overall messages)     |
+| quote         | Quote another user's post (out of 100 last overall messages) and optionally attach a reply to it  |
