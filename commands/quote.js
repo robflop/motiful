@@ -4,6 +4,12 @@ const moment = require('moment'); // For embed timestamp
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "quote";
+    if(msg.content == config.commandPrefix + command.toLowerCase()) {
+        // If no arguments were specified...
+        msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s.
+        return; // Abort command execution 
+    };
     var user = msgArray[1];
     // Define username of user to quote out of array
     var response = "";
