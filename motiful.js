@@ -23,8 +23,8 @@ selfbot.on('message', msg => { // Listen to all messages sent
 	Replace (cut out) selfbot prefix, cut out whitespaces at start and end, split prefix, command
 	and arg into array, convert to lowercase and select the command part ([0] of the array)
 	*/
-	var msgArray = msg.content.trim().split(' ');
-    // Split command parts and store them in an array
+	var msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
+    // Remove prefix from the message content, then split command parts and store them in an array
 	if(disabledCommands.indexOf(actualCmd) > -1) {
 	// If the command is found in the array of disabled commands...
 		msg.delete(); // ... delete the command call...

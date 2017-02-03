@@ -6,7 +6,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If no emotes have been favorited, notify user and set auto-delete to 10s instead of posting the list
     msg.edit(`Current favorite emotes are: \`\`\`${Object.keys(favs).join(", ")}\`\`\``).then(msg => msg.delete(30000));
     // Send the favorites list and delete it after 30 seconds
-}
+};
 
 exports.desc = "List your favorite emotes"; // Export command description
-exports.syntax = "" // Export command syntax 
+exports.syntax = ""; // Export command syntax 
