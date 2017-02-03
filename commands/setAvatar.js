@@ -27,5 +27,6 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 	msg.edit(`Successfully set your avatar to '${arg}' ! \n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000));
 	// ...and notify the user of the successful command execution.
 };
+
 exports.desc = "Change your avatar"; // Export command description
 exports.syntax = "<url to a picture>"; // Export command syntax

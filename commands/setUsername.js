@@ -17,5 +17,6 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 	msg.edit(`Successfully set your username to '${fullarg}' ! \n(May not have worked if ratelimit capped)`).then(msg => msg.delete(2000));
 	// ...and notify user of successful command execution.
 };
+
 exports.desc = "Change your username"; // Export command description
 exports.syntax = "<username to set yourself to>"; // Export command syntax
