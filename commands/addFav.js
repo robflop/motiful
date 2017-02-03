@@ -74,7 +74,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                 if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on FrankerFaceZ!`).then(msg => msg.delete(2000)); return};
                 // If emote was not found, notify user and abort command execution
             };
-        });         
+        });
     }
     else if(twChannel.toLowerCase() == "bttv") {
     // If the favorite is a bttv emote...
