@@ -75,7 +75,7 @@ selfbot.on('message', msg => { // Listen to all messages sent
 		// Notify the user of success and set auto-delete to 2s
 	};
 	process.on("unhandledRejection", err => {
-  		console.error("Uncaught Promise Error: \n" + err.stack);
+  		return;
 	});
 	// Log unhandled errors
 	return; // Just in case, return empty for anything else.
