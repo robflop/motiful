@@ -6,7 +6,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If eval disabled in config, notify user and then set auto-delete to 2s.
     var input = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"'));
     // Define eval input
-    if(input == '' || input == '"' || input == '""') {msg.edit("No input given.").then(msg => msg.delete(2000)); return;};
+    if(input == '' || input == '"' || input == '""') {msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => msg.delete(2000)); return;};
     try {
     // Try evaluating the input
         var output = eval(input);
