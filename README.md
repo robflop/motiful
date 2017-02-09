@@ -4,19 +4,22 @@ A Discord selfbot written using discord.js.
 Motiful also uses the request and moment packages, plus some standard node modules.
 
 ## Self-hosting usage
-(It is assumed you have node.js installed)
+(It is assumed you have [node.js](https://nodejs.org/en/) installed)
 
 - Rename config.example.json to config.json
-- Get your token from within Discord Dev Tools -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
-- Fill out your token and change the ownerID in config.json to your devmode discord ID (Enable Developer Mode -> Rightclick on yourself -> Copy ID)
+- Get your token from within Discord Dev Tools (Opened via CTRL+SHIFT+I/Command+Option+I inside Discord) -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
+- Fill out your token and change the ownerID in config.json to your devmode discord ID (Settings -> Appearance ->Toggle Developer Mode on -> Rightclick on yourself -> Press "Copy ID")
 - Adjust other config settings to your liking 
-- run ``npm install`` to install necessary packages
-- Start the bot using ``node motiful.js``!
+- run ``npm install`` in a command window located in the directory you downloaded motiful in to install necessary packages
+- (Feel free to ignore any "unmet dependency" warnings)
+- Start the bot using ``node motiful.js`` in a command window located in the directory you downloaded motiful in to!
 
 **IMPORTANT INFO:**
 
 If you change one of the folder paths, you actually have to create the folder aswell. 
 Otherwise the selfbot WILL crash. I will not provide support for such cases.
+
+A discord user ID (the ownerID you fill out above) will always be a (rather long) number. For example 153661862884409354. It does not contain letters or special symbols.
 
 ### Adding commands
 Adding commands to Motiful is very easy. The command handler will automatically register any .js file within the commands folder so
