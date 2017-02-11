@@ -13,6 +13,7 @@ customemotes
 config.json
 disabled_commands.json
 favorite_emotes.json
+saved_quotes.json
 
 # Runtime data
 pids
