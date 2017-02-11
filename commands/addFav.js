@@ -38,7 +38,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         };
         if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on the '${twChannel}' channel!`).then(msg => msg.delete(2000)); return};
         // If emote was not found, notify user and abort command execution
-        favs[emoteName] = twChannel + "-" + emoteName;
+        favs[emoteName] = {"twChannel": twChannel, "emoteName": emoteName};
         // Save the favorite in the favs list under the emote name with the channel and emote name as value
         fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
         // Save the favorites list to the file
@@ -62,7 +62,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     // ...and if the emote name matches up with the argument....
                         emoteFound = true;
                         // ...set the found value to true.
-                        favs[emoteName] = twChannel + "-" + emoteName;
+                        favs[emoteName] = {"twChannel": twChannel, "emoteName": emoteName};
                         // Save the favorite in the favs list under the emote name with the channel and emote name as value
                         fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
                         // Save the favorites list to the file
@@ -84,7 +84,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     // ...and if the emote name matches up with the argument...
                         emoteFound = true;
                         // ...set the found value to true.
-                        favs[emoteName] = twChannel + "-" + emoteName;
+                        favs[emoteName] = {"twChannel": twChannel, "emoteName": emoteName};
                         // Save the favorite in the favs list under the emote name with the channel and emote name as value
                         fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
                         // Save the favorites list to the file

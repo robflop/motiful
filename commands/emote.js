@@ -153,10 +153,10 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     };
     if(favs.hasOwnProperty(twChannel)) {
     // If the emote is on the favorites list....
-        emoteName = favs[twChannel].substring(favs[twChannel].indexOf("-")+1);
-        twChannel = favs[twChannel].substring(0,favs[twChannel].indexOf("-"));
+        emoteName = favs[twChannel]["emoteName"];
+        twChannel = favs[twChannel]["twChannel"];
         // ...redefine twChannel and emoteName to favorite values.
-        if(favs[emoteName].startsWith("bttv")) {
+        if(favs[emoteName]["twChannel"] == "bttv") {
         // If favorite is a BTTV emote...
             if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "3" )) { msgArray[2] = "1" };
             // ...default emote size to 1 if no valid one was given.
@@ -175,7 +175,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                 };
             };
         }
-        else if(favs[emoteName].startsWith("ffz")) {
+        else if(favs[emoteName]["twChannel"] == "ffz") {
         // If favorite is a FFZ emote....
             if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "4" )) { msgArray[2] = "1" };
             // ...default emote size to 1 if no valid one was given.
