@@ -65,3 +65,7 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | purge         | Purge a given amount of your own message out of the last 100 overall messages                     |
 | sub           | Replace a chosen part of one of your messages with another (out of 100 last overall messages)     |
 | quote         | Quote another user's post (out of 100 last overall messages) and optionally attach a reply to it  |
+| addQuote      | Save a quote of another user's post (out of last 100 overall messages)                            |
+| sendQuote     | Send a saved quote into the channel the command is used in                                        |
+| delQuote      | Delete a saved quote from the list                                                                |
+| listQuotes    | Output a list of all saved quotes                                                                 |
