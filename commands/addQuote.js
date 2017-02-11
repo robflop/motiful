@@ -13,7 +13,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         return; // Abort command execution 
     };
     var quoteName;
+    // Define quote name placeholder
     var user;
+    // Define user placeholder
     if(msgArray[1].startsWith('"')) {
     // If the quote name is a multi-word name...
         quoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
@@ -76,7 +78,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     embed.setColor(5267072) // ...set the embed properties.
                          .setAuthor(`${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.guild.member(user).user.avatarURL)
                          .setDescription(messages[j].content);
-                    quotes[quoteName] = `${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:` + "|.|" + messages[j].content + "|.|" + msg.guild.member(user).user.avatarURL;
+                    quotes[quoteName] = {"author": `${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, "content": messages[j].content, "avatar": msg.guild.member(user).user.avatarURL};
                     // Save the quote to the object...
                     fs.writeFileSync(`userconfig/saved_quotes.json`, JSON.stringify(quotes));
                     msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
@@ -87,7 +89,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                 embed.setColor(5267072) // ...set the embed properties.
                      .setAuthor(`${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.channel.recipient.avatarURL)
                      .setDescription(messages[j].content);
-                quotes[quoteName] = `${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:` + "|.|" + messages[j].content + "|.|" + msg.channel.recipient.avatarURL;
+                quotes[quoteName] = {"author": `${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, "content": messages[j].content, "avatar": msg.channel.recipient.avatarURL};
                 // Save the quote to the object...
                 fs.writeFileSync(`userconfig/saved_quotes.json`, JSON.stringify(quotes));
                 // ...and then save to the file.

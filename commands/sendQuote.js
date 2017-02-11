@@ -25,8 +25,8 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     var quote = quotes[quoteName];
     // Define the quote name as "quote"
     embed.setColor(5267072) // ...set the embed properties.
-         .setAuthor(quote.substring(0, quote.indexOf("|.|")), quote.substring(quote.lastIndexOf("|.|")+3))
-         .setDescription(quote.substring(quote.indexOf("|.|")+3, quote.lastIndexOf("|.|")));
+         .setAuthor(quote["author"], quote["avatar"])
+         .setDescription(quote["content"]);
     msg.channel.sendEmbed(embed);
     // Send the embed
 };
