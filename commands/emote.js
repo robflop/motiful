@@ -1,9 +1,9 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const globalEmotes = require('../twitchemotes/global.json'); // Load global emotes list
 const subEmotes = require('../twitchemotes/subscriber.json'); // Load subscriber emote list
 const bttv = require('../twitchemotes/bttv.json') // Load bttv emote list
-const favs = require('../favorite_emotes.json'); // Favorite emotes object
+const favs = require('../userconfig/favorite_emotes.json'); // Favorite emotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "emote";

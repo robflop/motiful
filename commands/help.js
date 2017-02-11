@@ -1,6 +1,6 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 var Commands = require('../command_handler.js'); // Load command handler
-var disabledCommands = require('../disabled_commands.json'); // Load list of toggled commands
+var disabledCommands = require('../userconfig/disabled_commands.json'); // Load list of toggled commands
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "help";

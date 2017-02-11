@@ -1,7 +1,7 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const subEmotes = require('../twitchemotes/subscriber.json'); // Load subscriber emote list
-const favs = require('../favorite_emotes.json'); // Favorite emotes object
+const favs = require('../userconfig/favorite_emotes.json'); // Favorite emotes object
 const bttv = require('../twitchemotes/bttv.json') // Load bttv emote list
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
@@ -40,7 +40,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // If emote was not found, notify user and abort command execution
         favs[emoteName] = twChannel + "-" + emoteName;
         // Save the favorite in the favs list under the emote name with the channel and emote name as value
-        fs.writeFileSync('favorite_emotes.json', JSON.stringify(favs));
+        fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
         // Save the favorites list to the file
         msg.edit(`Emote '${emoteName}' added to favorites!`).then(msg => msg.delete(2000));
         // If emote was found and matched, notify user of success
@@ -64,7 +64,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                         // ...set the found value to true.
                         favs[emoteName] = twChannel + "-" + emoteName;
                         // Save the favorite in the favs list under the emote name with the channel and emote name as value
-                        fs.writeFileSync('favorite_emotes.json', JSON.stringify(favs));
+                        fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
                         // Save the favorites list to the file
                         msg.edit(`Emote '${emoteName}' added to FFZ favorites!`).then(msg => msg.delete(2000));
                         // If emote was found and matched, notify user of success
@@ -86,7 +86,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                         // ...set the found value to true.
                         favs[emoteName] = twChannel + "-" + emoteName;
                         // Save the favorite in the favs list under the emote name with the channel and emote name as value
-                        fs.writeFileSync('favorite_emotes.json', JSON.stringify(favs));
+                        fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
                         // Save the favorites list to the file
                         msg.edit(`Emote '${emoteName}' added to BTTV favorites!`).then(msg => msg.delete(2000));
                         // If emote was found and matched, notify user of success

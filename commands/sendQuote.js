@@ -1,6 +1,6 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const Discord = require('discord.js'); // For defining the embed
-const quotes = require('../saved_quotes.json'); // Saved quotes object
+const quotes = require('../userconfig/saved_quotes.json'); // Saved quotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function 
     var command = "sendQuote";

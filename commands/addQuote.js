@@ -1,8 +1,8 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const Discord = require('discord.js'); // For defining the embed
 const moment = require('moment'); // For embed timestamp
-const quotes = require('../saved_quotes.json'); // Saved quotes object
+const quotes = require('../userconfig/saved_quotes.json'); // Saved quotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function 
     var command = "addQuote";
@@ -78,7 +78,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                          .setDescription(messages[j].content);
                     quotes[quoteName] = `${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:` + "|.|" + messages[j].content + "|.|" + msg.guild.member(user).user.avatarURL;
                     // Save the quote to the object...
-                    fs.writeFileSync(`saved_quotes.json`, JSON.stringify(quotes));
+                    fs.writeFileSync(`userconfig/saved_quotes.json`, JSON.stringify(quotes));
                     msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
                     // Send confirmation message and set auto-delete to 3s
                     return; // Abort command execution
@@ -89,7 +89,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                      .setDescription(messages[j].content);
                 quotes[quoteName] = `${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:` + "|.|" + messages[j].content + "|.|" + msg.channel.recipient.avatarURL;
                 // Save the quote to the object...
-                fs.writeFileSync(`saved_quotes.json`, JSON.stringify(quotes));
+                fs.writeFileSync(`userconfig/saved_quotes.json`, JSON.stringify(quotes));
                 // ...and then save to the file.
                 msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
                 // Send confirmation message and set auto-delete to 3s
@@ -100,4 +100,4 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
 };
 
 exports.desc = "Save a quote from within the last 100 overall messages"; // Export command description
-exports.syntax = "<username> <message snippet>"; // Export command syntax
+exports.syntax = "<quoteName> <username> <message snippet>"; // Export command syntax

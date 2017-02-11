@@ -1,4 +1,4 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "setStatus";

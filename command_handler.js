@@ -1,4 +1,4 @@
-const config = require('./config.json'); // Import configuration
+const config = require('./userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For reading the command files
 var normalizedPath = require("path").join(__dirname, config.commandPath); // Fix the path to be used in condition checks
 var commands = {}; // Object of existing commands

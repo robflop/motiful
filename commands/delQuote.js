@@ -1,6 +1,6 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
-const quotes = require('../saved_quotes.json'); // Saved quotes object
+const quotes = require('../userconfig/saved_quotes.json'); // Saved quotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function 
     var command = "delQuote";
@@ -16,7 +16,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If the emote is on the favorites list...
         delete quotes[quoteName];
         // ...delete the emote out of the object...
-        fs.writeFileSync('saved_quotes.json', JSON.stringify(quotes));
+        fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
         // ...write the object to the file...
         msg.edit(`Quote '${quoteName}' successfully deleted!`).then(msg => msg.delete(2000));
         // ...and notify the user of success, set auto-delete to 2s.

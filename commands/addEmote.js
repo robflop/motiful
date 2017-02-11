@@ -1,4 +1,4 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const request = require('request'); // For saving files
 
