@@ -6,7 +6,7 @@ Motiful also uses the request and moment packages, plus some standard node modul
 ## Self-hosting usage
 (It is assumed you have [node.js](https://nodejs.org/en/) installed)
 
-- Rename config.example.json to config.json
+- Rename config.example.json in the `userconfig/` folder to config.json
 - Get your token from within Discord Dev Tools (Opened via CTRL+SHIFT+I/Command+Option+I inside Discord) -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
 - Fill out your token and change the ownerID in config.json to your devmode discord ID (Settings -> Appearance ->Toggle Developer Mode on -> Rightclick on yourself -> Press "Copy ID")
 - Adjust other config settings to your liking 
@@ -35,6 +35,7 @@ Use it with ``<prefix> <command>``. It will also be listed in the 'help' command
 - The default command prefix is ``--``.
 - Commands are case **insensitive**, emotes are case **sensitive**.
 - The ``eval`` command is disabled by default and needs to be activated in ``config.json``. It is not toggleable using the ``toggle`` command until it is enabled in the config.
+- User config files (favorites, quotes, the bot config) are saved in the ``userconfig/`` file.
 
 #### License
 

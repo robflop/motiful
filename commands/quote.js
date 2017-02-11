@@ -1,4 +1,4 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const Discord = require('discord.js'); // For defining the embed
 const moment = require('moment'); // For embed timestamp
 

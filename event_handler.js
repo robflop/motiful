@@ -1,4 +1,4 @@
-const config = require('./config.json'); // Import configuration
+const config = require('./userconfig/config.json'); // Import configuration
 const moment = require('moment'); // Part of log writing
 
 module.exports = { // Export event functions

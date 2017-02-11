@@ -1,9 +1,9 @@
 const Discord = require('discord.js'); // Obvious selfbot base
 const selfbot = new Discord.Client(); // Initialize selfbot instance
-const config = require('./config.json'); // Import configuration
+const config = require('./userconfig/config.json'); // Import configuration
 var Commands = require('./command_handler.js'); // Load command handler
 var Events = require('./event_handler.js'); // Load event handler
-var disabledCommands = require('./disabled_commands.json') // Load array of disabled commands
+var disabledCommands = require('./userconfig/disabled_commands.json') // Load array of disabled commands
 
 selfbot.once('ready', () => { // Ready message once selfbot is loaded
 	Events.ready(selfbot);

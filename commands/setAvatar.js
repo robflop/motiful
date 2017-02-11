@@ -1,4 +1,4 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For checking if file exists locally
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function

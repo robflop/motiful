@@ -1,4 +1,4 @@
-const favs = require('../favorite_emotes.json'); // Favorite emotes object
+const favs = require('../userconfig/favorite_emotes.json'); // Favorite emotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "listFavs";

@@ -1,6 +1,6 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For file writing
-var disabledCommands = require('../disabled_commands.json'); // Load list of toggled commands
+var disabledCommands = require('../userconfig/disabled_commands.json'); // Load list of toggled commands
 var Commands = require('../command_handler.js'); // Load command handler (to get list of commands)
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
@@ -24,7 +24,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     if(index == -1) {
         disabledCommands.push(arg);
         // Push the command into the disabled commands array
-        fs.writeFileSync('disabled_commands.json', JSON.stringify(disabledCommands));
+        fs.writeFileSync('userconfig/disabled_commands.json', JSON.stringify(disabledCommands));
         // Write the array to the json file
         msg.edit(`Command '${arg}' successfully disabled!`).then(msg => msg.delete(2000));
         // Notify the user of success and set auto-delete to 2s
@@ -32,7 +32,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     }
     disabledCommands.splice(index, 1);
     // Splice the command from the disabled commands array
-    fs.writeFileSync('disabled_commands.json', JSON.stringify(disabledCommands));
+    fs.writeFileSync('userconfig/disabled_commands.json', JSON.stringify(disabledCommands));
     // Write the array to the json file
     msg.edit(`Command '${arg}' successfully enabled!`).then(msg => msg.delete(2000));
     // Notify the user of success and set auto-delete to 2s

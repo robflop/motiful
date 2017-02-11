@@ -1,6 +1,6 @@
-const config = require('../config.json'); // Import configuration
+const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
-const favs = require('../favorite_emotes.json'); // Favorite emotes object
+const favs = require('../userconfig/favorite_emotes.json'); // Favorite emotes object
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "delFav";
@@ -10,7 +10,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If the emote is on the favorites list...
         delete favs[favmote];
         // ...delete the emote out of the object...
-        fs.writeFileSync('favorite_emotes.json', JSON.stringify(favs));
+        fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
         // ...write the object to the file...
         msg.edit(`Emote '${favmote}' removed from favorites list!`).then(msg => msg.delete(2000));
         // ...and notify the user of success, set auto-delete to 2s.
