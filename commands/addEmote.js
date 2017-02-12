@@ -12,6 +12,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     };
     var emoteName = "";
     var emoteURL = "";
+    var emoteExt = "";
     // Define placeholders
     if(msgArray[1].startsWith('"')) {
     // If the emote name is a multi-word emote...
@@ -26,7 +27,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // ...assign the emote value out of the array...
         emoteURL = msgArray[2];
         // ...and assign emote url out of the array.
-    }
+    };
     if(emoteName.startsWith("http") && !emoteURL) {
     // If the emote name starts with http (so is a url in most cases)...
         emoteName = msgArray[1].substring(msgArray[1].lastIndexOf("/")+1, msgArray[1].lastIndexOf("."));
@@ -34,7 +35,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         emoteURL = msgArray[1];
         // ...and re-assign URL from msg array.
     };
-    if(emoteURL && emoteURL.startsWith("http")) { var emoteExt = emoteURL.substr(-4, 4); }
+    if(emoteURL && emoteURL.startsWith("http")) { emoteExt = emoteURL.substr(-4, 4); }
     // Assign emote extension based on the URL, if the url exists
     if(emoteExt !== ".png" && emoteExt !== ".jpg" && emoteExt !== ".gif") {
     // If the passed file isn't a jpg, png or gif...
@@ -50,6 +51,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         return; // Abort command execution
     };
     var getFile = request.get(emoteURL, function(error, response, body) {
+    // Request (download) the emote file
         if(!response || error) {
         // If there is an error or no response...
             msg.edit('Error contacting website!').then(msg => msg.delete(2000));
@@ -57,7 +59,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
             return; // Abort command execution
         };        
     }).pipe(fs.createWriteStream(customPath + emoteName + emoteExt));
-    // Pipe the request's image URL to a write stream and write it as the emote name
+    // Pipe the request to a write stream and write the contents to a file named after the emote name
     setTimeout(function() {
     // Set timeout for closing the stream
         getFile.close(); 
@@ -80,11 +82,11 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // ...and end the filestream.
     });
     getFile.on('finish', () => {
-    // Once the transfer is done (file is written fully)...
+    // Once the transfer is done (writing to file has been completed)...
         msg.edit(`Successfully added emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
         // ...notify user of success and set auto-delete to 2s.
     });
 };
 
-exports.desc = "Add a custom emote - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
-exports.syntax = "<emotename or url if no name> <url if name specified>"; // Export command syntax 
+exports.desc = "Add a custom emote - Multi-word custom emotes need to be enclosed by \"quotes\"."; // Export command description
+exports.syntax = "<emoteName or url if no name> <url if name specified>"; // Export command syntax 

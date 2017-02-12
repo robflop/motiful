@@ -4,7 +4,7 @@ const fs = require('fs'); // For custom emotes
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "delEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
-        // If no emoteName was specified...
+    // If no emoteName was specified...
         msg.edit('Specify an emoteName!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution 
@@ -27,23 +27,25 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     var emotePath = "";
     // Define path placeholder for emote to be deleted
     if(fs.existsSync(`${customPath + emoteName}.png`) || fs.existsSync(`${customPath + emoteName}.jpg`) || fs.existsSync(`${customPath + emoteName}.gif`)) {
+    // If a png, jpg or gif file with the emoteName argument exists in the folder...
         if(fs.existsSync(`${customPath + emoteName}.png`)) {
         // ... 1) and if the file is a png file...
             emotePath =  customPath + emoteName + ".png";
-            // ...set emoteURL to the emote path and add the png extension...
+            // ...set emotePath to the custom path plus the emoteName and add the png extension.
         };
         if(fs.existsSync(`${customPath + emoteName}.jpg`)) {
         // ... 2) and if the file is a jpg file...
             emotePath =  customPath + emoteName + ".jpg";
-            // ...set emoteURL to the emote path and add the jpg extension...
+            // ...set emotePath to the custom path plus the emoteName and add the jpg extension.
         };
         if(fs.existsSync(`${customPath + emoteName}.gif`)) {
         // ... 3) and if the file is a gif file...
             emotePath =  customPath + emoteName + ".gif";
-            // ...set emoteURL to the emote path and add the gif extension...
+            // ...set emotePath to the custom path plus the emoteName and add the gif extension.
         };               
     };
     fs.unlink(emotePath, function (error) {
+    // Delete the chosen emote using above assigned emote path
         if(error) {
         // If there is an error deleting the emote...
             msg.edit(`Error deleting emote!: \`\`\`${error}\`\`\``).then(msg => msg.delete(2000));
@@ -55,5 +57,5 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     });
 };
 
-exports.desc = "Delete a custom emote - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
-exports.syntax = "<emotename>"; // Export command syntax 
+exports.desc = "Delete a custom emote - Multi-word custom emotes need to be enclosed by \"quotes\"."; // Export command description
+exports.syntax = "<emoteName>"; // Export command syntax 

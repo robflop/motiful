@@ -77,7 +77,6 @@ selfbot.on('message', msg => { // Listen to all messages sent
 	process.on("unhandledRejection", err => {
   		return;
 	});
-	// Log unhandled errors
 	return; // Just in case, return empty for anything else.
 });
 selfbot.login(config.token); // Log the selfbot in
