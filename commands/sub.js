@@ -7,11 +7,11 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     var replaceWith = msg.content.substring(msg.content.lastIndexOf("/")+1);
     // Define what to replace the above part with out of message
     if(toReplace == ""){ msg.edit("Specify a part to replace!").then(msg => msg.delete(2000)); return; }
-    // If the toReplace arg is empty, notify user and set auto-delete to 2s
+    // If the toReplace argument is empty, notify user and set auto-delete to 2s
+    msg.delete();
+    // Delete the command call
     msg.channel.fetchMessages({limit: 100}).then((messages) => {
     // Get last 100 messages
-        msg.delete();
-        // Delete the command call
         messages = messages.array();
         // Convert messages collection to array
         for(var i=1; i<messages.length; i++) {

@@ -5,7 +5,7 @@ var disabledCommands = require('../userconfig/disabled_commands.json'); // Load 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "help";
     var commandsExpl = [];
-    // Array which will have all commands and their corresponding explainations
+    // Define commandsExpl array which will have all commands and their corresponding explainations
     var cmdList = Object.keys(Commands.commands);
 	// Get all command names (keys) from commands object
     var arg = msgArray[1];
