@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json'); // Import configuration
 
 exports.main = function(selfbot, msg, msgArray) { // Export command function
 	var command = "setNickname"; 
-	var arg = msg.content.replace(config.commandPrefix + command, "").replace(config.commandPrefix + command.toLowerCase(), "").trim();
+	var arg = msg.content.substr(config.commandPrefix.length + command.length + 1);
 	// Take out the prefix and command name out of the message content, then define the argument out of the remaining content
 	if(msg.content == config.commandPrefix + command.toLowerCase()) { 
 	// If there is no argument (only prefix and command)...
