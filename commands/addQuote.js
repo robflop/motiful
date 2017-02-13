@@ -20,7 +20,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If the quote name is a multi-word name...
         quoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
         // ...assign the quote name value to the cut-out "" part and replace all spaces with underscores...
-        user = emoteURL = msg.content.substring(msg.content.lastIndexOf('"')+2, msg.content.indexOf(" ", msg.content.lastIndexOf('"')+2));
+        user = msg.content.substring(msg.content.lastIndexOf('"')+2, msg.content.indexOf(" ", msg.content.lastIndexOf('"')+2));
         // ...and assign the user value out of the message content beyond the quote name.
     }
     else {
