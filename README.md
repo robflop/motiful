@@ -70,3 +70,4 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | sendQuote     | Send a saved quote into the channel the command is used in                                        |
 | delQuote      | Delete a saved quote from the list                                                                |
 | listQuotes    | Output a list of all saved quotes                                                                 |
+| aesthetics    | Have the selfbot make a phrase aesthetic
