@@ -6,34 +6,63 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     var command = "addEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
-        msg.edit('Specify an emote!').then(msg => msg.delete(2000));
+        msg.edit('Specify arguments!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution
     };
     var emoteName = "";
     var emoteURL = "";
     var emoteExt = "";
+    var attachment;
     // Define placeholders
     if(msgArray[1].startsWith('"')) {
     // If the emote name is a multi-word emote...
         emoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
         // ...assign the emote value to the cut-out "" part and replace all spaces with underscores...
-        emoteURL = msg.content.substring(msg.content.lastIndexOf('"')+2);
-        // ...and assign the emoteURL out of the remaining message content.
+        if(msg.attachments.size>0) {
+        // ...1) and if the message has an attached file...
+            attachment = msg.attachments.first();
+            // ...assign the attachment to the placeholder...
+            emoteURL = attachment.url;
+            // ...and assign its url as the emoteURL.
+        }
+        else {
+        // ...2) and if there is no attachment...
+            emoteURL = msg.content.substring(msg.content.lastIndexOf('"')+2);
+            // ...assign the emoteURL out of the remaining message content.
+        };
     }
     else {
     // If the emote is a single-word emote...
         emoteName = msgArray[1];
         // ...assign the emote value out of the array...
-        emoteURL = msgArray[2];
-        // ...and assign emote url out of the array.
+        if(msg.attachments.size>0) {
+        // ...1) and if the message has an attached file...
+            attachment = msg.attachments.first();
+            // ...assign the attachment to the placeholder...
+            emoteURL = attachment.url;
+            // ...and assign its url as the emoteURL.
+        }
+        else {
+        // ...2) and if there is no attachment...
+            emoteURL = msgArray[2];
+            // ...assign the emote url out of the array.
+        };
     };
-    if(emoteName.startsWith("http") && !emoteURL) {
-    // If the emote name starts with http (so is a url in most cases)...
-        emoteName = msgArray[1].substring(msgArray[1].lastIndexOf("/")+1, msgArray[1].lastIndexOf("."));
-        // ...assign name based on emote url... 
-        emoteURL = msgArray[1];
-        // ...and re-assign URL from msg array.
+    if((emoteName.startsWith("http") || (msg.attachments.size>0)) && !emoteURL) {
+    // If the emote name starts with http (so is a url in most cases) or has an attachment and no name or URL...
+        if(msg.attachments.size>0) {
+            emoteName = attachment.url.substring(attachment.url.lastIndexOf("/")+1, attachment.url.lastIndexOf("."));
+            // ...assign name based on attachment url...
+            emoteURL = attachment.url;
+            // ...and assign the url based on the attachment's own url.
+        }
+        else {
+            emoteName = msgArray[1].substring(msgArray[1].lastIndexOf("/")+1, msgArray[1].lastIndexOf("."));
+            // ...assign name based on emote url... 
+            emoteURL = msgArray[1];
+            // ...and re-assign URL from msg array.
+        };
     };
     if(emoteURL && emoteURL.startsWith("http")) { emoteExt = emoteURL.substr(-4, 4); }
     // Assign emote extension based on the URL, if the url exists
