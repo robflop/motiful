@@ -20,7 +20,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                 // ...delete it.
             };
         };
-    })
+    });
 };
 
 exports.desc = "Purge a given amount of your last messages out of the last 100 overall messages"; // Export command description

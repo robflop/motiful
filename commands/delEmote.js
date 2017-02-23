@@ -10,8 +10,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         return; // Abort command execution 
     };
     var emoteName = "";
-    var emoteURL = "";
-    // Define placeholders
+    // Define placeholder
     if(msgArray[1].startsWith('"')) {
     // If the emoteName name is a multi-word emote...
         emoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");

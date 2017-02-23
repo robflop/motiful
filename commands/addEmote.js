@@ -10,10 +10,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution
     };
-    var emoteName = "";
-    var emoteURL = "";
-    var emoteExt = "";
-    var attachment;
+    var emoteName, emoteURL, emoteExt, attachment;
     // Define placeholders
     if(msgArray[1].startsWith('"')) {
     // If the emote name is a multi-word emote...
