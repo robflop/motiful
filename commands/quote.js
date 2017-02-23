@@ -12,14 +12,10 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     };
     var user = msgArray[1];
     // Define username of user to quote out of array
-    var response = "";
-    // Define Response placeholder
-    var snippet = "";
-    // Define Snippet placeholder
+    var response, snippet, users, date, time, name, avatar;
+    // Define placeholders
     var isDM = false;
     // Define the "isDM" indicator bool, default to false
-    var users;
-    // Define the users placeholder for gathering messages later on
     if(msg.content.includes("/")) {
     // If the message contains a slash...
         response = msg.content.substring(msg.content.lastIndexOf('/')+2);
@@ -73,10 +69,16 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // Loop through the fetched messages
             if(messages[j].author.id == user && messages[j].content.includes(snippet)) {
             // If the message is by the specified user and contains the snippet...
+                date = moment(messages[j].createdTimestamp).format('Do MMM YYYY'),
+                time = moment(messages[j].createdTimestamp).format('HH:mm:ss');
+                // ...asssign time and date values...
                 if(!isDM) {
                 // ...1) and if the channel is not a DM channel...
+                    name = msg.guild.member(user).displayName,
+                    avatar = msg.guild.member(user).user.avatarURL;
+                    // ...assign server-related name and avatar values...
                     embed.setColor(5267072) 
-                         .setAuthor(`${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.guild.member(user).user.avatarURL)
+                         .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                          .setDescription(messages[j].content);
                     // ...set the embed properties.
                     msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
@@ -84,8 +86,11 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
                     return; // Abort command execution
                 };
                 // ...2) and the channel is a DM channel...
+                name = msg.channel.recipient.username,
+                avatar = msg.channel.recipient.avatarURL;
+                // ...assign DM-related name and avatar values...
                 embed.setColor(5267072) 
-                     .setAuthor(`${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.channel.recipient.avatarURL)
+                     .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                      .setDescription(messages[j].content);
                 // ...set the embed properties.
                 msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});

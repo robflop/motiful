@@ -12,10 +12,8 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution 
     };
-    var quoteName;
-    // Define quote name placeholder
-    var user;
-    // Define user placeholder
+    var quoteName, user, name, avatar, date, time, users;
+    // Define placeholders
     if(msgArray[1].startsWith('"')) {
     // If the quote name is a multi-word name...
         quoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
@@ -34,8 +32,6 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // Define quote snippet out of message content
     var isDM = false;
     // Define the "isDM" indicator bool, default to false
-    var users;
-    // Define the users placeholder for gathering messages later on
     var embed = new Discord.RichEmbed();
      // Define the embed as new RichEmbed
     if(msg.channel.type == "text") {
@@ -77,28 +73,37 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // Loop through the fetched messages
             if(messages[j].author.id == user && messages[j].content.includes(snippet)) {
             // If the message is by the specified user and contains the snippet...
+                date = moment(messages[j].createdTimestamp).format('Do MMM YYYY'),
+                time = moment(messages[j].createdTimestamp).format('HH:mm:ss');
+                // ...asssign time and date values...
                 if(!isDM) {
                 // ...1) and if the channel is not a DM channel...
+                    name = msg.guild.member(user).displayName,
+                    avatar = msg.guild.member(user).user.avatarURL;
+                    // ...assign server-related name and avatar values...
                     embed.setColor(5267072) 
-                         .setAuthor(`${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.guild.member(user).user.avatarURL)
+                         .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                          .setDescription(messages[j].content);
-                    // ...set the embed properties.
-                    quotes[quoteName] = {"author": `${msg.guild.member(user).displayName} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, "content": messages[j].content, "avatar": msg.guild.member(user).user.avatarURL};
+                    // ...and set the embed properties.
+                    quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": messages[j].content, "avatar": avatar};
                     // Save the quote to the quotes list...
-                    fs.writeFileSync(`userconfig/saved_quotes.json`, JSON.stringify(quotes));
+                    fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
                     // ...and save the list to the file.
                     msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
                     // Send confirmation message and set auto-delete to 2s
                     return; // Abort command execution
                 };
                 // ...2) and the channel is a DM channel...
+                name = msg.channel.recipient.username,
+                avatar = msg.channel.recipient.avatarURL;
+                // ...assign DM-related name and avatar values...
                 embed.setColor(5267072) 
-                     .setAuthor(`${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, msg.channel.recipient.avatarURL)
+                     .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                      .setDescription(messages[j].content);
-                // ...set the embed properties.
-                quotes[quoteName] = {"author": `${msg.channel.recipient.username} wrote on the ${moment(messages[j].createdTimestamp).format('Do MMM YYYY')} at ${moment(messages[j].createdTimestamp).format('HH:mm:ss')}:`, "content": messages[j].content, "avatar": msg.channel.recipient.avatarURL};
+                // ...and set the embed properties.
+                quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": messages[j].content, "avatar": avatar};
                 // Save the quote to the quotes list...
-                fs.writeFileSync(`userconfig/saved_quotes.json`, JSON.stringify(quotes));
+                fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
                 // ...and save the list to the file.
                 msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
                 // Send confirmation message and set auto-delete to 2s

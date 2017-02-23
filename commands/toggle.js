@@ -17,7 +17,7 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         return; // Abort command execution to prevent other code from executing
     };
     // If the argument calls for a list of disabled commands, list them and set auto-delete to 30s
-    if(arg == "toggle" || arg == "help" || Object.keys(Commands.commands).indexOf(arg) == -1) {msg.delete(); return; } 
+    if(arg == "toggle" || arg == "help" || Object.keys(Commands.commands).indexOf(arg) == -1) { msg.delete(); return; } 
 	// Disallow toggling of the toggle/help command and any non-existing commands
     var index = disabledCommands.indexOf(arg);
     // Define the index of the argument inside the disabled commands list
