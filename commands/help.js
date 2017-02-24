@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json'); // Import configuration
 var Commands = require('../command_handler.js'); // Load command handler
 var disabledCommands = require('../userconfig/disabled_commands.json'); // Load list of toggled commands
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "help";
     var commandsExpl = [];
     // Define commandsExpl array which will have all commands and their corresponding explainations

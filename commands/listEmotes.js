@@ -1,7 +1,7 @@
 const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function   
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function   
     var command = "listEmotes";
     var customPath = require("path").join(__dirname, "../customemotes/");
     // Set the path the custom emotes are stored in

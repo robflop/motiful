@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const request = require('request'); // For saving files
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "addEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...

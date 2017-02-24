@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json'); // Import configuration
 const Discord = require('discord.js'); // For defining the embed
 const moment = require('moment'); // For embed timestamp
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "quote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...

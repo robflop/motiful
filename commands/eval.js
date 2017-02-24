@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json'); // Import configuration
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "eval";
     if(!config.eval) {msg.edit('Eval has been disabled in the config.').then(msg => msg.delete(2000))};
     // If eval disabled in config, notify user and set auto-delete to 2s.

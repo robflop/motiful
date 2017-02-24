@@ -4,7 +4,7 @@ const Discord = require('discord.js'); // For defining the embed
 const moment = require('moment'); // For embed timestamp
 const quotes = require('../userconfig/saved_quotes.json'); // Load saved quotes object
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function 
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function 
     var command = "addQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...

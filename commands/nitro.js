@@ -1,6 +1,6 @@
 const Discord = require('discord.js'); // For defining the embed
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "nitro";
     var embed = new Discord.RichEmbed();
     // Define the embed as new RichEmbed

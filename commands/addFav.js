@@ -4,7 +4,7 @@ const subEmotes = require('../twitchemotes/subscriber.json'); // Load subscriber
 const favs = require('../userconfig/favorite_emotes.json'); // Load favorite emotes object
 const bttv = require('../twitchemotes/bttv.json') // Load bttv emote list
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "addFav";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
