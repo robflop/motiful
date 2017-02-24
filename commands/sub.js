@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json'); // Import configuration
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "sub";
     var toReplace = msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.lastIndexOf("/"));
     // Define part of original message to be replaced

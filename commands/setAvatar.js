@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json'); // Import configuration
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
 	var command = "setAvatar";
 	var arg = msgArray[1];
 	// Assign the argument out of the array

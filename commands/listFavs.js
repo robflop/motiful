@@ -1,6 +1,6 @@
 const favs = require('../userconfig/favorite_emotes.json'); // Favorite emotes object
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "listFavs";
     if(Object.keys(favs).length == 0) {msg.edit("No emotes have been favorited.").then(msg => msg.delete(5000)); return;};
     // If no emotes have been favorited, notify user and set auto-delete to 5s instead of posting the list

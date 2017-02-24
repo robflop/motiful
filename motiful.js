@@ -1,16 +1,17 @@
 const Discord = require('discord.js'); // Obvious selfbot base
 const selfbot = new Discord.Client(); // Initialize selfbot instance
 const config = require('./userconfig/config.json'); // Import configuration
+const chalk = require('chalk'); // Colorful console logs, yay
 var Commands = require('./command_handler.js'); // Load command handler
 var Events = require('./event_handler.js'); // Load event handler
 var disabledCommands = require('./userconfig/disabled_commands.json') // Load array of disabled commands
 
 selfbot.once('ready', () => { // Ready message once selfbot is loaded
-	Events.ready(selfbot);
+	Events.ready(selfbot, chalk);
 });
 
 selfbot.on('error', () => { // Listen to errors
-	Events.error(selfbot);
+	Events.error(selfbot, chalk);
 }); 
 
 selfbot.on('message', msg => { // Listen to all messages sent
@@ -32,7 +33,7 @@ selfbot.on('message', msg => { // Listen to all messages sent
 	};
     if(Object.keys(Commands.commands).indexOf(actualCmd) > -1) { 
 	// If the given command is an actual command that is available...
-		Commands.commands[actualCmd].main(selfbot, msg, msgArray, Commands);
+		Commands.commands[actualCmd].main(selfbot, msg, msgArray, Commands, chalk);
 		// ...run the command.
 	};
 	if(actualCmd == "reload") {

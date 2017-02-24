@@ -1,4 +1,4 @@
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "ping";
     msg.delete();
     // Delete the command call

@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json'); // Import configuration
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "purge";
     var amount = parseInt(msgArray[1], 10);
     // Define amount to purge out of array

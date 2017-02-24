@@ -1,11 +1,12 @@
 const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
+const moment = require('moment'); // For logs
 const globalEmotes = require('../twitchemotes/global.json'); // Load global emotes list
 const subEmotes = require('../twitchemotes/subscriber.json'); // Load subscriber emote list
 const bttv = require('../twitchemotes/bttv.json') // Load bttv emote list
 const favs = require('../userconfig/favorite_emotes.json'); // Load favorite emotes object
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "emote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
@@ -13,6 +14,8 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
         // ...tell the user to do so and set auto-delete to 2s.
         return; // Abort command execution
     };
+    var timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
+	// Define timestamp
     var twChannel = "";
     // Define twChannel placeholder
     if(msgArray[1].startsWith('"')) {
@@ -82,9 +85,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
     // If the channel was specified as ffz...
         require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
         // ...search FrankerFaceZ for the emote name (emote input).
-	        if(error) {console.log('Error searching FrankerFaceZ emote list occurred: ' + error)};
+	        if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`)};
 		    // Log any errors|undefined responses
-       	    if(response == undefined) {console.log('FrankerFaceZ emote list response undefined')};
+       	    if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`)};
             if(body) {
             // Once body exists...
                 if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "4" )) { msgArray[3] = "1" };
@@ -182,9 +185,9 @@ exports.main = function(selfbot, msg, msgArray) { // Export command function
             emoteSize = msgArray[2];
             require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
             // Get the list of valid FrankerFaceZ emotes using the emoteName
-	            if(error) {console.log('Error searching FrankerFaceZ emote list occurred: ' + error)};
+	            if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`)};
 		        // Log any errors|undefined responses
-       	        if(response == undefined) {console.log('FrankerFaceZ emote list response undefined')};
+       	        if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`)};
                 if(body) {
                 // Once body exists...
                     var emoteList = JSON.parse(body);

@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const quotes = require('../userconfig/saved_quotes.json'); // Load saved quotes object
 
-exports.main = function(selfbot, msg, msgArray) { // Export command function 
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function 
     var command = "delQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no quote name was specified...
