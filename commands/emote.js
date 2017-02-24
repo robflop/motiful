@@ -85,9 +85,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // If the channel was specified as ffz...
         require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
         // ...search FrankerFaceZ for the emote name (emote input).
-	        if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`)};
-		    // Log any errors|undefined responses
-       	    if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`)};
+	        if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
+		    // Log any errors|undefined responses, notify the user and abort command execution
+       	    if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
             if(body) {
             // Once body exists...
                 if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "4" )) { msgArray[3] = "1" };
@@ -185,9 +185,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
             emoteSize = msgArray[2];
             require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
             // Get the list of valid FrankerFaceZ emotes using the emoteName
-	            if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`)};
-		        // Log any errors|undefined responses
-       	        if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`)};
+	            if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
+		        // Log any errors|undefined responses, notify the user and abort command execution
+       	        if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
                 if(body) {
                 // Once body exists...
                     var emoteList = JSON.parse(body);
