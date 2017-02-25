@@ -6,7 +6,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Define part of original message to be replaced
     var replaceWith = msg.content.substring(msg.content.lastIndexOf("/")+1);
     // Define what to replace the above part with out of message
-    if(toReplace == ""){ msg.edit("Specify a part to replace!").then(msg => {return msg.delete(2000);});
+    if(toReplace == ""){ msg.edit("Specify a part to replace!").then(msg => {return msg.delete(2000);})};
     // If the toReplace argument is empty, notify user and set auto-delete to 2s
     msg.delete();
     // Delete the command call
