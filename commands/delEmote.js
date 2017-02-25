@@ -5,9 +5,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "delEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emoteName was specified...
-        msg.edit('Specify an emoteName!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution 
+        return msg.edit('Specify an emoteName!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution  
     };
     var emoteName = "";
     // Define placeholder
@@ -47,9 +46,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Delete the chosen emote using above assigned emote path
         if(error) {
         // If there is an error deleting the emote...
-            msg.edit(`Error deleting emote!: \`\`\`${error}\`\`\``).then(msg => msg.delete(2000));
-            // ...tell the user and set auto-delete to 2s.
-            return;        
+            return msg.edit(`Error deleting emote!: \`\`\`${error}\`\`\``).then(msg => msg.delete(2000));
+            // ...tell the user and set auto-delete to 2s and abort command execution     
         };
         msg.edit(`Successfully deleted emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
         // Notify user of success and set auto-delete to 2s

@@ -17,7 +17,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 		    // ...and then put it in the emotes array.
 	    };
     });
-    if(emotes == 0) {msg.edit("No custom emotes have been added.").then(msg => msg.delete(5000)); return;};
+    if(emotes == 0) {return msg.edit("No custom emotes have been added.").then(msg => msg.delete(5000));};
     // If no custom emotes have been added, post that instead of the list and auto-delete after 5 seconds
     msg.edit(`Available custom emotes are: \`\`\`${emotes.join(", ")}\`\`\``).then(msg => msg.delete(30000));
     // Send the emotes list and delete it after 30 seconds

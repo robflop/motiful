@@ -6,9 +6,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 	// Take out the prefix and command name out of the message content, then define the argument out of the remaining content
 	if(msg.content == config.commandPrefix + command.toLowerCase()) { 
 	// If there is no argument (only prefix and command)...
-		msg.edit("Specify a username to set yourself to!").then(msg => msg.delete(2000));
-		// ...notify the user...
-		return;	// ...and abort command execution.
+		return msg.edit("Specify a username to set yourself to!").then(msg => msg.delete(2000));
+		// ...notify the user and abort command execution.
 	};
 	// If there is an argument given,...
 	selfbot.user.setUsername(arg);

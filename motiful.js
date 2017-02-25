@@ -28,8 +28,7 @@ selfbot.on('message', msg => { // Listen to all messages sent
     // Remove prefix from the message content, then split command parts and store them in an array
 	if(disabledCommands.indexOf(actualCmd) > -1) {
 	// If the command is found in the array of disabled commands...
-		msg.delete(); // ... delete the command call...
-		return; // ...and don't execute the command (duh). (Else proceed as usual.)
+		return msg.delete(); // ... delete the command call and don't execute the command (duh). (Else proceed as usual.)
 	};
     if(Object.keys(Commands.commands).indexOf(actualCmd) > -1) { 
 	// If the given command is an actual command that is available...
@@ -46,9 +45,8 @@ selfbot.on('message', msg => { // Listen to all messages sent
 		*/
 		if(arg == "") {
 		// If no command to reload is given...
-            msg.edit('Specify a command to reload!').then(msg => msg.delete(2000));
-                // ...notify the user, set auto-delete to 2s...
-			return; // ...and abort command execution.
+            return msg.edit('Specify a command to reload!').then(msg => msg.delete(2000));
+                // ...notify the user, set auto-delete to 2s and abort command execution.
 		};
 		// Otherwise...
 		try {
@@ -67,9 +65,8 @@ selfbot.on('message', msg => { // Listen to all messages sent
     	}
 		catch(error) {
 		// If there is an error while reloading...
-			msg.edit(`Error while reloading the '${arg}' command: \`\`\`${error}\`\`\`\n(Command may not exist, check for typos)`).then(msg => msg.delete(2000));
-			// ...notify the user of the error and set auto-delete to 2s
-			return; // ...and abort command execution.
+			return msg.edit(`Error while reloading the '${arg}' command: \`\`\`${error}\`\`\`\n(Command may not exist, check for typos)`).then(msg => msg.delete(2000));
+			// ...notify the user of the error and set auto-delete to 2s and abort command execution.
 		};
 		// If there is no error...
 		msg.edit(`Command '${cmdFile.slice(0, -3)}' successfully reloaded!`).then(msg => msg.delete(2000));

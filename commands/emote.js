@@ -10,9 +10,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "emote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
-        msg.edit('Specify an emote!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     var timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
 	// Define timestamp
@@ -57,9 +56,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         emoteID = globalEmotes["emotes"][emoteName]["image_id"];
         emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
         // Grab the emote's ID out of the global emotes list and assign the emote URL...
-        msg.channel.sendFile(emoteURL, `${emoteName}.png`);
-        // ...then send the emote into the channel the command was called in...
-        return; // ...and abort command execution.
+        return msg.channel.sendFile(emoteURL, `${emoteName}.png`);
+        // ...then send the emote into the channel the command was called in and abort command execution.
     };
     if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined) {
     // If the channel argument can be found in the twitch channel list...
@@ -75,11 +73,10 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                 // ...then assign the emote URL using emoteID and emoteSize.
             };
         };
-        if(emoteID == "") {return};
+        if(emoteID == "") { return };
         // If emoteID is empty (no name could be matched, emote not found), abort command execution 
-        msg.channel.sendFile(emoteURL, emoteName + ".png");
-        // Send the emote into the channel the command was called in...
-        return; // ...and abort command execution.
+        return msg.channel.sendFile(emoteURL, emoteName + ".png");
+        // Send the emote into the channel the command was called in and abort command execution.
     };
     if(twChannel.toLowerCase() == "ffz") {
     // If the channel was specified as ffz...
@@ -104,9 +101,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                         // ...assign the emote id of the matched emote as emoteID...
                         emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
                         // ...assign the emoteURL accordingly...
-                        msg.channel.sendFile(emoteURL, emoteName + ".png");
-                        // ...and send the emote.
-                        return; // Abort command execution to prevent multi-post of emotes with same name
+                        return msg.channel.sendFile(emoteURL, emoteName + ".png");
+                        // ...send the emote and abort command execution to prevent multi-post of emotes with same name 
                     };
                 };
             };
@@ -126,9 +122,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                 // ...assign the emote id of the matched emote as emoteID...
                 emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
                 // ...assign the emoteURL accordingly...
-                msg.channel.sendFile(emoteURL, emoteName + "." + bttv["emotes"][i]["imageType"]);
-                // ...and send the emote.
-                return; // Abort command execution to prevent multi-post of emotes with same name
+                return msg.channel.sendFile(emoteURL, emoteName + "." + bttv["emotes"][i]["imageType"]);
+                // ...send the emote and abort command execution to prevent multi-post of emotes with same name
             };
         };
     };
@@ -172,9 +167,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                     // ...assign the emote id of the matched emote as emoteID...
                     emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
                     // ...assign the emoteURL accordingly...
-                    msg.channel.sendFile(emoteURL, emoteName + "." + bttv["emotes"][i]["imageType"]);
-                    // ...and send the emote.
-                    return; // Abort command execution to prevent multi-post of emotes with same name
+                    return msg.channel.sendFile(emoteURL, emoteName + "." + bttv["emotes"][i]["imageType"]);
+                    // ...send the emote and abort command execution to prevent multi-post of emotes with same name
                 };
             };
         }
@@ -200,9 +194,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                             // ...assign the emote id of the matched emote as emoteID...
                             emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
                             // ...assign the emoteURL accordingly...
-                            msg.channel.sendFile(emoteURL, emoteName + ".png");
-                            // ...and send the emote.
-                            return; // Abort command execution to prevent multi-post of emotes with same name
+                            return msg.channel.sendFile(emoteURL, emoteName + ".png");
+                            // ...send the emote and abort command execution to prevent multi-post of emotes with same name
                         };
                     };
                 };
@@ -220,9 +213,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                     // ...assign the image id of the matched emote as emoteID...
                     emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
                     // ...then assign the emote URL using emoteID and emoteSize.
-                    msg.channel.sendFile(emoteURL, emoteName + ".png");
-                    // Send the emote into the channel the command was called in...
-                    return; // ...and abort command execution.
+                    return msg.channel.sendFile(emoteURL, emoteName + ".png");
+                    // Send the emote into the channel the command was called in and abort command execution. 
                 };
             };
         };

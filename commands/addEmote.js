@@ -6,9 +6,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "addEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
-        msg.edit('Specify arguments!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit('Specify arguments!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     var emoteName, emoteURL, emoteExt, attachment;
     // Define placeholders
@@ -65,24 +64,21 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Assign emote extension based on the URL, if the url exists
     if(emoteExt !== ".png" && emoteExt !== ".jpg" && emoteExt !== ".gif") {
     // If the passed file isn't a jpg, png or gif...
-        msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000)); 
-        // ...notify the user of rejection and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000)); 
+        // ...notify the user of rejection and set auto-delete to 2s and abort command execution
     };
     var customPath = require("path").join(__dirname, "../customemotes/");
     // Set the path the custom emotes are stored in
     if(fs.existsSync(customPath + emoteName + emoteExt)) {
-        msg.edit('Emote with that name already exists!').then(msg => msg.delete(2000));
-        // Notify user and set auto-delete to 2s
-        return; // Abort command execution
+        return msg.edit('Emote with that name already exists!').then(msg => msg.delete(2000));
+        // Notify user and set auto-delete to 2s and abort command execution
     };
     var getFile = request.get(emoteURL, function(error, response, body) {
     // Request (download) the emote file
         if(!response || error) {
         // If there is an error or no response...
-            msg.edit('Error contacting website!').then(msg => msg.delete(2000));
-            // ...notify the user and set auto-delete to 2s.
-            return; // Abort command execution
+            return msg.edit('Error contacting website!').then(msg => msg.delete(2000));
+            // ...notify the user and set auto-delete to 2s and abort command execution
         };        
     }).pipe(fs.createWriteStream(customPath + emoteName + emoteExt));
     // Pipe the request to a write stream and write the contents to a file named after the emote name
