@@ -6,9 +6,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "quote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...
-        msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution 
+        return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution 
     };
     var user = msgArray[1];
     // Define username of user to quote out of array
@@ -44,9 +43,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     }
     else {
     // If the command is called in neither a server's channel nor pm...
-        msg.edit("Quote only supported on Servers or PMs, sorry.").then(msg => msg.delete(2000));
-        // ...notify user and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit("Quote only supported on Servers or PMs, sorry.").then(msg => msg.delete(2000));
+        // ...notify user and set auto-delete to 2s and abort command execution
     };
     if(!isDM) {
     // If the channel is not a DM channel...
@@ -81,9 +79,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                          .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                          .setDescription(messages[j].content);
                     // ...set the embed properties.
-                    msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
-                    // Send the quote and the response into the channel the command was called in
-                    return; // Abort command execution
+                    return msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
+                    // Send the quote and the response into the channel the command was called in and abort command execution
                 };
                 // ...2) and the channel is a DM channel...
                 name = msg.channel.recipient.username,
@@ -93,9 +90,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                      .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                      .setDescription(messages[j].content);
                 // ...set the embed properties.
-                msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
-                // Send the quote and the response into the channel the command was called in
-                return; // Abort command execution
+                return msg.channel.sendEmbed(embed).then(msg => {if(response !== "") {msg.channel.sendMessage(response)}});
+                // Send the quote and the response into the channel the command was called in and abort command execution
             };
         };
     })

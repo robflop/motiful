@@ -8,9 +8,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "addQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...
-        msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution 
+        return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution 
     };
     var quoteName, user, name, avatar, date, time, users;
     // Define placeholders
@@ -48,9 +47,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     }
     else {
     // If the command is called in neither a server's channel nor pm...
-        msg.edit("Quote only supported on Servers or DMs, sorry.").then(msg => msg.delete(2000));
-        // ...notify user and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit("Quote only supported on Servers or DMs, sorry.").then(msg => msg.delete(2000));
+        // ...notify user and set auto-delete to 2s and abort command execution
     };
     if(!isDM) {
     // If the channel is not a DM channel...
@@ -89,9 +87,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                     // Save the quote to the quotes list...
                     fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
                     // ...and save the list to the file.
-                    msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
-                    // Send confirmation message and set auto-delete to 2s
-                    return; // Abort command execution
+                    return msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
+                    // Send confirmation message and set auto-delete to 2s and abort command execution
                 };
                 // ...2) and the channel is a DM channel...
                 name = msg.channel.recipient.username,
@@ -105,9 +102,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                 // Save the quote to the quotes list...
                 fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
                 // ...and save the list to the file.
-                msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
-                // Send confirmation message and set auto-delete to 2s
-                return; // Abort command execution
+                return msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
+                // Send confirmation message and set auto-delete to 2s and abort command execution
             };
         };
     })

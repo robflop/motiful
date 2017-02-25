@@ -8,9 +8,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "addFav";
     if(msg.content == config.commandPrefix + command.toLowerCase()) { 
     // If no emote was specified...
-        msg.edit('Specify an emote!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution
+       return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     var twChannel = msgArray[1];
     // Assign twitch channel out of array
@@ -20,9 +19,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Define subscriber emote "found" indicator bool, default to false
     if(favs.hasOwnProperty(emoteName)) {
     // If the emote is on the favorites list already...
-        msg.edit(`Emote '${emoteName}' is already on the favorites list!`).then(msg => msg.delete(2000));
-        // ...notify the user and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit(`Emote '${emoteName}' is already on the favorites list!`).then(msg => msg.delete(2000));
+        // ...notify the user and set auto-delete to 2s and abort command execution
     };
     if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined) {
     // If the channel argument can be found within the subscriber emotes...
@@ -42,9 +40,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         // Save the favorite in the favs list under the emote name in an object containing channel and emote name
         fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
         // Save the favorites list to the file
-        msg.edit(`Emote '${emoteName}' added to favorites!`).then(msg => msg.delete(2000));
+        return msg.edit(`Emote '${emoteName}' added to favorites!`).then(msg => msg.delete(2000));
         // If emote was found and added, notify user of success and set auto-delete to 2s
-        return; // Abort command execution to prevent addition of multiple emotes with same name
     }
     else if(twChannel.toLowerCase() == "ffz") {
     // If the channel was specified as ffz...
@@ -67,9 +64,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                         // Save the favorite in the favs list under the emote name in an object containing channel and emote name
                         fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
                         // Save the favorites list to the file
-                        msg.edit(`Emote '${emoteName}' added to FFZ favorites!`).then(msg => msg.delete(2000));
+                        return msg.edit(`Emote '${emoteName}' added to FFZ favorites!`).then(msg => msg.delete(2000));
                         // If emote was found and added, notify user of success and set auto-delete to 2s
-                        return; // Abort command execution to prevent addition of multiple emotes with same name
                     };
                 };
                 if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on FrankerFaceZ!`).then(msg => msg.delete(2000)); return};
@@ -89,9 +85,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                         // Save the favorite in the favs list under the emote name in an object containing channel and emote name
                         fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
                         // Save the favorites list to the file
-                        msg.edit(`Emote '${emoteName}' added to BTTV favorites!`).then(msg => msg.delete(2000));
+                        return msg.edit(`Emote '${emoteName}' added to BTTV favorites!`).then(msg => msg.delete(2000));
                         // If emote was found and added, notify user of success and set auto-delete to 2s
-                        return; // Abort command execution to prevent addition of multiple emotes with same name
                     };
                 };
                 if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on BetterTwitchTV!`).then(msg => msg.delete(2000)); return};
@@ -99,9 +94,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     }
     else {
     // If the channel argument can't be found...
-        msg.edit(`Twitch channel / Extension '${twChannel}' not found!`).then(msg => msg.delete(2000));
-        // ...notify the user, set auto-delete to 2s...
-        return; // ...and abort command execution.
+        return msg.edit(`Twitch channel / Extension '${twChannel}' not found!`).then(msg => msg.delete(2000));
+        // ...notify the user, set auto-delete to 2s and abort command execution.
     };
 };
 

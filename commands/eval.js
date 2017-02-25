@@ -6,7 +6,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // If eval disabled in config, notify user and set auto-delete to 2s.
     var input = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"'));
     // Define eval input out of the message content
-    if(input == '' || input == '"' || input == '""') {msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => msg.delete(2000)); return;};
+    if(input == '' || input == '"' || input == '""') {msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => {return msg.delete(2000);});
     // If input is empty or none was given, notify user and set auto-delete to 2s.
     try {
     // Try evaluating the input
@@ -30,9 +30,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         };
         if(output.length + input.length > 1950) {
         // If the output + input is longer than 1950 characters...
-            msg.edit("Output too long! Try another script.").then(msg => msg.delete(2000));
-            // ...notify user, then set auto-delete to 2s.
-            return; // Abort command execution
+            return msg.edit("Output too long! Try another script.").then(msg => msg.delete(2000));
+            // ...notify user, then set auto-delete to 2s and abort command execution
         };
         msg.edit(`INPUT:\`\`\`js\n${input}\n\`\`\`\n\nOUTPUT: \`\`\`js\n${output}\n\`\`\``);
         // Send the message with the evaluated output

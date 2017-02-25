@@ -6,17 +6,15 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     var command = "sendQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...
-        msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s.
-        return; // Abort command execution 
+        return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution  
     };
     var quoteName = msgArray[1];
     // Define quote name out of the array
     if(!quotes.hasOwnProperty(quoteName)) {
     // If the quote is not found...
-        msg.edit(`Quote '${quoteName}' not found!`).then(msg => msg.delete(2000));
-        // ...notify the user and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit(`Quote '${quoteName}' not found!`).then(msg => msg.delete(2000));
+        // ...notify the user and set auto-delete to 2s and abort command execution
     };
     msg.delete();
     // Delete the command call

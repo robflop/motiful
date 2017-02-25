@@ -17,9 +17,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     };
     if(aestheticPhrase.join(" ").length > 1999) { 
     // If the output is longer than the max message size...
-        msg.edit("Output too long. Try shorter text.").then(msg => msg.delete(2000));
-        //  ...tell the user to shorten their input and set auto-delete to 2s.
-        return; // Abort command execution
+        return msg.edit("Output too long. Try shorter text.").then(msg => msg.delete(2000));
+        //  ...tell the user to shorten their input and set auto-delete to 2s and abort command execution
     };
     msg.edit(aestheticPhrase.join(" "));
     // Join the aesthetics from the aestheticPhrase array and edit the message to the result
