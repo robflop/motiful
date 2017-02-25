@@ -10,7 +10,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     if(!arg) {msg.edit("Specify a command to toggle!").then(msg => msg.delete(2000))};
     // If no argument is given, notify the user and set auto-delete to 2s.
     if(arg == "dcom") {
-        if(disabledCommands == "") {msg.edit("No commands have been disabled!").then(msg => {return msg.delete(5000);});
+        if(disabledCommands == "") {msg.edit("No commands have been disabled!").then(msg => {return msg.delete(5000);})};
         // If no commands have been disabled, tell the user and set auto-delete to 5s
         return msg.edit(`Disabled commands are: \`\`\`${disabledCommands.join(", ")}\`\`\``).then(msg => msg.delete(30000));
         // If there are disabled commands, list them and set auto-delete to 30s and abort command execution to prevent other code from executing
