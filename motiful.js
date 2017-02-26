@@ -12,7 +12,7 @@ selfbot.once('ready', () => { // Ready message once selfbot is loaded
 
 selfbot.on('error', () => { // Listen to errors
 	Events.error(selfbot, chalk);
-}); 
+});
 
 selfbot.on('message', msg => { // Listen to all messages sent
     if(msg.author.id !== config.ownerID) { return; }; // Don't listen to anyone but the owner
