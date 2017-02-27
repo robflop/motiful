@@ -10,15 +10,12 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Delete the command call
     msg.channel.fetchMessages({limit: 100}).then((messages) => {
     // Get the last 100 messages
-        messages = messages.array();
-        // Convert messages collection to array
-        for(var i=0; i<=amount; i++) {
+        messages = messages.filterArray(message => message.author.id == config.ownerID && message.content !== msg.content);
+        // Filter messages collection by the bot owner ID
+        for(var i=0; i<amount; i++) {
         // Loop through the fetched messages array
-            if(messages[i].author.id == config.ownerID) {
-            // If the message is by the bot owner...
                 messages[i].delete();
-                // ...delete it.
-            };
+            // Delete the messages
         };
     });
 };
