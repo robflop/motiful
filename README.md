@@ -44,7 +44,7 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 ## Out-of-the-box Commands:
 | Command     	| Effect                                                                                    	    |
 |-------------	|-------------------------------------------------------------------------------------------------	|
-| help        	| List all currently available commands                                                          	|
+| help        	| List all currently available commands (Spammy in public channels, use with caution)               |
 | about       	| Get general info about the selfbot                                                               	|
 | setStatus     | Change your own playing status (only shows up for others)                                       	|
 | setAvatar   	| Change your own avatar                                                                           	|
@@ -70,4 +70,5 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | sendQuote     | Send a saved quote into the channel the command is used in                                        |
 | delQuote      | Delete a saved quote from the list                                                                |
 | listQuotes    | Output a list of all saved quotes                                                                 |
-| aesthetics    | Have the selfbot make a phrase aesthetic
+| aesthetics    | Have the selfbot make a phrase aesthetic                                                          |
+| ascii         | Spell out your input in ascii art (Spammy, use with caution)                                      |
