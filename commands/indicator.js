@@ -17,7 +17,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         indicatorPhrase.push(indicatorTemplate + phrase[i] + ":");
         // ...2) and if the letter doesn't have a corresponding indicator, push it into the array as-is.
     };
-    if(indicatorPhrase.join(" ").length > 1999) { 
+    if(indicatorPhrase.join(" ").length > 1999) {
     // If the output is longer than the max message size...
         return msg.edit("Output too long. Try shorter text.").then(msg => msg.delete(2000));
         //  ...tell the user to shorten their input and set auto-delete to 2s and abort command execution
@@ -27,4 +27,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Spell out input in regional indicators"; // Export command description
-exports.syntax = "<phrase/word to indicatorfy>"; // Export command syntax 
+exports.syntax = "<phrase/word to indicatorfy>"; // Export command syntax
