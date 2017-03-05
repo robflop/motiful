@@ -59,7 +59,7 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | addFav        | Add an emote to your favorites list                                                               |
 | delFav        | Remove an emote from your favorites list                                                          |
 | listFavs      | List all your favorite emotes                                                                     |
-| eval          | Have the selfbot evaluate javascript input and output the results                                 |
+| eval          | Have the selfbot evaluate javascript input and output the results (async possible)                |
 | indicator     | Have the selfbot spell a phrase in regional indicators                                            |
 | ping          | Measure the delay between command calls and command execution in ms                               |
 | nitro         | Have the selfbot post a fake embed about a "Nitro-only message"                                   |
