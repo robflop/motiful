@@ -23,7 +23,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
   	// This is put here instead of outside the command execution because we need a reference to the message and other things
     const print = (...a) => { // ...a means all arguments
         const cleaned = a.map(o => {
-            if (typeof o !== 'string') o = util.inspect(o); // Turn to string
+            if (typeof o !== 'string') o = util.inspect(o, {depth: 0}); // Turn to string
             return o.replace(tokenRegex, '[TOKEN]'); // Replace tokens
         });
 
@@ -41,6 +41,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     };
 
     var result; // Define result placeholder
+
     if(msgArray[1] == "async") {
         result = new Promise(resolve => resolve(eval(`(async () => { ${input} })()`)));
         // This version is wrapped in an async function
@@ -52,10 +53,11 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         result = new Promise(resolve => resolve(eval(input)));
         // Non-async promise, no need to return everything manually
     }
+    
     const cb = '```'; // Shortcut for codeblock syntax
   
   	return result.then(output => {
-        if (typeof output !== 'string') output = util.inspect(output); // Inspect to turn to string if not one
+        if (typeof output !== 'string') output = util.inspect(output, {depth: 0}); // Inspect to turn to string if not one
         output = `${logs.join('\n')}\n${logs.length && output === 'undefined' ? '' : output}`; // Prepend the logs to the output with a check for undefined to make things prettier
         output = output.replace(tokenRegex, '[TOKEN]'); // Replace tokens
 
