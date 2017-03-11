@@ -19,6 +19,8 @@
         "no-unused-vars": "off",
         "constructor-super": "warn",
         "valid-typeof": "warn",
-        "no-trailing-spaces": "error"
+        "no-trailing-spaces": "error",
+        "use-isnan": "warn",
+        "camelcase": "error"
     }
 }
