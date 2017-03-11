@@ -3,10 +3,10 @@ const fs = require('fs'); // For custom emotes
 
 exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "delEmote";
-    if(msg.content == config.commandPrefix + command.toLowerCase()) { 
+    if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no emoteName was specified...
         return msg.edit('Specify an emoteName!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s and abort command execution  
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     var emoteName = "";
     // Define placeholder
@@ -40,14 +40,14 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         // ... 3) and if the file is a gif file...
             emotePath =  customPath + emoteName + ".gif";
             // ...set emotePath to the custom path plus the emoteName and add the gif extension.
-        };               
+        };
     };
     fs.unlink(emotePath, function (error) {
     // Delete the chosen emote using above assigned emote path
         if(error) {
         // If there is an error deleting the emote...
             return msg.edit(`Error deleting emote!: \`\`\`${error}\`\`\``).then(msg => msg.delete(2000));
-            // ...tell the user and set auto-delete to 2s and abort command execution     
+            // ...tell the user and set auto-delete to 2s and abort command execution
         };
         msg.edit(`Successfully deleted emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
         // Notify user of success and set auto-delete to 2s
@@ -55,4 +55,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Delete a custom emote - Multi-word custom emotes need to be enclosed by \"quotes\"."; // Export command description
-exports.syntax = "<emoteName>"; // Export command syntax 
+exports.syntax = "<emoteName>"; // Export command syntax

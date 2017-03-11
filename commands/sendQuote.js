@@ -2,12 +2,12 @@ const config = require('../userconfig/config.json'); // Import configuration
 const Discord = require('discord.js'); // For defining the embed
 const quotes = require('../userconfig/saved_quotes.json'); // Load saved quotes object
 
-exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function 
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "sendQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...
         return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s and abort command execution  
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     var quoteName = msgArray[1];
     // Define quote name out of the array
@@ -22,7 +22,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Define the embed as new RichEmbed
     var quote = quotes[quoteName];
     // Define the quote entry of the object as "quote"
-    embed.setColor(5267072) 
+    embed.setColor(5267072)
          .setAuthor(quote["author"], quote["avatar"])
          .setDescription(quote["content"]);
     // Set the embed properties

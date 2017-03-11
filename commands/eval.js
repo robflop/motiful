@@ -9,17 +9,17 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Define eval input out of the message content
     if(input == '' || input == '"' || input == '""') {msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => {return msg.delete(2000);})};
     // If input is empty or none was given, notify user and set auto-delete to 2s.
-    
+
   	/*
     Credit for all of the below goes to 1Computer1 on GitHub
     ily ❤ - from comp
     */
-  
+
 	const evaled = {}; // Stores outputs
     const logs = []; // Stores logs
 
     const tokenRegex = new RegExp(selfbot.token.replace(/\./g, '\\.').split('').join('.?'), 'g'); // Regex for tokens
-  
+
   	// This is put here instead of outside the command execution because we need a reference to the message and other things
     const print = (...a) => { // ...a means all arguments
         const cleaned = a.map(o => {
@@ -53,9 +53,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         result = new Promise(resolve => resolve(eval(input)));
         // Non-async promise, no need to return everything manually
     }
-    
+
     const cb = '```'; // Shortcut for codeblock syntax
-  
+
   	return result.then(output => {
         if (typeof output !== 'string') output = util.inspect(output, {depth: 0}); // Inspect to turn to string if not one
         output = `${logs.join('\n')}\n${logs.length && output === 'undefined' ? '' : output}`; // Prepend the logs to the output with a check for undefined to make things prettier

@@ -9,4 +9,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Measure the delay between your input and the selfbot's command execution"; // Export command description
-exports.syntax = ""; // Export command syntax 
+exports.syntax = ""; // Export command syntax

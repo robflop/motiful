@@ -1,10 +1,10 @@
 const config = require('../userconfig/config.json'); // Import configuration
 
 exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
-	var command = "setNickname"; 
+	var command = "setNickname";
 	var arg = msg.content.substr(config.commandPrefix.length + command.length + 1);
 	// Take out the prefix and command name out of the message content, then define the argument out of the remaining content
-	if(msg.content == config.commandPrefix + command.toLowerCase()) { 
+	if(msg.content == config.commandPrefix + command.toLowerCase()) {
 	// If there is no argument (only prefix and command)...
 		return msg.edit("Specify a nickname to set yourself to!").then(msg => msg.delete(2000));
 		// ...notify the user, set auto-delete to 2s and abort command execution.

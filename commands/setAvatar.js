@@ -7,11 +7,11 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 	if(!arg) {
 	// If no image is specified...
 		return msg.edit("Specify an image!").then(msg => msg.delete(2000));
-		// ...notify user to specify an image and set auto-delete to 2s and abort command execution 
+		// ...notify user to specify an image and set auto-delete to 2s and abort command execution
 	};
-	if(!arg.startsWith("http")) { 
-		// If the argument does not begin with http (is not a link) and is not found locally... 
-		return msg.edit("Invalid file or URL.").then(msg => msg.delete(2000)); 
+	if(!arg.startsWith("http")) {
+		// If the argument does not begin with http (is not a link) and is not found locally...
+		return msg.edit("Invalid file or URL.").then(msg => msg.delete(2000));
 		// ...notify the user of the error, set auto-delete to 2s and abort command execution.
 	};
 	if(arg.substr(-4, 4) !== ".png" && arg.substr(-4, 4) !== ".jpg" && arg.substr(-4, 4) !== ".gif" && arg.substr(-5, 5) !== ".jpeg" && arg.substr(-5, 5) !== ".webp") {
