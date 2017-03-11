@@ -1,6 +1,6 @@
 const config = require('./userconfig/config.json'); // Import configuration
 const moment = require('moment'); // Part of log writing
-var timestamp = moment().format('DD/MM/YYYY HH:mm:ss'); 
+var timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
 
 module.exports = { // Export event functions
 	"ready": function ready(selfbot, chalk) { // Once the selfbot is ready (fully booted) ...
@@ -12,7 +12,17 @@ module.exports = { // Export event functions
 		that this won't make you permanently display as invisible.
 		*/
 	},
-	"error": function error(selfbot, chalk) { // If a "serious connection error" occurs...
-		console.log(`[${timestamp}]${chalk.red("[CONNECTION]")} motiful encountered a "serious connection error"!`); // ...console log a notifcation.	
-	}
+	"error": function error(selfbot, error, chalk) { // If a "serious connection error" occurs...
+		timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
+		console.log(`[${timestamp}]${chalk.red("[CONNECTION]")} motiful encountered a "serious connection error! | ${error.code}`); // ...console log a notifcation.
+	},
+	"disconnect": function disconnect(selfbot, error, chalk) { // If the selfbot gets disconnected...
+		timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
+		console.log(`[${timestamp}]${chalk.red("[CONNECTION]")} motiful was disconnected! | ${error.code}`); // ...console log a notifcation.
+		if(error.code == 1000) {
+			console.log(`[${timestamp}]${chalk.green("[POWER]")} Automatically restarting...`);
+			selfbot.destroy().then(() => selfbot.login(config.token));
+			// Restart selfbot if disconnect code is 1000 (gracefully exited) because it won't reconnect automatically
+		};
+	},
 };
