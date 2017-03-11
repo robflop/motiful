@@ -7,7 +7,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no arguments were specified...
         return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s and abort command execution 
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     msg.delete();
     // Delete the command call
@@ -65,7 +65,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
             name = user.displayName,
             avatar = user.user.avatarURL;
             // ...assign server-related name and avatar values...
-            embed.setColor(5267072) 
+            embed.setColor(5267072)
                  .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
                  .setDescription(quoteMsg.content);
                  // ...and set the embed properties.
@@ -76,7 +76,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         name = msg.channel.recipient.username,
         avatar = msg.channel.recipient.avatarURL;
         // ...assign DM-related name and avatar values...
-        embed.setColor(5267072) 
+        embed.setColor(5267072)
              .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
              .setDescription(quoteMsg.content);
         // ...and set the embed properties.

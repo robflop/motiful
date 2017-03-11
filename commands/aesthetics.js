@@ -10,7 +10,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Define object of valid aesthetic characters
     for(var i=0; i<phrase.length; i++) {
     // Loop through every letter of the input phrase...
-        if(letters[phrase[i].toLowerCase()] !== undefined) { aestheticPhrase.push(letters[phrase[i]]); continue; }; 
+        if(letters[phrase[i].toLowerCase()] !== undefined) { aestheticPhrase.push(letters[phrase[i]]); continue; };
         // ...1) and if the letter has an aesthetic counterpart, push it into the array.
         aestheticPhrase.push(phrase[i]);
         // ...2) and if the letter doesn't have an aesthetic counterpart, push it into the array as-is.

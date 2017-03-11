@@ -16,4 +16,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Send a fake Nitro embed"; // Export command description
-exports.syntax = ""; // Export command syntax 
+exports.syntax = ""; // Export command syntax

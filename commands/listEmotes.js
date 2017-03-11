@@ -1,7 +1,7 @@
 const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 
-exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function   
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "listEmotes";
     var customPath = require("path").join(__dirname, "../customemotes/");
     // Set the path the custom emotes are stored in
@@ -11,7 +11,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 	// Look at all the files in the specificed folder
 	    if(file.substr(-4, 4) == ".png" || file.substr(-4, 4) == ".jpg" || file.substr(-4, 4) == ".gif") {
 	    // If the file is a png, jpg or gif file...
-		    var emoteFile = file.slice(0, -4).replace(/_/g," ");  
+		    var emoteFile = file.slice(0, -4).replace(/_/g," ");
 		    // ...grab the pure filename without ext and make it lowercase...
 		   emotes.push(emoteFile);
 		    // ...and then put it in the emotes array.
@@ -24,4 +24,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "List all custom emotes available"; // Export command description
-exports.syntax = ""; // Export command syntax 
+exports.syntax = ""; // Export command syntax

@@ -8,7 +8,7 @@ const favs = require('../userconfig/favorite_emotes.json'); // Load favorite emo
 
 exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "emote";
-    if(msg.content == config.commandPrefix + command.toLowerCase()) { 
+    if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no emote was specified...
         return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s and abort command execution
@@ -45,7 +45,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // If the emote name can be found within the global emotes...
          emoteName = msgArray[1];
          /*
-		 ...change the order of array objects...		
+		 ...change the order of array objects...
 		*/
         emoteSize = msgArray[2];
         if(msgArray[2] == undefined || ( msgArray[2] !== "1.0" && msgArray[2] !== "2.0" && msgArray[2] !== "3.0" )) { msgArray[2] = "1.0" };
@@ -74,7 +74,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
             };
         };
         if(emoteID == "") { return };
-        // If emoteID is empty (no name could be matched, emote not found), abort command execution 
+        // If emoteID is empty (no name could be matched, emote not found), abort command execution
         return msg.channel.sendFile(emoteURL, emoteName + ".png");
         // Send the emote into the channel the command was called in and abort command execution.
     };
@@ -102,7 +102,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                         emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
                         // ...assign the emoteURL accordingly...
                         return msg.channel.sendFile(emoteURL, emoteName + ".png");
-                        // ...send the emote and abort command execution to prevent multi-post of emotes with same name 
+                        // ...send the emote and abort command execution to prevent multi-post of emotes with same name
                     };
                 };
             };
@@ -214,7 +214,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                     emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
                     // ...then assign the emote URL using emoteID and emoteSize.
                     return msg.channel.sendFile(emoteURL, emoteName + ".png");
-                    // Send the emote into the channel the command was called in and abort command execution. 
+                    // Send the emote into the channel the command was called in and abort command execution.
                 };
             };
         };
@@ -222,4 +222,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat - Multi-word custom emotes need to be enclosed by quotes."; // Export command description
-exports.syntax = "<global emote, 'ffz', 'bttv', custom emote, favorite emote or twitch channel> <bttv emote if bttv, ffz emote if ffz, channel emote if twitch channel or emote size if global or fav emote> <emote size if subscriber, bttv or ffz emote>"; // Export command syntax 
+exports.syntax = "<global emote, 'ffz', 'bttv', custom emote, favorite emote or twitch channel> <bttv emote if bttv, ffz emote if ffz, channel emote if twitch channel or emote size if global or fav emote> <emote size if subscriber, bttv or ffz emote>"; // Export command syntax

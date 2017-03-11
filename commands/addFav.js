@@ -6,7 +6,7 @@ const bttv = require('../twitchemotes/bttv.json') // Load bttv emote list
 
 exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "addFav";
-    if(msg.content == config.commandPrefix + command.toLowerCase()) { 
+    if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no emote was specified...
        return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s and abort command execution
@@ -90,7 +90,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
                     };
                 };
                 if(!emoteFound) {msg.edit(`Emote '${emoteName}' not found on BetterTwitchTV!`).then(msg => msg.delete(2000)); return};
-                // If emote was not found, notify user, set auto-delete to 2s and abort command execution                  
+                // If emote was not found, notify user, set auto-delete to 2s and abort command execution
     }
     else {
     // If the channel argument can't be found...
@@ -100,4 +100,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Add a twitch subscriber, FrankerFaceZ or BetterTwitchTV emote to your favorites, allowing you to use it without naming the channel/source it is from"; // Export command description
-exports.syntax = "<channelName or ffz/bttv> <emoteName>"; // Export command syntax 
+exports.syntax = "<channelName or ffz/bttv> <emoteName>"; // Export command syntax

@@ -16,7 +16,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         // If there are disabled commands, list them and set auto-delete to 30s and abort command execution to prevent other code from executing
     };
     // If the argument calls for a list of disabled commands, list them and set auto-delete to 30s
-    if(arg == "toggle" || arg == "help" || Object.keys(Commands.commands).indexOf(arg) == -1) { return msg.delete(); } 
+    if(arg == "toggle" || arg == "help" || Object.keys(Commands.commands).indexOf(arg) == -1) { return msg.delete(); }
 	// Disallow toggling of the toggle/help command and any non-existing commands
     var index = disabledCommands.indexOf(arg);
     // Define the index of the argument inside the disabled commands list
@@ -39,4 +39,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Toggle a command on/off or list toggled commands"; // Export command description
-exports.syntax = "<command to toggle OR 'dcom' to list disabled commands>"; // Export command syntax 
+exports.syntax = "<command to toggle OR 'dcom' to list disabled commands>"; // Export command syntax

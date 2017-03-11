@@ -2,12 +2,12 @@ const config = require('../userconfig/config.json'); // Import configuration
 const fs = require('fs'); // For custom emotes
 const quotes = require('../userconfig/saved_quotes.json'); // Load saved quotes object
 
-exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function 
+exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "delQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no quote name was specified...
         return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
-        // ...tell the user to do so and set auto-delete to 2s and abort command execution 
+        // ...tell the user to do so and set auto-delete to 2s and abort command execution
     };
     var quoteName = msgArray[1];
     // Define quote name out of the array

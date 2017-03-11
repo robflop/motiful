@@ -21,4 +21,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Delete a twitch subscriber, FFZ or BTTV emote from your favorites"; // Export command description
-exports.syntax = "<favoriteName>"; // Export command syntax 
+exports.syntax = "<favoriteName>"; // Export command syntax

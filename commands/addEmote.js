@@ -4,7 +4,7 @@ const request = require('request'); // For saving files
 
 exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
     var command = "addEmote";
-    if(msg.content == config.commandPrefix + command.toLowerCase()) { 
+    if(msg.content == config.commandPrefix + command.toLowerCase()) {
     // If no emote was specified...
         return msg.edit('Specify arguments!').then(msg => msg.delete(2000));
         // ...tell the user to do so and set auto-delete to 2s and abort command execution
@@ -55,7 +55,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         }
         else {
             emoteName = msgArray[1].substring(msgArray[1].lastIndexOf("/")+1, msgArray[1].lastIndexOf("."));
-            // ...assign name based on emote url... 
+            // ...assign name based on emote url...
             emoteURL = msgArray[1];
             // ...and re-assign URL from msg array.
         };
@@ -64,7 +64,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Assign emote extension based on the URL, if the url exists
     if(emoteExt !== ".png" && emoteExt !== ".jpg" && emoteExt !== ".gif") {
     // If the passed file isn't a jpg, png or gif...
-        return msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000)); 
+        return msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000));
         // ...notify the user of rejection and set auto-delete to 2s and abort command execution
     };
     var customPath = require("path").join(__dirname, "../customemotes/");
@@ -79,19 +79,19 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         // If there is an error or no response...
             return msg.edit('Error contacting website!').then(msg => msg.delete(2000));
             // ...notify the user and set auto-delete to 2s and abort command execution
-        };        
+        };
     }).pipe(fs.createWriteStream(customPath + emoteName + emoteExt));
     // Pipe the request to a write stream and write the contents to a file named after the emote name
     setTimeout(function() {
     // Set timeout for closing the stream
-        getFile.close(); 
+        getFile.close();
         // Close the stream once timeout hits
         /*
-        INFO: This is done so that in the case you provide an invalid file with 
+        INFO: This is done so that in the case you provide an invalid file with
         proper syntax (e.g. "https://picture.png"), the stream will stop trying
         to write anything to the file after 60 seconds, allowing you to delete
         the faulty emote. You can't delete a file that's still being written to,
-        after all. (And if it takes you 60 seconds to download an emote, it 
+        after all. (And if it takes you 60 seconds to download an emote, it
         probably shouldn't be an emote anyway.)
         */
     }, 60000);
@@ -111,4 +111,4 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
 };
 
 exports.desc = "Add a custom emote - Multi-word custom emotes need to be enclosed by \"quotes\"."; // Export command description
-exports.syntax = "<emoteName or url if no name> <url if name specified>"; // Export command syntax 
+exports.syntax = "<emoteName or url if no name> <url if name specified>"; // Export command syntax
