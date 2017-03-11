@@ -10,8 +10,12 @@ selfbot.once('ready', () => { // Ready message once selfbot is loaded
 	Events.ready(selfbot, chalk);
 });
 
-selfbot.on('error', () => { // Listen to errors
-	Events.error(selfbot, chalk);
+selfbot.on('disconnect', error => { // Listen to disconnects
+	Events.disconnect(selfbot, error, chalk);
+});
+
+selfbot.on('error', error => { // Listen to errors
+	Events.error(selfbot, error, chalk);
 });
 
 selfbot.on('message', msg => { // Listen to all messages sent
@@ -20,7 +24,7 @@ selfbot.on('message', msg => { // Listen to all messages sent
     if(msg.content == config.commandPrefix) { return; }; // Ignore empty commands (messages containing just the prefix)
 
     var actualCmd = msg.content.replace(config.commandPrefix, '').trim().split(' ')[0].toLowerCase();
-    /*	
+    /*
 	Replace (cut out) selfbot prefix, cut out whitespaces at start and end, split prefix, command
 	and arg into array, convert to lowercase and select the command part ([0] of the array)
 	*/
@@ -30,7 +34,7 @@ selfbot.on('message', msg => { // Listen to all messages sent
 	// If the command is found in the array of disabled commands...
 		return msg.delete(); // ... delete the command call and don't execute the command (duh). (Else proceed as usual.)
 	};
-    if(Object.keys(Commands.commands).indexOf(actualCmd) > -1) { 
+    if(Object.keys(Commands.commands).indexOf(actualCmd) > -1) {
 	// If the given command is an actual command that is available...
 		Commands.commands[actualCmd].main(selfbot, msg, msgArray, Commands, chalk);
 		// ...run the command.
@@ -38,10 +42,10 @@ selfbot.on('message', msg => { // Listen to all messages sent
 	if(actualCmd == "reload") {
 	// Reload command
 		var arg = msg.content.substr(config.commandPrefix.length + actualCmd.length + 1);
-		/* 
+		/*
 		Cut out the name of the command to be reloaded
 		INFO: The additional 2 spaces added are the whitespaces between one, the prefix and the command, and two, between the command and the argument.
-		Example: "robbot, reload emote" -> cut out the length of the prefix and " reload ". 
+		Example: "robbot, reload emote" -> cut out the length of the prefix and " reload ".
 		*/
 		if(arg == "") {
 		// If no command to reload is given...
