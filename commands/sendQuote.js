@@ -22,7 +22,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // Define the embed as new RichEmbed
     var quote = quotes[quoteName];
     // Define the quote entry of the object as "quote"
-    embed.setColor(5267072)
+    embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
          .setAuthor(quote["author"], quote["avatar"])
          .setDescription(quote["content"]);
     // Set the embed properties
