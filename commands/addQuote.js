@@ -15,10 +15,10 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // If the quote name is a multi-word name...
         quoteName = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
         // ...assign the quote name value to the cut-out "" part and replace all spaces with underscores...
-        user = msg.content.substring(msg.content.lastIndexOf('"')+2, msg.content.indexOf(" ", msg.content.lastIndexOf('"')+2));
+        user = msg.content.substring(msg.content.lastIndexOf('"')+2, msg.content.indexOf(" ", msg.content.lastIndexOf('"')+2)).toLowerCase();
         // ...and assign the user value out of the message content beyond the quote name.
     }
-    else quoteName = msgArray[1], user = msgArray[2];
+    else quoteName = msgArray[1], user = msgArray[2].toLowerCase();
     snippet = msg.content.substring(config.commandPrefix.length + command.length + quoteName.length + user.length + 3);
     // Define quote snippet out of message content
     var isDM = false, isGDM = false;
@@ -28,9 +28,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     else if(msg.channel.type == "group") isGDM = true, users = msg.channel.recipients.set(msg.author.id, msg.author);
     // Define user/member groups based on channel type
     // The bot user's user object is added since it is not natively included in the recipients collection
-    if(!isDM && !isGDM) user = users.filter(m => m.user.username.startsWith(user) || m.displayName.startsWith(user)).first();
-    if(isGDM) user = users.filter(u => u.username.startsWith(user)).first();
-    if(isDM) user = users.filter(u => u.username.startsWith(user))[0];
+    if(!isDM && !isGDM) user = users.filter(m => m.user.username.toLowerCase().startsWith(user) || m.displayName.toLowerCase().startsWith(user)).first();
+    if(isGDM) user = users.filter(u => u.username.toLowerCase().startsWith(user)).first();
+    if(isDM) user = users.filter(u => u.username.toLowerCase().startsWith(user))[0];
     // Define targeted user based on channel type
     if(!user) return msg.channel.sendMessage("User not found!").then(msg => msg.delete(2000));
     // If user was not found, notify user and abort command execution
