@@ -80,7 +80,7 @@ selfbot.on('message', msg => { // Listen to all messages sent
 });
 
 process.on("unhandledRejection", err => {
-  	return;
+  	console.error("Uncaught Promise Error: \n" + err.stack);
 });
 
 selfbot.login(config.token); // Log the selfbot in
