@@ -13,7 +13,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     };
     msg.delete();
     // Delete the command call
-    var quoteName, user, name, avatar, date, time, users, quoteMsg;
+    var quoteName, user, name, avatar, date, time, users, quoteMsg, snippet;
     // Define placeholders
     if(msgArray[1].startsWith('"')) {
     // If the quote name is a multi-word name...
@@ -29,12 +29,12 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         user = msgArray[2];
         // ...and assign the user out out the array.
     }
-    var snippet = msg.content.substring(config.commandPrefix.length + command.length + quoteName.length + user.length + 3);
+    snippet = msg.content.substring(config.commandPrefix.length + command.length + quoteName.length + user.length + 3);
     // Define quote snippet out of message content
     var isDM = false;
     // Define the "isDM" indicator bool, default to false
     var embed = new Discord.RichEmbed();
-     // Define the embed as new RichEmbed
+    // Define the embed as new RichEmbed
     if(msg.channel.type == "text") {
     // 1) If the command is called from a server's channel...
         users = msg.guild.members;
@@ -44,8 +44,8 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // 2) If the command is called in a DM channel...
         isDM = true;
         // ...switch "isDM" indicator bool to true...
-        user = msg.channel.recipient.id;
-        // ...and define user as the recipient's ID.
+        users = [msg.channel.recipient, selfbot.user];
+        // ...put the recipient and the user in an array to filter below.
     }
     else {
     // If the command is called in neither a server's channel nor pm...
@@ -56,44 +56,34 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     // If the channel is not a DM channel...
         user = users.filter(m => m.user.username.startsWith(user) || m.displayName.startsWith(user)).first();
         // Filter the members collection to select the guildmember object of the to-be-quoted member
-    };
+    }
+    else {
+        user = users.filter(u => u.username.startsWith(user))[0];
+    }
+    if(!user) return msg.channel.sendMessage("User not found!").then(msg => msg.delete(2000));
+    // If user was not found, notify user and abort command execution
     msg.channel.fetchMessages({limit: 100}).then((messages) => {
     // Get last 100 messages
-        quoteMsg = messages.filter(message => (message.author.id == user.user.id && message.content.includes(snippet)) && message.content !== msg.content).first();
+        if(!isDM) quoteMsg = messages.filter(message => (message.author.id == user.user.id && message.content.includes(snippet)) && message.content !== msg.content).first()
+        else quoteMsg = messages.filter(message => (message.author.id == user.id && message.content.includes(snippet)) && message.content !== msg.content).first();
         // Filter fetched messages by the user to quote, the snippet and if the message content equals the command call
+        if(!quoteMsg) return msg.channel.sendMessage("Message not found!").then(msg => msg.delete(2000));
+        // If quote was not found, notify user and abort command execution
         date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'),
         time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
-        // Define date and time based on the filtered message...
-        if(!isDM) {
-        // ...1) and if the channel is not a DM channel...
-            name = user.displayName,
-            avatar = user.user.avatarURL;
-            // ...assign server-related name and avatar values...
-            embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
-                 .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
-                 .setDescription(quoteMsg.content);
-                 // ...and set the embed properties.
-            quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": quoteMsg.content, "avatar": avatar};
-            // Save the quote to the quotes list...
-            fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
-            // ...and save the list to the file.
-            return msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
-            // Send confirmation message and set auto-delete to 2s and abort command execution
-            };
-        // ...2) and the channel is a DM channel...
-        name = msg.channel.recipient.username,
-        avatar = msg.channel.recipient.avatarURL;
-        // ...assign DM-related name and avatar values...
+        // Define date and time based on the filtered message
+        if(!isDM) name = user.displayName, avatar = user.user.avatarURL
+        else name = user.username, avatar = user.avatarURL;
+        // Set respective username and avatar
         embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
              .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
              .setDescription(quoteMsg.content);
-        // ...and set the embed properties.
+        // Set embed properties
         quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": quoteMsg.content, "avatar": avatar};
         // Save the quote to the quotes list...
         fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
-        // ...and save the list to the file.
         return msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
-        // Send confirmation message and set auto-delete to 2s and abort command execution
+        // Send confirmation message, set auto-delete to 2s and abort command execution
     });
 };
 
