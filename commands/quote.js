@@ -67,7 +67,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
         // If quote was not found, notify user and abort command execution
         date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'),
         time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
-        // Define date and time based on the filtered message...
+        // Define date and time based on the filtered message
         if(!isDM) name = user.displayName, avatar = user.user.avatarURL
         else name = user.username, avatar = user.avatarURL;
         // Set respective username and avatar
