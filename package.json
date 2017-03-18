@@ -1,6 +1,6 @@
 {
   "name": "motiful",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Discord selfbot built with discord.js",
   "main": "motiful.js",
   "dependencies": {
