@@ -1,21 +1,11 @@
-const config = require('../userconfig/config.json'); // Import configuration
+const config = require('../userconfig/config.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) {
     var command = "setStatus";
 	var arg = msg.content.substr(config.commandPrefix.length + command.length + 1);
-	// Take out the prefix and command name out of the message content, then define the argument out of the remaining content
-    if(arg == "") {
-    // If argument is empty...
-        selfbot.user.setGame();
-        // ...empty the playing status...
-        return msg.edit("Successfully cleared your status!\n").then(msg => msg.delete(2000));
-        // ...notify the user of success, set auto-delete to 2s and abort further command execution.
-    };
-    selfbot.user.setGame(arg);
-    // Set the user's playing status to the argument
-    msg.edit(`Successfully set your game to '${arg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000));
-    // Notify the user of successful change and set auto-delete to 2s
+    if(arg == "") selfbot.user.setGame().then(user => msg.edit("Successfully cleared your status!\n").then(msg => msg.delete(2000)));
+    else selfbot.user.setGame(arg).then(user => msg.edit(`Successfully set your game to '${arg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)));
 };
 
-exports.desc = "Change your current status"; // Export command description
-exports.syntax = "<status to set yourself to>"; // Export command syntax
+exports.desc = "Change your current status";
+exports.syntax = "<status to set yourself to>";

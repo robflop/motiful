@@ -1,29 +1,18 @@
-const config = require('../userconfig/config.json'); // Import configuration
-var Commands = require('../command_handler.js'); // Load command handler
-var disabledCommands = require('../userconfig/disabled_commands.json'); // Load list of toggled commands
+const config = require('../userconfig/config.json');
+var Commands = require('../command_handler.js');
+var disabledCommands = require('../userconfig/disabled_commands.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) {
     var command = "help";
+    msg.delete();
     var commandsExpl = [];
-    // Define commandsExpl array which will have all commands and their corresponding explainations
     var cmdList = Object.keys(Commands.commands);
-	// Get all command names (keys) from commands object
     var arg = msgArray[1];
-    // Get possible argument from message array
-    if(arg) {
-    // If there is an argument...
-        if(cmdList.indexOf(arg) !== -1) {msg.edit(`**__Syntax for '${arg}' is:__** \`\`\`${config.commandPrefix + arg + " " + Commands.commands[arg].syntax}\`\`\``).then(msg => msg.delete(20000));};
-        // ...and the argument is in the command list, send the syntax help for it and set auto-delete to 20s.
-        return; // Abort command execution
-    };
-    for(var i = 0; i < cmdList.length; i++) {
-	// Loop through each command (key)
-		commandsExpl.push(`\`\`'${cmdList[i]}' -- ${Commands.commands[cmdList[i]].desc}\`\``);
-		// Push each command including its description into the commandsExpl array
-	};
-    msg.edit(`**__Available commands are:__**\n\n${commandsExpl.join("\n")}\n\n\`\`Use '${config.commandPrefix + command} <commandname>' to get syntax help on a command!\`\`\n\n**Disabled commands are: ${disabledCommands.join(", ")}**`).then(msg => msg.delete(30000));
-    // Send the command list and the disabled commands list and then set auto-delete to 30s.
+    // possible arg to get help on a command
+    if(arg && cmdList.indexOf(arg) !== -1) return msg.edit(`**__Syntax for '${arg}' is:__** \`\`\`${config.commandPrefix + arg + " " + Commands.commands[arg].syntax}\`\`\``).then(msg => msg.delete(20000));
+    for(var i = 0; i < cmdList.length; i++) commandsExpl.push(`\`\`'${cmdList[i]}' -- ${Commands.commands[cmdList[i]].desc}\`\``);
+    msg.channel.sendMessage(`**__Available commands are:__**\n\n${commandsExpl.join("\n")}\n\n\`\`Use '${config.commandPrefix + command} <commandname>' to get syntax help on a command!\`\`\n\n**${disabledCommands.join(", ").length>0 ? "Disabled commands: " + disabledCommands.join(", ") : "No commands have been disabled."}**`, {split: {char: "\n"}});
 };
 
-exports.desc = "Display this mesage"; // Export command description
-exports.syntax = "<command to get help on, optional>"; // Export command syntax
+exports.desc = "Display this mesage";
+exports.syntax = "<command to get help on, optional>";
