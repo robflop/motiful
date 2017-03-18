@@ -1,80 +1,46 @@
-const Discord = require('discord.js'); // Obvious selfbot base
-const selfbot = new Discord.Client(); // Initialize selfbot instance
-const config = require('./userconfig/config.json'); // Import configuration
-const chalk = require('chalk'); // Colorful console logs, yay
-var Commands = require('./command_handler.js'); // Load command handler
-var Events = require('./event_handler.js'); // Load event handler
-var disabledCommands = require('./userconfig/disabled_commands.json') // Load array of disabled commands
+const Discord = require('discord.js');
+const selfbot = new Discord.Client();
+const config = require('./userconfig/config.json');
+const chalk = require('chalk');
+var Commands = require('./command_handler.js');
+var Events = require('./event_handler.js');
+var disabledCommands = require('./userconfig/disabled_commands.json');
 
-selfbot.once('ready', () => { // Ready message once selfbot is loaded
+selfbot.once('ready', () => {
 	Events.ready(selfbot, chalk);
 });
 
-selfbot.on('disconnect', error => { // Listen to disconnects
+selfbot.on('disconnect', error => {
 	Events.disconnect(selfbot, error, chalk);
 });
 
-selfbot.on('error', error => { // Listen to errors
+selfbot.on('error', error => {
 	Events.error(selfbot, error, chalk);
 });
 
-selfbot.on('message', msg => { // Listen to all messages sent
-    if(msg.author.id !== config.ownerID) { return; }; // Don't listen to anyone but the owner
-    if(!msg.content.startsWith(config.commandPrefix)) { return; }; // Don't listen to messages not starting with selfbot prefix
-    if(msg.content == config.commandPrefix) { return; }; // Ignore empty commands (messages containing just the prefix)
-
+selfbot.on('message', msg => {
+    if(msg.author.id !== config.ownerID) return;
+    if(!msg.content.startsWith(config.commandPrefix)) return;
+    if(msg.content == config.commandPrefix) return;
     var actualCmd = msg.content.replace(config.commandPrefix, '').trim().split(' ')[0].toLowerCase();
-    /*
-	Replace (cut out) selfbot prefix, cut out whitespaces at start and end, split prefix, command
-	and arg into array, convert to lowercase and select the command part ([0] of the array)
-	*/
 	var msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
-    // Remove prefix from the message content, then split command parts and store them in an array
-	if(disabledCommands.indexOf(actualCmd) > -1) {
-	// If the command is found in the array of disabled commands...
-		return msg.delete(); // ... delete the command call and don't execute the command (duh). (Else proceed as usual.)
-	};
-    if(Object.keys(Commands.commands).indexOf(actualCmd) > -1) {
-	// If the given command is an actual command that is available...
-		Commands.commands[actualCmd].main(selfbot, msg, msgArray, Commands, chalk);
-		// ...run the command.
-	};
+	if(disabledCommands.indexOf(actualCmd) > -1) return msg.delete();
+	// disabled commands check
+    if(Object.keys(Commands.commands).indexOf(actualCmd) > -1) Commands.commands[actualCmd].main(selfbot, msg, msgArray, Commands, chalk);
+	// run the command
 	if(actualCmd == "reload") {
-	// Reload command
-		var arg = msg.content.substr(config.commandPrefix.length + actualCmd.length + 1);
-		/*
-		Cut out the name of the command to be reloaded
-		INFO: The additional 2 spaces added are the whitespaces between one, the prefix and the command, and two, between the command and the argument.
-		Example: "robbot, reload emote" -> cut out the length of the prefix and " reload ".
-		*/
-		if(arg == "") {
-		// If no command to reload is given...
-            return msg.edit('Specify a command to reload!').then(msg => msg.delete(2000));
-                // ...notify the user, set auto-delete to 2s and abort command execution.
-		};
-		// Otherwise...
+		var arg = msg.content.substr(config.commandPrefix.length + actualCmd.length + 2);
+		if(arg == "") return msg.reply('specify a command to reload!');
 		try {
-		// ...try reloading the command.
 			var cmdFile = Commands.commands[arg.toLowerCase()].filename;
-			// Define the file to reload, based on the commands object
 			delete require.cache[require.resolve(`./commands/${cmdFile}`)];
 			delete require.cache[require.resolve('./commands/help.js')];
 			delete require.cache[require.resolve('./command_handler.js')];
-			/*
-			Delete the command's cache, the 'help' cache and the command handler's cache...
-			('help' cache deleted to update the command's info if command added/removed/changed)
-			*/
 			Commands = require('./command_handler.js');
-			// ...then re-require the command handler which then reloads the command.
+			// also reload help cmd to update output
     	}
-		catch(error) {
-		// If there is an error while reloading...
-			return msg.edit(`Error while reloading the '${arg}' command: \`\`\`${error}\`\`\`\n(Command may not exist, check for typos)`).then(msg => msg.delete(2000));
-			// ...notify the user of the error and set auto-delete to 2s and abort command execution.
-		};
-		// If there is no error...
-		msg.edit(`Command '${cmdFile.slice(0, -3)}' successfully reloaded!`).then(msg => msg.delete(2000));
-		// Notify the user of success and set auto-delete to 2s
+		catch(error) { return msg.reply(`error while reloading the '${arg}' command: \`\`\`${error}\`\`\`\n(Command may not exist, check for typos)`); };
+		msg.reply(`command '${cmdFile.slice(0, -3)}' successfully reloaded!`);
 	};
 	return; // Just in case, return empty for anything else.
 });

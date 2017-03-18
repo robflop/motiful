@@ -1,20 +1,11 @@
-const config = require('../userconfig/config.json'); // Import configuration
+const config = require('../userconfig/config.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) { // Export command function
+exports.main = function(selfbot, msg, msgArray, chalk) {
 	var command = "setUsername";
 	var arg = msg.content.substr(config.commandPrefix.length + command.length + 1);
-	// Take out the prefix and command name out of the message content, then define the argument out of the remaining content
-	if(msg.content == config.commandPrefix + command.toLowerCase()) {
-	// If there is no argument (only prefix and command)...
-		return msg.edit("Specify a username to set yourself to!").then(msg => msg.delete(2000));
-		// ...notify the user and abort command execution.
-	};
-	// If there is an argument given,...
-	selfbot.user.setUsername(arg);
-	// ...then set the bot's username to the arg...
-	msg.edit(`Successfully set your username to '${arg}' ! \n(May not have worked if ratelimit capped)`).then(msg => msg.delete(2000));
-	// ...and notify user of successful command execution.
+	if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit("Specify a username to set yourself to!").then(msg => msg.delete(2000));
+	selfbot.user.setUsername(arg).then(user => msg.edit(`Successfully set your username to '${arg}' ! \n(May not have worked if ratelimit capped)`).then(msg => msg.delete(2000)));
 };
 
-exports.desc = "Change your username"; // Export command description
-exports.syntax = "<username to set yourself to>"; // Export command syntax
+exports.desc = "Change your username";
+exports.syntax = "<username to set yourself to>";
