@@ -7,7 +7,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     if(msg.content == config.commandPrefix + command) return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
     // Abort if no arguments given
     msg.delete();
-    var user = msgArray[1];
+    var user = msgArray[1].toLowerCase();
     var response, snippet, users, date, time, name, avatar, quoteMsg;
     // Define placeholders
     var isDM = false, isGDM = false;
@@ -28,9 +28,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) { // Export command funct
     else if(msg.channel.type == "group") isGDM = true, users = msg.channel.recipients.set(msg.author.id, msg.author);
     // Define user/member groups based on channel type
     // The bot user's user object is added since it is not natively included in the recipients collection
-    if(!isDM && !isGDM) user = users.filter(m => m.user.username.startsWith(user) || m.displayName.startsWith(user)).first();
-    if(isGDM) user = users.filter(u => u.username.startsWith(user)).first();
-    if(isDM) user = users.filter(u => u.username.startsWith(user))[0];
+    if(!isDM && !isGDM) user = users.filter(m => m.user.username.toLowerCase().startsWith(user) || m.displayName.toLowerCase().startsWith(user)).first();
+    if(isGDM) user = users.filter(u => u.username.toLowerCase().startsWith(user)).first();
+    if(isDM) user = users.filter(u => u.username.toLowerCase().startsWith(user))[0];
     // Define targeted user based on channel type
     if(!user) return msg.channel.sendMessage("User not found!").then(msg => msg.delete(2000));
     // If user was not found, notify user and abort command execution
