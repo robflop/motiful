@@ -37,7 +37,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
 
     var result;
 
-    if(msg.content.substring(config.commandPrefix.length + command.length + 2, msg.content.indexOf('"')).trim() == "async") result = new Promise(resolve => resolve(eval(`(async () => { ${input} })()`)));
+    if(msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.indexOf('"')).trim() == "async") result = new Promise(resolve => resolve(eval(`(async () => { ${input} })()`)));
     else result = new Promise(resolve => resolve(eval(input)));
     // Async and non-async versions
     const cb = '```';
