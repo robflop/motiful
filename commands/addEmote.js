@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json');
 const fs = require('fs');
 const request = require('request');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "addEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify arguments!').then(msg => msg.delete(2000));
     var emoteName, emoteURL, emoteExt, attachment;
@@ -29,14 +29,14 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
             emoteURL = msgArray[1];
         };
     };
-    if(emoteURL && emoteURL.startsWith("http")) { emoteExt = emoteURL.substr(-4, 4); }
+    if(emoteURL && emoteURL.startsWith("http")) emoteExt = emoteURL.substr(-4, 4);
     if(emoteExt !== ".png" && emoteExt !== ".jpg" && emoteExt !== ".gif") return msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000));
     var customPath = require("path").join(__dirname, "../customemotes/");
     if(fs.existsSync(customPath + emoteName + emoteExt)) return msg.edit('Emote with that name already exists!').then(msg => msg.delete(2000));
     var getFile = request.get(emoteURL, function(error, response, body) {
         if(!response || error) return msg.edit('Error contacting website!').then(msg => msg.delete(2000));
     }).pipe(fs.createWriteStream(customPath + emoteName + emoteExt));
-    setTimeout(function() { getFile.close()}, 60000);
+    setTimeout(() => getFile.close(), 60000);
     // 60s dl timeout
     getFile.on('error', () => {
         msg.edit(`Error writing file for the '${emoteName.replace(/_/g," ")}' emote!`).then(msg => {msg.delete(2000); getFile.end()});

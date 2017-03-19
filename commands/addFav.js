@@ -4,7 +4,7 @@ const subEmotes = require('../twitchemotes/subscriber.json');
 const favs = require('../userconfig/favorite_emotes.json');
 const bttv = require('../twitchemotes/bttv.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "addFav";
     if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
     var twChannel = msgArray[1];
@@ -12,6 +12,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
     var emoteFound = false;
     if(favs.hasOwnProperty(emoteName)) return msg.edit(`Emote '${emoteName}' is already on the favorites list!`).then(msg => msg.delete(2000));
     if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined) {
+    // sub fav
         twChannel = twChannel.toLowerCase();
         for(var i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
             if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) emoteFound = true;
@@ -22,6 +23,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
         return msg.edit(`Emote '${emoteName}' added to favorites!`).then(msg => msg.delete(2000));
     }
     else if(twChannel.toLowerCase() == "ffz") {
+    // ffz fav
         require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
 	        if(error) return msg.edit('Error searching FrankerFaceZ emote list occurred: \n\n' + error).then(msg => msg.delete(2000));
        	    if(response == undefined) return msg.edit('Error contacting website, FrankerFaceZ emote list response undefined').then(msg => msg.delete(2000));
@@ -40,6 +42,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
         });
     }
     else if(twChannel.toLowerCase() == "bttv") {
+    // bttv fav
         for(var i = 0; i < bttv["emotes"].length; i++) {
             if(bttv["emotes"][i]["code"] == emoteName) {
                 emoteFound = true;

@@ -1,13 +1,13 @@
 const config = require('../userconfig/config.json');
 const fs = require('fs');
-var disabledCommands = require('../userconfig/disabled_commands.json');
-var Commands = require('../command_handler.js');
+const disabledCommands = require('../userconfig/disabled_commands.json');
+const Commands = require('../command_handler.js');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "toggle";
     var arg = msgArray[1];
     if(!arg) msg.edit("Specify a command to toggle!").then(msg => msg.delete(2000));
-    if(arg == "toggle" || arg == "help" || Object.keys(Commands.commands).indexOf(arg) == -1) return msg.delete();
+    if(arg == "toggle" || arg == "help" || !Object.keys(Commands.commands).includes(arg)) return msg.delete();
     var index = disabledCommands.indexOf(arg);
     if(index == -1) {
         disabledCommands.push(arg);

@@ -6,7 +6,7 @@ const subEmotes = require('../twitchemotes/subscriber.json');
 const bttv = require('../twitchemotes/bttv.json');
 const favs = require('../userconfig/favorite_emotes.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "emote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
     var timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
@@ -22,7 +22,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
     var emoteID = "";
     // placeholders
     msg.delete();
-    if(emoteSize == undefined || ( emoteSize !== "1.0" && emoteSize !== "2.0" && emoteSize !== "3.0" )) { emoteSize = "1.0" };
+    if(emoteSize == undefined || ( emoteSize !== "1.0" && emoteSize !== "2.0" && emoteSize !== "3.0" )) emoteSize = "1.0";
     var customPath = require("path").join(__dirname, "../customemotes/");
     if(globalEmotes["emotes"][msgArray[1]] !== undefined) {
     // global emote
@@ -42,10 +42,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
             if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
                 emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
                 emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
+                return msg.channel.sendFile(emoteURL, emoteName + ".png");
             };
         };
-        if(emoteID == "") return;
-        return msg.channel.sendFile(emoteURL, emoteName + ".png");
     };
     if(twChannel.toLowerCase() == "ffz") {
     // ffz emote
@@ -68,7 +67,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
     };
     if(twChannel.toLowerCase() == "bttv") {
     // bttv emote
-        if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "3" )) { msgArray[3] = "1" };
+        if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "3" )) msgArray[3] = "1";
         emoteSize = msgArray[3];
         for(var i = 0; i < bttv["emotes"].length; i++) {
             if(bttv["emotes"][i]["code"] == emoteName && emoteID == "") {
@@ -123,7 +122,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
         }
         else {
         // twitch sub fav
-            if(msgArray[2] == "2.0" || msgArray[2] == "3.0") {emoteSize = msgArray[2]; };
+            if(msgArray[2] == "2.0" || msgArray[2] == "3.0") emoteSize = msgArray[2];
             for(var i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
                 if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
                     emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];

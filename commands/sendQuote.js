@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json');
 const Discord = require('discord.js');
 const quotes = require('../userconfig/saved_quotes.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "sendQuote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
     var quoteName = msgArray[1];

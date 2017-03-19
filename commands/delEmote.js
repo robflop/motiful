@@ -1,7 +1,7 @@
 const config = require('../userconfig/config.json');
 const fs = require('fs');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "delEmote";
     if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify an emoteName!').then(msg => msg.delete(2000));
     var emoteName = "";
@@ -19,7 +19,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
     };
     fs.unlink(emotePath, function (error) {
         if(error) return msg.edit(`Error deleting emote!: \`\`\`${error}\`\`\``).then(msg => msg.delete(2000));
-        else msg.edit(`Successfully deleted emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
+        msg.edit(`Successfully deleted emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
     });
 };
 
