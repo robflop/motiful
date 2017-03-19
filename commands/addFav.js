@@ -1,7 +1,7 @@
 const config = require('../userconfig/config.json');
 const fs = require('fs');
 const subEmotes = require('../twitchemotes/subscriber.json');
-const favs = require('../userconfig/favorite_emotes.json');
+const favs = require('../userconfig/favoriteEmotes.json');
 const bttv = require('../twitchemotes/bttv.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
@@ -19,7 +19,7 @@ exports.main = function(client, msg, msgArray, chalk) {
         };
         if(!emoteFound) return msg.edit(`Emote '${emoteName}' not found on the '${twChannel}' channel!`).then(msg => msg.delete(2000));
         favs[emoteName] = {"twChannel": twChannel, "emoteName": emoteName};
-        fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
+        fs.writeFileSync('userconfig/favoriteEmotes.json', JSON.stringify(favs));
         return msg.edit(`Emote '${emoteName}' added to favorites!`).then(msg => msg.delete(2000));
     }
     else if(twChannel.toLowerCase() == "ffz") {
@@ -33,7 +33,7 @@ exports.main = function(client, msg, msgArray, chalk) {
                     if(emoteList["emoticons"][i]["name"] == emoteName) {
                         emoteFound = true;
                         favs[emoteName] = {"twChannel": twChannel, "emoteName": emoteName};
-                        fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
+                        fs.writeFileSync('userconfig/favoriteEmotes.json', JSON.stringify(favs));
                         return msg.edit(`Emote '${emoteName}' added to FFZ favorites!`).then(msg => msg.delete(2000));
                     };
                 };
@@ -47,7 +47,7 @@ exports.main = function(client, msg, msgArray, chalk) {
             if(bttv["emotes"][i]["code"] == emoteName) {
                 emoteFound = true;
                 favs[emoteName] = {"twChannel": twChannel, "emoteName": emoteName};
-                fs.writeFileSync('userconfig/favorite_emotes.json', JSON.stringify(favs));
+                fs.writeFileSync('userconfig/favoriteEmotes.json', JSON.stringify(favs));
                 return msg.edit(`Emote '${emoteName}' added to BTTV favorites!`).then(msg => msg.delete(2000));
             };
         };

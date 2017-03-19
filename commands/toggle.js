@@ -1,7 +1,7 @@
 const config = require('../userconfig/config.json');
 const fs = require('fs');
-const disabledCommands = require('../userconfig/disabled_commands.json');
-const Commands = require('../command_handler.js');
+const disabledCommands = require('../userconfig/disabledCommands.json');
+const Commands = require('../commandHandler.js');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "toggle";
@@ -11,12 +11,12 @@ exports.main = function(client, msg, msgArray, chalk) {
     var index = disabledCommands.indexOf(arg);
     if(index == -1) {
         disabledCommands.push(arg);
-        fs.writeFileSync('userconfig/disabled_commands.json', JSON.stringify(disabledCommands));
+        fs.writeFileSync('userconfig/disabledCommands.json', JSON.stringify(disabledCommands));
         return msg.edit(`Command '${arg}' successfully disabled!`).then(msg => msg.delete(2000));
     }
     else {
         disabledCommands.splice(index, 1);
-        fs.writeFileSync('userconfig/disabled_commands.json', JSON.stringify(disabledCommands));
+        fs.writeFileSync('userconfig/disabledCommands.json', JSON.stringify(disabledCommands));
         return msg.edit(`Command '${arg}' successfully enabled!`).then(msg => msg.delete(2000));
     }
 };

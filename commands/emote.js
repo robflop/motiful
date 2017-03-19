@@ -4,7 +4,7 @@ const moment = require('moment');
 const globalEmotes = require('../twitchemotes/global.json');
 const subEmotes = require('../twitchemotes/subscriber.json');
 const bttv = require('../twitchemotes/bttv.json');
-const favs = require('../userconfig/favorite_emotes.json');
+const favs = require('../userconfig/favoriteEmotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "emote";

@@ -2,7 +2,7 @@ const config = require('../userconfig/config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
 const moment = require('moment');
-const quotes = require('../userconfig/saved_quotes.json');
+const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "addQuote";
@@ -39,7 +39,7 @@ exports.main = function(client, msg, msgArray, chalk) {
              .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
              .setDescription(quoteMsg.content);
         quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": quoteMsg.content, "avatar": avatar};
-        fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
+        fs.writeFileSync('userconfig/savedQuotes.json', JSON.stringify(quotes));
         return msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
     });
 };

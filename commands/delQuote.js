@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json');
 const fs = require('fs');
-const quotes = require('../userconfig/saved_quotes.json');
+const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "delQuote";
@@ -8,7 +8,7 @@ exports.main = function(client, msg, msgArray, chalk) {
     var quoteName = msgArray[1];
     if(quotes.hasOwnProperty(quoteName)) {
         delete quotes[quoteName];
-        fs.writeFileSync('userconfig/saved_quotes.json', JSON.stringify(quotes));
+        fs.writeFileSync('userconfig/savedQuotes.json', JSON.stringify(quotes));
         return msg.edit(`Quote '${quoteName}' successfully deleted!`).then(msg => msg.delete(2000));
     }
     return msg.edit(`Quote '${quoteName}' not found on quotes list!`).then(msg => msg.delete(2000));
