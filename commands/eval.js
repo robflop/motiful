@@ -1,11 +1,11 @@
 const config = require('../userconfig/config.json');
 const util = require('util');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "eval";
-    if(!config.eval) msg.edit('Eval has been disabled in the config.').then(msg => {return msg.delete(2000);})
+    if(!config.eval) return msg.edit('Eval has been disabled in the config.').then(msg => msg.delete(2000));
     var input = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"'));
-    if(input == '' || input == '"' || input == '""') msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => {return msg.delete(2000);});
+    if(input == '' || input == '"' || input == '""') return msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => msg.delete(2000));
   	/*
     Credit for all of the below goes to 1Computer1 on GitHub
     ily ❤ - from comp
@@ -14,7 +14,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
 	const evaled = {}; // Stores outputs
     const logs = []; // Stores logs
 
-    const tokenRegex = new RegExp(selfbot.token.replace(/\./g, '\\.').split('').join('.?'), 'g'); // Regex for tokens
+    const tokenRegex = new RegExp(client.token.replace(/\./g, '\\.').split('').join('.?'), 'g'); // Regex for tokens
 
   	// This is put here instead of outside the command execution because we need a reference to the message and other things
     const print = (...a) => { // ...a means all arguments
@@ -37,7 +37,9 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
 
     var result;
 
-    if(msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.indexOf('"')).trim() == "async") result = new Promise(resolve => resolve(eval(`(async () => { ${input} })()`)));
+    if(msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.indexOf('"')).trim() == "async") {
+        result = new Promise(resolve => resolve(eval(`(async () => { ${input} })()`)));
+    }
     else result = new Promise(resolve => resolve(eval(input)));
     // Async and non-async versions
     const cb = '```';

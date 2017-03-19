@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "aesthetics";
     var phrase = msg.content.replace(config.commandPrefix + command, '').trim().toLowerCase();
     var aestheticPhrase = [];
@@ -10,7 +10,7 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
         aestheticPhrase.push(phrase[i]);
     };
     if(aestheticPhrase.join(" ").length > 1999) return msg.edit("Output too long. Try shorter text.").then(msg => msg.delete(2000));
-    else msg.edit(aestheticPhrase.join(" "));
+    msg.edit(aestheticPhrase.join(" "));
 };
 
 exports.desc = "Spell out a phrase, but with more ａ ｅ ｓ ｔ ｈ ｅ ｔ ｉ ｃ ｓ";

@@ -1,10 +1,6 @@
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "ping";
-    msg.delete();
-    msg.channel.sendMessage('Pong?').then(message => {
-            message.edit(`Pong'ed in ${message.createdTimestamp - msg.createdTimestamp}ms!`);
-            message.delete(2000);
-    });
+    msg.edit(`Pong! (${Math.round(client.ping)}ms)`);
 };
 
 exports.desc = "Measure the delay between your input and the selfbot's command execution";

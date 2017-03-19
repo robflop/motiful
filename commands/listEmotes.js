@@ -1,7 +1,7 @@
 const config = require('../userconfig/config.json');
 const fs = require('fs');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "listEmotes";
     var customPath = require("path").join(__dirname, "../customemotes/");
     var emotes = [];

@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const moment = require('moment');
 const quotes = require('../userconfig/saved_quotes.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "addQuote";
     if(msg.content == config.commandPrefix + command) return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
     msg.delete();
@@ -21,14 +21,13 @@ exports.main = function(selfbot, msg, msgArray, chalk) {
     var isDM = false, isGDM = false;
     var embed = new Discord.RichEmbed();
     if(msg.channel.type == "text") users = msg.guild.members;
-    else if(msg.channel.type == "dm") isDM = true, users = [msg.channel.recipient, selfbot.user];
+    else if(msg.channel.type == "dm") isDM = true, users = new Discord.Collection([[msg.channel.recipient.id, msg.channel.recipient], [msg.author.id, msg.author]]);
     else if(msg.channel.type == "group") isGDM = true, users = msg.channel.recipients.set(msg.author.id, msg.author);
     // The bot user's user object is added since it is not natively included in the recipients collection
     if(!isDM && !isGDM) user = users.filter(m => m.user.username.toLowerCase().startsWith(user) || m.displayName.toLowerCase().startsWith(user)).first();
-    if(isGDM) user = users.filter(u => u.username.toLowerCase().startsWith(user)).first();
-    if(isDM) user = users.filter(u => u.username.toLowerCase().startsWith(user))[0];
+    if(isDM || isGDM) user = users.filter(u => u.username.toLowerCase().startsWith(user)).first();
     if(!user) return msg.channel.sendMessage("User not found!").then(msg => msg.delete(2000));
-    msg.channel.fetchMessages({limit: 100}).then((messages) => {
+    msg.channel.fetchMessages({limit: 100}).then(messages => {
         if(!isDM && !isGDM) quoteMsg = messages.filter(message => (message.author.id == user.user.id && message.content.toLowerCase().includes(snippet)) && message.content !== msg.content).first()
         if(isDM || isGDM) quoteMsg = messages.filter(message => (message.author.id == user.id && message.content.toLowerCase().includes(snippet)) && message.content !== msg.content).first();
         if(!quoteMsg) return msg.channel.sendMessage("Message not found!").then(msg => msg.delete(2000));

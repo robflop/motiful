@@ -1,8 +1,8 @@
 const favs = require('../userconfig/favorite_emotes.json');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "listFavs";
-    if(Object.keys(favs).length == 0) {msg.edit("No emotes have been favorited.").then(msg => {return msg.delete(5000);})};
+    if(Object.keys(favs).length == 0) msg.edit("No emotes have been favorited.").then(msg => {return msg.delete(5000);})
     msg.edit(`Current favorite emotes are: \`\`\`${Object.keys(favs).join(", ")}\`\`\``).then(msg => msg.delete(30000));
 };
 

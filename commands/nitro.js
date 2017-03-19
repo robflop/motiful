@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-exports.main = function(selfbot, msg, msgArray, chalk) {
+exports.main = function(client, msg, msgArray, chalk) {
     var command = "nitro";
     var embed = new Discord.RichEmbed();
     msg.delete();
