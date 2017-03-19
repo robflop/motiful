@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./userconfig/config.json');
 const chalk = require('chalk');
-var Commands = require('./command_handler.js');
-const Events = require('./event_handler.js');
-const disabledCommands = require('./userconfig/disabled_commands.json');
+var Commands = require('./commandHandler.js');
+const Events = require('./eventHandler.js');
+const disabledCommands = require('./userconfig/disabledCommands.json');
 
 client.once('ready', () => { Events.ready(client, chalk); });
 
@@ -28,8 +28,8 @@ const handleMsg = (msg) => {
 			var cmdFile = Commands.commands[arg.toLowerCase()].filename;
 			delete require.cache[require.resolve(`./commands/${cmdFile}`)];
 			delete require.cache[require.resolve('./commands/help.js')];
-			delete require.cache[require.resolve('./command_handler.js')];
-			Commands = require('./command_handler.js');
+			delete require.cache[require.resolve('./commandHandler.js')];
+			Commands = require('./commandHandler.js');
 			// also reload help cmd to update output
     	}
 		catch(error) { return msg.edit(`Error while reloading the '${arg}' command: \`\`\`${error}\`\`\`\n(Command may not exist, check for typos)`).then(msg => msg.delete(2000)); };

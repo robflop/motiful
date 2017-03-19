@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json');
-var Commands = require('../command_handler.js');
-var disabledCommands = require('../userconfig/disabled_commands.json');
+var Commands = require('../commandHandler.js');
+var disabledCommands = require('../userconfig/disabledCommands.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "help";

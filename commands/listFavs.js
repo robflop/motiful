@@ -1,4 +1,4 @@
-const favs = require('../userconfig/favorite_emotes.json');
+const favs = require('../userconfig/favoriteEmotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "listFavs";

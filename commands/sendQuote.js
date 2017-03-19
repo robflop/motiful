@@ -1,6 +1,6 @@
 const config = require('../userconfig/config.json');
 const Discord = require('discord.js');
-const quotes = require('../userconfig/saved_quotes.json');
+const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
     var command = "sendQuote";
