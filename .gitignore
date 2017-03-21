@@ -3,9 +3,6 @@ logs
 *.log
 npm-debug.log*
 
-# ignore vscode files
-.vscode
-
 # ignore custom emotes
 customemotes
 
