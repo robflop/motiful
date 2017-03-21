@@ -24,11 +24,11 @@ exports.main = function(client, msg, msgArray, chalk) {
     // The bot user's user object is added since it is not natively included in the recipients collection
     if(!isDM && !isGDM) user = users.filter(m => m.user.username.toLowerCase().startsWith(user) || m.displayName.toLowerCase().startsWith(user)).first();
     if(isDM || isGDM) user = users.filter(u => u.username.toLowerCase().startsWith(user)).first();
-    if(!user) return msg.channel.sendMessage("User not found!").then(msg => msg.delete(2000));
+    if(!user) return msg.channel.send("User not found!").then(msg => msg.delete(2000));
     msg.channel.fetchMessages({limit: 100}).then((messages) => {
         if(!isDM && !isGDM) quoteMsg = messages.filter(message => (message.author.id == user.user.id && message.content.toLowerCase().includes(snippet)) && message.content !== msg.content).first()
         if(isDM || isGDM) quoteMsg = messages.filter(message => (message.author.id == user.id && message.content.toLowerCase().includes(snippet)) && message.content !== msg.content).first();
-        if(!quoteMsg) return msg.channel.sendMessage("Message not found!").then(msg => msg.delete(2000));
+        if(!quoteMsg) return msg.channel.send("Message not found!").then(msg => msg.delete(2000));
         date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'),
         time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
         if(!isDM && !isGDM) name = user.displayName, avatar = user.user.avatarURL;
@@ -36,7 +36,7 @@ exports.main = function(client, msg, msgArray, chalk) {
         embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
              .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
              .setDescription(quoteMsg.content);
-        return msg.channel.sendEmbed(embed).then(msg => {if(response) {msg.channel.sendMessage(response)}});
+        return msg.channel.send('', {embed: embed}).then(msg => {if(response) {msg.channel.send(response)}});
     });
 };
 
