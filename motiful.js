@@ -14,12 +14,12 @@ client.on('error', error => { Events.error(client, error, chalk); });
 
 const handleMsg = (msg) => {
 	if(msg.author.id !== config.ownerID) return;
-    if(!msg.content.startsWith(config.commandPrefix)) return;
-    if(msg.content == config.commandPrefix) return;
-    var actualCmd = msg.content.replace(config.commandPrefix, '').trim().split(' ')[0].toLowerCase();
+	if(!msg.content.startsWith(config.commandPrefix)) return;
+	if(msg.content == config.commandPrefix) return;
+	var actualCmd = msg.content.replace(config.commandPrefix, '').trim().split(' ')[0].toLowerCase();
 	var msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
 	if(disabledCommands.includes(actualCmd)) return msg.delete();
-    if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, Commands, chalk);
+	if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, Commands, chalk);
 	// run the command
 	if(actualCmd == "reload") {
 		var arg = msgArray[1];
@@ -31,7 +31,7 @@ const handleMsg = (msg) => {
 			delete require.cache[require.resolve('./commandHandler.js')];
 			Commands = require('./commandHandler.js');
 			// also reload help cmd to update output
-    	}
+		}
 		catch(error) { return msg.edit(`Error while reloading the '${arg}' command: \`\`\`${error}\`\`\`\n(Command may not exist, check for typos)`).then(msg => msg.delete(2000)); };
 		msg.edit(`Command '${cmdFile.slice(0, -3)}' successfully reloaded!`).then(msg => msg.delete(2000));
 	};
