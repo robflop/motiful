@@ -26,11 +26,11 @@ exports.main = function(client, msg, msgArray, chalk) {
     // The bot user's user object is added since it is not natively included in the recipients collection
     if(!isDM && !isGDM) user = users.filter(m => m.user.username.toLowerCase().startsWith(user) || m.displayName.toLowerCase().startsWith(user)).first();
     if(isDM || isGDM) user = users.filter(u => u.username.toLowerCase().startsWith(user)).first();
-    if(!user) return msg.channel.sendMessage("User not found!").then(msg => msg.delete(2000));
+    if(!user) return msg.channel.send("User not found!").then(msg => msg.delete(2000));
     msg.channel.fetchMessages({limit: 100}).then(messages => {
         if(!isDM && !isGDM) quoteMsg = messages.filter(message => (message.author.id == user.user.id && message.content.toLowerCase().includes(snippet)) && message.content !== msg.content).first()
         if(isDM || isGDM) quoteMsg = messages.filter(message => (message.author.id == user.id && message.content.toLowerCase().includes(snippet)) && message.content !== msg.content).first();
-        if(!quoteMsg) return msg.channel.sendMessage("Message not found!").then(msg => msg.delete(2000));
+        if(!quoteMsg) return msg.channel.send("Message not found!").then(msg => msg.delete(2000));
         date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'),
         time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
         if(!isDM && !isGDM) name = user.displayName, avatar = user.user.avatarURL;
@@ -40,7 +40,7 @@ exports.main = function(client, msg, msgArray, chalk) {
              .setDescription(quoteMsg.content);
         quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": quoteMsg.content, "avatar": avatar};
         fs.writeFileSync('userconfig/savedQuotes.json', JSON.stringify(quotes));
-        return msg.channel.sendEmbed(embed, `**__The following quote was successfully saved under the '${quoteName}' name:__**`).then(msg => {msg.delete(2000)});
+        return msg.channel.send(`**__The following quote was successfully saved under the '${quoteName}' name:__**`, {embed: embed}).then(msg => {msg.delete(2000)});
     });
 };
 
