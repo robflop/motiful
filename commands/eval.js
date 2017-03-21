@@ -19,19 +19,19 @@ exports.main = function(client, msg, msgArray, chalk) {
 	// This is put here instead of outside the command execution because we need a reference to the message and other things
 	const print = (...a) => { // ...a means all arguments
 		const cleaned = a.map(o => {
-			if (typeof o !== 'string') o = util.inspect(o, {depth: 0}); // Turn to string
+			if(typeof o !== 'string') o = util.inspect(o, {depth: 0}); // Turn to string
 			return o.replace(tokenRegex, '[TOKEN]');
 		});
 		// If the evaled object does not have an output, that means the message has not been edited yet
 		// So we push to the logs array which gets prepended in the then() or catch()
-		if (!evaled.output) return void logs.push(...cleaned);
+		if(!evaled.output) return void logs.push(...cleaned);
 
 		// If it is after we evaled, i.e. setTimeout(), then we do this
 		// The evaled.output has the thing that will be printed to it appended to it, so it persists throughout prints
 		evaled.output += evaled.output.endsWith('\n') ? cleaned.join(' ') : `\n${cleaned.join(' ')}`; // newline check
 		const title = evaled.errored ? '☠\u2000**Error**' : '📤\u2000**Output**'; // Error check title change
 
-		if (evaled.output.length + input.length > 1900) evaled.output = 'Output too long.';
+		if(evaled.output.length + input.length > 1900) evaled.output = 'Output too long.';
 		return msg.edit(`📥\u2000**Input**${cb}js\n${input}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
 	};
 
@@ -45,12 +45,12 @@ exports.main = function(client, msg, msgArray, chalk) {
 	const cb = '```';
 
 	return result.then(output => {
-		if (typeof output !== 'string') output = util.inspect(output, {depth: 0});
+		if(typeof output !== 'string') output = util.inspect(output, {depth: 0});
 		output = `${logs.join('\n')}\n${logs.length && output === 'undefined' ? '' : output}`;
         // Prepend the logs to the output with a check for undefined to make things prettier
 		output = output.replace(tokenRegex, '[TOKEN]');
 
-		if (output.length + input.length > 1900) output = 'Output too long.';
+		if(output.length + input.length > 1900) output = 'Output too long.';
 
 		return msg.edit(`📥\u2000**Input**${cb}js\n${input}\n${cb}\n📤\u2000**Output**${cb}js\n${output}\n${cb}`).then(() => {
 			evaled.errored = false;
