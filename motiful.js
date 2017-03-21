@@ -16,8 +16,8 @@ const handleMsg = (msg) => {
 	if(msg.author.id !== config.ownerID) return;
 	if(!msg.content.startsWith(config.commandPrefix)) return;
 	if(msg.content == config.commandPrefix) return;
-	var actualCmd = msg.content.replace(config.commandPrefix, '').trim().split(' ')[0].toLowerCase();
 	var msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
+	var actualCmd = msgArray[0].toLowerCase();
 	if(disabledCommands.includes(actualCmd)) return msg.delete();
 	if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, Commands, chalk);
 	// run the command

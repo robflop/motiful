@@ -5,6 +5,7 @@ const globalEmotes = require('../twitchemotes/global.json');
 const subEmotes = require('../twitchemotes/subscriber.json');
 const bttv = require('../twitchemotes/bttv.json');
 const favs = require('../userconfig/favoriteEmotes.json');
+const request = require('request');
 
 exports.main = function(client, msg, msgArray, chalk) {
 	var command = "emote";
@@ -48,7 +49,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 	};
 	if(twChannel.toLowerCase() == "ffz") {
     // ffz emote
-		require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
+		request.get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
 			if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`); return msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000));};
 			if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`); return msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000));};
 			if(body) {
@@ -105,7 +106,7 @@ exports.main = function(client, msg, msgArray, chalk) {
         // ffz fav
 			if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "4" )) msgArray[2] = "1";
 			emoteSize = msgArray[2];
-			require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
+			request.get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
 				if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
 				if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
 				if(body) {

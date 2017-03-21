@@ -3,6 +3,7 @@ const fs = require('fs');
 const subEmotes = require('../twitchemotes/subscriber.json');
 const favs = require('../userconfig/favoriteEmotes.json');
 const bttv = require('../twitchemotes/bttv.json');
+const request = require('request');
 
 exports.main = function(client, msg, msgArray, chalk) {
 	var command = "addFav";
@@ -24,7 +25,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 	}
 	else if(twChannel.toLowerCase() == "ffz") {
     // ffz fav
-		require('request').get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
+		request.get(`http://api.frankerfacez.com/v1/emoticons?q=${emoteName}&page=1&private=on`, function(error, response, body) {
 			if(error) return msg.edit('Error searching FrankerFaceZ emote list occurred: \n\n' + error).then(msg => msg.delete(2000));
 			if(response == undefined) return msg.edit('Error contacting website, FrankerFaceZ emote list response undefined').then(msg => msg.delete(2000));
 			if(body) {
