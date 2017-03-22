@@ -57,7 +57,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 			evaled.output = output;
 		});
 	}).catch(err => {
-		console.error(err);
+		// console.error(err);
 		err = err.toString();
 		err = `${logs.join('\n')}\n${logs.length && err === 'undefined' ? '' : err}`;
 		err = err.replace(tokenRegex, '[TOKEN]');

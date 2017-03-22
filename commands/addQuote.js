@@ -40,7 +40,7 @@ exports.main = function(client, msg, msgArray, chalk) {
              .setDescription(quoteMsg.content);
 		quotes[quoteName] = {"author": `${name} wrote on the ${date} at ${time}:`, "content": quoteMsg.content, "avatar": avatar};
 		fs.writeFileSync('userconfig/savedQuotes.json', JSON.stringify(quotes));
-		return msg.channel.send(`**__The following quote was successfully saved under the '${quoteName}' name:__**`, {embed: embed}).then(msg => {msg.delete(2000)});
+		return msg.channel.send(`**__The following quote was successfully saved under the '${quoteName}' name:__**`, {embed: embed}).then(msg => msg.delete(2000));
 	});
 };
 

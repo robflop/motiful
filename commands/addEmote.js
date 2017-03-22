@@ -38,12 +38,8 @@ exports.main = function(client, msg, msgArray, chalk) {
 	}).pipe(fs.createWriteStream(customPath + emoteName + emoteExt));
 	setTimeout(() => getFile.close(), 60000);
     // 60s dl timeout
-	getFile.on('error', () => {
-		msg.edit(`Error writing file for the '${emoteName.replace(/_/g," ")}' emote!`).then(msg => {msg.delete(2000); getFile.end()});
-	});
-	getFile.on('finish', () => {
-		msg.edit(`Successfully added emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000));
-	});
+	getFile.on('error', () => msg.edit(`Error writing file for the '${emoteName.replace(/_/g," ")}' emote!`).then(msg => {msg.delete(2000); getFile.end()}));
+	getFile.on('finish', () => msg.edit(`Successfully added emote '${emoteName.replace(/_/g," ")}'!`).then(msg => msg.delete(2000)));
 };
 
 exports.desc = "Add a custom emote - Multi-word custom emotes need to be enclosed by \"quotes\".";
