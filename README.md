@@ -4,7 +4,7 @@ A Discord selfbot written using discord.js.
 Motiful also uses the request and moment packages, plus some standard node modules.
 
 ## Self-hosting usage
-(It is assumed you have [node.js](https://nodejs.org/en/) installed)
+(It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 installed)
 
 - Rename config.example.json in the `userconfig/` folder to config.json
 - Get your token from within Discord Dev Tools (Opened via CTRL+SHIFT+I/Command+Option+I inside Discord) -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
