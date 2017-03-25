@@ -43,6 +43,6 @@ client.on('message', msg => handleMsg(msg));
 client.on('messageUpdate', (oldMsg, newMsg) => handleMsg(newMsg));
 // commands are untested for usage when edited into messages
 
-process.on("unhandledRejection", err => console.error("Uncaught Promise Error: \n" + err.stack));
+process.on("unhandledRejection", err => console.error(`[${require('moment')().format('DD/MM/YYYY HH:mm:ss')}] Uncaught Promise Error: \n${err.stack}`));
 
 client.login(config.token);
