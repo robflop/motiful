@@ -3,7 +3,7 @@ const config = require('../userconfig/config.json');
 exports.main = function(client, msg, msgArray, chalk) {
 	var command = "setStatus";
 	var arg = msg.content.substr(config.commandPrefix.length + command.length + 1);
-	if(arg == "") return client.user.setGame().then(user => msg.edit("Successfully cleared your status!\n").then(msg => msg.delete(2000)));
+	if(arg == "") return client.user.setGame(null).then(user => msg.edit("Successfully cleared your status!\n").then(msg => msg.delete(2000)));
 	client.user.setGame(arg).then(user => msg.edit(`Successfully set your game to '${arg}' !\n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)));
 };
 
