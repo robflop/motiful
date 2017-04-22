@@ -3,5 +3,6 @@
 	"ownerID": "<fill in your ID here>",
     "commandPath": "commands/",
     "commandPrefix": "--",
-    "eval": false
+    "eval": false,
+	"pm2": false
 }
