@@ -5,10 +5,10 @@ const moment = require('moment');
 const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "addQuote";
+	const command = "addQuote";
 	if(msg.content == config.commandPrefix + command) return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
 	msg.delete();
-	var quoteName, user, name, avatar, date, time, users, quoteMsg, snippet;
+	let quoteName, user, name, avatar, date, time, users, quoteMsg, snippet;
     // placeholders
 	if(msgArray[1].startsWith('"')) {
     // multi-word quotes
@@ -18,8 +18,8 @@ exports.main = function(client, msg, msgArray, chalk) {
 	else quoteName = msgArray[1], user = msgArray[2].toLowerCase();
     // single-word quote
 	snippet = msg.content.substring(config.commandPrefix.length + command.length + quoteName.length + user.length + 3);
-	var isDM = false, isGDM = false;
-	var embed = new Discord.RichEmbed();
+	let isDM = false, isGDM = false;
+	const embed = new Discord.RichEmbed();
 	if(msg.channel.type == "text") users = msg.guild.members;
 	else if(msg.channel.type == "dm") isDM = true, users = new Discord.Collection([[msg.channel.recipient.id, msg.channel.recipient], [msg.author.id, msg.author]]);
 	else if(msg.channel.type == "group") isGDM = true, users = msg.channel.recipients.set(msg.author.id, msg.author);

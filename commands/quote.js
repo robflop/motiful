@@ -3,13 +3,13 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "quote";
+	const command = "quote";
 	if(msg.content == config.commandPrefix + command) return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
 	msg.delete();
-	var user = msgArray[1].toLowerCase();
-	var response, snippet, users, date, time, name, avatar, quoteMsg;
+	let user = msgArray[1].toLowerCase();
+	let response, snippet, users, date, time, name, avatar, quoteMsg;
     // placeholders
-	var isDM = false, isGDM = false;
+	let isDM = false, isGDM = false;
 	if(msg.content.includes("/")) {
     // with response
 		response = msg.content.substring(msg.content.lastIndexOf('/')+2);
@@ -17,7 +17,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 	}
 	else snippet = msg.content.substring(config.commandPrefix.length + command.length + user.length + 2).toLowerCase();
     // no response
-	var embed = new Discord.RichEmbed();
+	const embed = new Discord.RichEmbed();
 	if(msg.channel.type == "text") users = msg.guild.members;
 	else if(msg.channel.type == "dm") isDM = true, users = new Discord.Collection([[msg.channel.recipient.id, msg.channel.recipient], [msg.author.id, msg.author]]);
 	else if(msg.channel.type == "group") isGDM = true, users = msg.channel.recipients.set(msg.author.id, msg.author);

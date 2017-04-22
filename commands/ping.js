@@ -1,6 +1,6 @@
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "ping";
-	var ping = Math.ceil(client.ping);
+	const command = "ping";
+	const ping = Math.ceil(client.ping);
 	msg.edit(`P${"o".repeat(ping/100)}ng! (${ping}ms)`);
 };
 

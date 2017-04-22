@@ -3,8 +3,8 @@ const fs = require('fs');
 const favs = require('../userconfig/favoriteEmotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "delFav";
-	var favmote = msgArray[1];
+	const command = "delFav";
+	const favmote = msgArray[1];
 	if(favs.hasOwnProperty(favmote)) {
 		delete favs[favmote];
 		fs.writeFileSync('userconfig/favoriteEmotes.json', JSON.stringify(favs));

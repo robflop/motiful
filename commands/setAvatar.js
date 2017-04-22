@@ -1,8 +1,8 @@
 const config = require('../userconfig/config.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "setAvatar";
-	var arg = msgArray[1];
+	const command = "setAvatar";
+	const arg = msgArray[1];
 	if(!arg) return msg.edit("Specify an image!").then(msg => msg.delete(2000));
 	if(!arg.startsWith("http")) return msg.edit("Invalid URL.").then(msg => msg.delete(2000));
 	if(arg.substr(-4, 4) !== ".png" && arg.substr(-4, 4) !== ".jpg" && arg.substr(-4, 4) !== ".gif" && arg.substr(-5, 5) !== ".jpeg" && arg.substr(-5, 5) !== ".webp") {

@@ -2,9 +2,9 @@ const config = require('../userconfig/config.json');
 const util = require('util');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "eval";
+	const command = "eval";
 	if(!config.eval) return msg.edit('Eval has been disabled in the config.').then(msg => msg.delete(2000));
-	var input = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"'));
+	const input = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"'));
 	if(input == '' || input == '"' || input == '""') return msg.edit("No input given. Maybe you forgot to enclose it with \"quotes?\"").then(msg => msg.delete(2000));
 	/*
     Credit for all of the below goes to 1Computer1 on GitHub
@@ -35,7 +35,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 		return msg.edit(`📥\u2000**Input**${cb}js\n${input}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
 	};
 
-	var result;
+	let result;
 
 	if(msg.content.substring(config.commandPrefix.length + command.length + 1, msg.content.indexOf('"')).trim() == "async") {
 		result = new Promise(resolve => resolve(eval(`(async () => { ${input} })()`)));

@@ -8,23 +8,23 @@ const favs = require('../userconfig/favoriteEmotes.json');
 const request = require('request');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "emote";
+	const command = "emote";
 	if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify an emote!').then(msg => msg.delete(2000));
-	var timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
-	var twChannel = "";
+	const timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
+	let twChannel = "";
     // placeholder
 	if(msgArray[1].startsWith('"')) twChannel = msg.content.substring(msg.content.indexOf('"')+1, msg.content.lastIndexOf('"')).replace(/ /g,"_");
     // multi-word emote
 	else twChannel = msgArray[1];
     // single-word emote
-	var emoteName = msgArray[2];
-	var emoteURL = "";
-	var emoteSize = msgArray[3];
-	var emoteID = "";
+	let emoteName = msgArray[2];
+	let emoteURL = "";
+	let emoteSize = msgArray[3];
+	let emoteID = "";
     // placeholders
 	msg.delete();
 	if(emoteSize == undefined || ( emoteSize !== "1.0" && emoteSize !== "2.0" && emoteSize !== "3.0" )) emoteSize = "1.0";
-	var customPath = require("path").join(__dirname, "../customemotes/");
+	const customPath = require("path").join(__dirname, "../customemotes/");
 	if(globalEmotes["emotes"][msgArray[1]] !== undefined) {
     // global emote
 		emoteName = msgArray[1];
@@ -39,7 +39,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 	if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined) {
     // sub emote
 		twChannel = twChannel.toLowerCase();
-		for(var i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
+		for(let i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
 			if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
 				emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
 				emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
@@ -55,8 +55,8 @@ exports.main = function(client, msg, msgArray, chalk) {
 			if(body) {
 				if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "4" )) msgArray[3] = "1";
 				emoteSize = msgArray[3];
-				var emoteList = JSON.parse(body);
-				for(var i = 0; i < emoteList["emoticons"].length; i++) {
+				const emoteList = JSON.parse(body);
+				for(let i = 0; i < emoteList["emoticons"].length; i++) {
 					if(emoteList["emoticons"][i]["name"] == emoteName && emoteID == "") {
 						emoteID = emoteList["emoticons"][i]["id"];
 						emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
@@ -70,7 +70,7 @@ exports.main = function(client, msg, msgArray, chalk) {
     // bttv emote
 		if(msgArray[3] == undefined || ( msgArray[3] !== "1" && msgArray[3] !== "2" && msgArray[3] !== "3" )) msgArray[3] = "1";
 		emoteSize = msgArray[3];
-		for(var i = 0; i < bttv["emotes"].length; i++) {
+		for(let i = 0; i < bttv["emotes"].length; i++) {
 			if(bttv["emotes"][i]["code"] == emoteName && emoteID == "") {
 				emoteID = bttv["emotes"][i]["id"];
 				emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
@@ -94,7 +94,7 @@ exports.main = function(client, msg, msgArray, chalk) {
         // bttv fav
 			if(msgArray[2] == undefined || ( msgArray[2] !== "1" && msgArray[2] !== "2" && msgArray[2] !== "3" )) msgArray[2] = "1";
 			emoteSize = msgArray[2];
-			for(var i = 0; i < bttv["emotes"].length; i++) {
+			for(let i = 0; i < bttv["emotes"].length; i++) {
 				if(bttv["emotes"][i]["code"] == emoteName && emoteID == "") {
 					emoteID = bttv["emotes"][i]["id"];
 					emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
@@ -110,8 +110,8 @@ exports.main = function(client, msg, msgArray, chalk) {
 				if(error) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} Error searching FrankerFaceZ emote list occurred: ${error}`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
 				if(response == undefined) {console.log(`[${timestamp}]${chalk.red("[REQUEST-ERROR]")} FrankerFaceZ emote list response undefined`); msg.edit("Error contacting the website! (Try again?)").then(msg => msg.delete(2000)); return;};
 				if(body) {
-					var emoteList = JSON.parse(body);
-					for(var i = 0; i < emoteList["emoticons"].length; i++) {
+					const emoteList = JSON.parse(body);
+					for(let i = 0; i < emoteList["emoticons"].length; i++) {
 						if(emoteList["emoticons"][i]["name"] == emoteName && emoteID == "") {
 							emoteID = emoteList["emoticons"][i]["id"];
 							emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
@@ -124,7 +124,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 		else {
         // twitch sub fav
 			if(msgArray[2] == "2.0" || msgArray[2] == "3.0") emoteSize = msgArray[2];
-			for(var i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
+			for(let i = 0; i < Object.keys(subEmotes["channels"][twChannel]["emotes"]).length; i++) {
 				if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
 					emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
 					emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
