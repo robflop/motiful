@@ -1,6 +1,6 @@
 const config = require('./userconfig/config.json');
 const moment = require('moment');
-var timestamp;
+let timestamp;
 
 module.exports = {
 	"ready": function ready(client, chalk) {

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./userconfig/config.json');
 const chalk = require('chalk');
-var Commands = require('./commandHandler.js');
+let Commands = require('./commandHandler.js');
 const Events = require('./eventHandler.js');
 const disabledCommands = require('./userconfig/disabledCommands.json');
 
@@ -15,15 +15,15 @@ client.on('error', error => Events.error(client, error, chalk));
 const handleMsg = (msg) => {
 	if(msg.author.id !== config.ownerID || !msg.content.startsWith(config.commandPrefix) || msg.content == config.commandPrefix) return;
 	if(disabledCommands.includes(actualCmd)) return msg.delete();
-	var msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
-	var actualCmd = msgArray[0].toLowerCase();
+	const msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
+	const actualCmd = msgArray[0].toLowerCase();
 	if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, Commands, chalk);
 	// run the command
 	if(actualCmd == "reload") {
-		var arg = msgArray[1];
+		const arg = msgArray[1];
 		if(!arg) return msg.edit('Specify a command to reload!').then(msg => msg.delete(2000));
 		try {
-			var cmdFile = Commands.commands[arg.toLowerCase()].filename;
+			const cmdFile = Commands.commands[arg.toLowerCase()].filename;
 			delete require.cache[require.resolve(`./commands/${cmdFile}`)];
 			delete require.cache[require.resolve('./commands/help.js')];
 			delete require.cache[require.resolve('./commandHandler.js')];

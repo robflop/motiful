@@ -1,9 +1,9 @@
 const config = require('../userconfig/config.json');
 const moment = require('moment');
-var timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "shutdown";
+	const command = "shutdown";
+	const timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
 	msg.edit("motiful shutting down!").then(msg => msg.delete(1000));
 	setTimeout(function() {
 		client.destroy().then(() => {

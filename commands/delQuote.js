@@ -3,9 +3,9 @@ const fs = require('fs');
 const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "delQuote";
+	const command = "delQuote";
 	if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
-	var quoteName = msgArray[1];
+	const quoteName = msgArray[1];
 	if(quotes.hasOwnProperty(quoteName)) {
 		delete quotes[quoteName];
 		fs.writeFileSync('userconfig/savedQuotes.json', JSON.stringify(quotes));

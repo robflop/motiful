@@ -1,12 +1,12 @@
 const config = require('../userconfig/config.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
-	var command = "indicators";
-	var phrase = msg.content.replace(config.commandPrefix + command, '').trim().toLowerCase();
-	var indicatorTemplate = ":regional_indicator_";
-	var indicatorPhrase = [];
-	var indicators = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-	for(var i=0; i<phrase.length; i++) {
+	const command = "indicators";
+	const phrase = msg.content.replace(config.commandPrefix + command, '').trim().toLowerCase();
+	const indicatorTemplate = ":regional_indicator_";
+	const indicatorPhrase = [];
+	const indicators = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+	for(let i=0; i<phrase.length; i++) {
 		if(!indicators.includes(phrase[i].toLowerCase())) { indicatorPhrase.push(phrase[i]); continue; };
 		indicatorPhrase.push(indicatorTemplate + phrase[i] + ":");
 	};
