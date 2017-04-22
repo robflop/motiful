@@ -14,9 +14,9 @@ client.on('error', error => Events.error(client, error, chalk));
 
 const handleMsg = (msg) => {
 	if(msg.author.id !== config.ownerID || !msg.content.startsWith(config.commandPrefix) || msg.content == config.commandPrefix) return;
-	if(disabledCommands.includes(actualCmd)) return msg.delete();
 	const msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
 	const actualCmd = msgArray[0].toLowerCase();
+	if(disabledCommands.includes(actualCmd)) return msg.delete();
 	if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, Commands, chalk);
 	// run the command
 	if(actualCmd == "reload") {
