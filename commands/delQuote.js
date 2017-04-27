@@ -4,7 +4,7 @@ const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
 	const command = "delQuote";
-	if(msg.content == config.commandPrefix + command.toLowerCase()) return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
+	if(msg.content == config.commandPrefix + command || msgArray.length<2) return msg.edit('Specify a quote name!').then(msg => msg.delete(2000));
 	const quoteName = msgArray[1];
 	if(quotes.hasOwnProperty(quoteName)) {
 		delete quotes[quoteName];

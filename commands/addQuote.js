@@ -6,7 +6,7 @@ const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
 	const command = "addQuote";
-	if(msg.content == config.commandPrefix + command) return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
+	if(msg.content == config.commandPrefix + command || msgArray.length<3) return msg.edit('Specify a username and snippet!').then(msg => msg.delete(2000));
 	msg.delete();
 	let quoteName, user, name, avatar, date, time, users, quoteMsg;
     // placeholders

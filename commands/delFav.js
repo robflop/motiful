@@ -4,6 +4,7 @@ const favs = require('../userconfig/favoriteEmotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
 	const command = "delFav";
+	if(msg.content == config.commandPrefix + command || msgArray.length<2) return msg.edit('Specify a favorite to remove!').then(msg => msg.delete(2000));
 	const favmote = msgArray[1];
 	if(favs.hasOwnProperty(favmote)) {
 		delete favs[favmote];
