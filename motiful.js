@@ -6,7 +6,23 @@ let Commands = require('./commandHandler.js');
 const Events = require('./eventHandler.js');
 const disabledCommands = require('./userconfig/disabledCommands.json');
 
-client.once('ready', () => Events.ready(client, chalk));
+// memleak stuff
+// const takeADump = () => {
+// 	const file = `./heapdumps/motiful-${process.pid}-${Date.now()}.heapsnapshot`;
+// 	require('heapdump').writeSnapshot(file, (err) => {
+// 		if (err) console.error(err);
+// 		else console.error(`Wrote snapshot: ${file}`);
+// 	});
+// };
+
+client.once('ready', () => {
+	Events.ready(client, chalk);
+
+	// memleak stuff
+	// takeADump();
+});
+
+// setTimeout(() => { takeADump() }, 1000*60*60*6) // take 2nd dump after 6h
 
 client.on('disconnect', error => Events.disconnect(client, error, chalk));
 
@@ -17,7 +33,7 @@ const handleMsg = (msg) => {
 	const msgArray = msg.content.replace(config.commandPrefix, '').trim().split(' ');
 	const actualCmd = msgArray[0].toLowerCase();
 	if(disabledCommands.includes(actualCmd)) return msg.delete();
-	if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, Commands, chalk);
+	if(Object.keys(Commands.commands).includes(actualCmd)) Commands.commands[actualCmd].main(client, msg, msgArray, chalk);
 	// run the command
 	if(actualCmd == "reload") {
 		const arg = msgArray[1];
