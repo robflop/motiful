@@ -5,7 +5,7 @@ let timestamp;
 module.exports = {
 	"ready": function ready(client, chalk) {
 		timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
-		client.user.setStatus('invisible').then(() => console.log(`[${timestamp}]${chalk.green("[POWER]")} motiful ready!`));
+		client.user.setStatus('invisible').then(() => console.log(`[${timestamp}]${chalk.green("[POWER]")} motiful ready! ${config.pm2?"(Using PM2)":""}`));
 		// appear offline when not online as actual user
 	},
 	"error": function error(client, error, chalk) {
@@ -21,4 +21,8 @@ module.exports = {
 			// Restart selfbot if disconnect code is 1000 (gracefully exited) because it won't reconnect automatically
 		};
 	},
+	"reconnecting": function reconnecting(client, chalk) {
+		timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
+		console.log(`[${timestamp}]${chalk.green("[CONNECTION]")} motiful is reconnecting!`);
+	}
 };
