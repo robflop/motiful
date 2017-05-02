@@ -1,5 +1,5 @@
 const config = require('../userconfig/config.json');
-const Discord = require('discord.js');
+const RichEmbed = require('discord.js').RichEmbed;
 const quotes = require('../userconfig/savedQuotes.json');
 
 exports.main = function(client, msg, msgArray, chalk) {
@@ -8,7 +8,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 	const quoteName = msgArray[1];
 	if(!quotes.hasOwnProperty(quoteName)) return msg.edit(`Quote '${quoteName}' not found!`).then(msg => msg.delete(2000));
 	msg.delete();
-	const embed = new Discord.RichEmbed();
+	const embed = new RichEmbed();
 	const quote = quotes[quoteName];
 	embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
          .setAuthor(quote["author"], quote["avatar"])

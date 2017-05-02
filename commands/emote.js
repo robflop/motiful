@@ -78,11 +78,11 @@ exports.main = function(client, msg, msgArray, chalk) {
 			};
 		};
 	};
-	if(fs.existsSync(`${customPath + twChannel.replace(/ /g,"_")}.png`) || fs.existsSync(`${customPath + twChannel.replace(/ /g,"_")}.jpg`) || fs.existsSync(`${customPath + twChannel.replace(/ /g,"_")}.gif`)) {
+	if(fs.existsSync(`./${customPath + twChannel.replace(/ /g,"_")}.png`) || fs.existsSync(`./${customPath + twChannel.replace(/ /g,"_")}.jpg`) || fs.existsSync(`./${customPath + twChannel.replace(/ /g,"_")}.gif`)) {
     // local emote
-		if(fs.existsSync(`${customPath + twChannel}.png`)) emoteURL = customPath + twChannel + ".png";
-		if(fs.existsSync(`${customPath + twChannel}.jpg`)) emoteURL = customPath + twChannel + ".jpg";
-		if(fs.existsSync(`${customPath + twChannel}.gif`)) emoteURL = customPath + twChannel + ".gif";
+		if(fs.existsSync(`./${customPath + twChannel}.png`)) emoteURL = customPath + twChannel + ".png";
+		if(fs.existsSync(`./${customPath + twChannel}.jpg`)) emoteURL = customPath + twChannel + ".jpg";
+		if(fs.existsSync(`./${customPath + twChannel}.gif`)) emoteURL = customPath + twChannel + ".gif";
 		emoteName = emoteURL.replace(customPath, '');
 		msg.channel.send('', {file: {attachment: emoteURL, name: emoteName}});
 	};

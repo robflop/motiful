@@ -30,7 +30,8 @@ exports.main = function(client, msg, msgArray, chalk) {
 		};
 	};
 	if(emoteURL && emoteURL.startsWith("http")) emoteExt = emoteURL.substr(-4, 4);
-	if(emoteExt !== ".png" && emoteExt !== ".jpg" && emoteExt !== ".gif") return msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000));
+	const validExts = [".png", ".jpg", ".gif"];
+	if(!validExts.includes(emoteExt)) return msg.edit("Only PNGs, JPGs and GIFs are accepted, sorry.").then(msg => msg.delete(2000));
 	const customPath = require("path").join(__dirname, "../customemotes/");
 	if(fs.existsSync(customPath + emoteName + emoteExt)) return msg.edit('Emote with that name already exists!').then(msg => msg.delete(2000));
 	const getFile = request.get(emoteURL, function(error, response, body) {

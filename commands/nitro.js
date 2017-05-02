@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
+const RichEmbed = require('discord.js').RichEmbed;
 
 exports.main = function(client, msg, msgArray, chalk) {
 	const command = "nitro";
-	const embed = new Discord.RichEmbed();
+	const embed = new RichEmbed();
 	msg.delete();
 	embed.setColor(5267072)
          .setAuthor(`Discord Nitro Message`, 'https://cdn.discordapp.com/emojis/264287569687216129.png ')

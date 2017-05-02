@@ -5,9 +5,8 @@ exports.main = function(client, msg, msgArray, chalk) {
 	const arg = msgArray[1];
 	if(!arg) return msg.edit("Specify an image!").then(msg => msg.delete(2000));
 	if(!arg.startsWith("http")) return msg.edit("Invalid URL.").then(msg => msg.delete(2000));
-	if(arg.substr(-4, 4) !== ".png" && arg.substr(-4, 4) !== ".jpg" && arg.substr(-4, 4) !== ".gif" && arg.substr(-5, 5) !== ".jpeg" && arg.substr(-5, 5) !== ".webp") {
-		return msg.edit("Invalid file format! Only png, jpg/jpeg, gif and webp are allowed.").then(msg => msg.delete(2000));
-	};
+	const validFormats = [".png", ".jpg", ".gif", ".webp"];
+	if(!validFormats.includes(arg.substr(-4, 4))) return msg.edit("Invalid file format! Only png, jpg, gif and webp are allowed.").then(msg => msg.delete(2000));
 	client.user.setAvatar(arg).then(() => msg.edit(`Successfully set your avatar to '${arg}' ! \n(May not have worked if ratelimit has been capped)`).then(msg => msg.delete(2000)));
 };
 
