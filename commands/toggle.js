@@ -11,12 +11,12 @@ exports.main = function(client, msg, msgArray, chalk) {
 	const index = disabledCommands.indexOf(arg);
 	if(index == -1) {
 		disabledCommands.push(arg);
-		fs.writeFileSync('userconfig/disabledCommands.json', JSON.stringify(disabledCommands));
+		fs.writeFileSync('./userconfig/disabledCommands.json', JSON.stringify(disabledCommands));
 		return msg.edit(`Command '${arg}' successfully disabled!`).then(msg => msg.delete(2000));
 	}
 	else {
 		disabledCommands.splice(index, 1);
-		fs.writeFileSync('userconfig/disabledCommands.json', JSON.stringify(disabledCommands));
+		fs.writeFileSync('./userconfig/disabledCommands.json', JSON.stringify(disabledCommands));
 		return msg.edit(`Command '${arg}' successfully enabled!`).then(msg => msg.delete(2000));
 	}
 };

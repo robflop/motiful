@@ -12,10 +12,10 @@ exports.main = function(client, msg, msgArray, chalk) {
     // single-word emote
 	const customPath = require("path").join(__dirname, "../customemotes/");
 	let emotePath = "";
-	if(fs.existsSync(`${customPath + emoteName}.png`) || fs.existsSync(`${customPath + emoteName}.jpg`) || fs.existsSync(`${customPath + emoteName}.gif`)) {
-		if(fs.existsSync(`${customPath + emoteName}.png`)) emotePath =  customPath + emoteName + ".png";
-		if(fs.existsSync(`${customPath + emoteName}.jpg`)) emotePath =  customPath + emoteName + ".jpg";
-		if(fs.existsSync(`${customPath + emoteName}.gif`)) emotePath =  customPath + emoteName + ".gif";
+	if(fs.existsSync(`./${customPath + emoteName}.png`) || fs.existsSync(`${customPath + emoteName}.jpg`) || fs.existsSync(`${customPath + emoteName}.gif`)) {
+		if(fs.existsSync(`./${customPath + emoteName}.png`)) emotePath =  customPath + emoteName + ".png";
+		if(fs.existsSync(`./${customPath + emoteName}.jpg`)) emotePath =  customPath + emoteName + ".jpg";
+		if(fs.existsSync(`./${customPath + emoteName}.gif`)) emotePath =  customPath + emoteName + ".gif";
 	};
 	fs.unlink(emotePath, function (error) {
 		if(error) return msg.edit(`Error deleting emote!: \`\`\`${error}\`\`\``).then(msg => msg.delete(2000));
