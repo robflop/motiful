@@ -80,7 +80,6 @@ exports.main = function(client, msg, msgArray, chalk) {
 	};
 	if(fs.existsSync(`${customPath + twChannel}.png`) || fs.existsSync(`${customPath + twChannel}.jpg`) || fs.existsSync(`${customPath + twChannel}.gif`)) {
     // custom emote
-		console.log(twChannel);
 		if(fs.existsSync(`${customPath + twChannel}.png`)) emoteURL = customPath + twChannel + ".png";
 		if(fs.existsSync(`${customPath + twChannel}.jpg`)) emoteURL = customPath + twChannel + ".jpg";
 		if(fs.existsSync(`${customPath + twChannel}.gif`)) emoteURL = customPath + twChannel + ".gif";
