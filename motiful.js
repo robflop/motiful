@@ -6,23 +6,7 @@ let Commands = require('./commandHandler.js');
 const Events = require('./eventHandler.js');
 const disabledCommands = require('./userconfig/disabledCommands.json');
 
-// memleak stuff
-// const takeADump = () => {
-// 	const file = `./heapdumps/motiful-${process.pid}-${Date.now()}.heapsnapshot`;
-// 	require('heapdump').writeSnapshot(file, (err) => {
-// 		if (err) console.error(err);
-// 		else console.error(`Wrote snapshot: ${file}`);
-// 	});
-// };
-
-client.once('ready', () => {
-	Events.ready(client, chalk);
-
-	// memleak stuff
-	// takeADump();
-});
-
-// setTimeout(() => { takeADump() }, 1000*60*60*6) // take 2nd dump after 6h
+client.once('ready', () => Events.ready(client, chalk));
 
 client.on('disconnect', error => Events.disconnect(client, error, chalk));
 
