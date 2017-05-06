@@ -13,7 +13,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 	embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
          .setAuthor(quote["author"], quote["avatar"])
          .setDescription(quote["content"]);
-	msg.channel.send('', {embed: embed});
+	msg.channel.send({embed: embed});
 };
 
 exports.desc = "Post a saved quote";

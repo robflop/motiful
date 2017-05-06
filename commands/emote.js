@@ -34,7 +34,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 		twChannel = "";
 		emoteID = globalEmotes["emotes"][emoteName]["image_id"];
 		emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
-		return msg.channel.send('', {file: {attachment: emoteURL, name: `${emoteName}.png}`}});
+		return msg.channel.send({files: [{attachment: emoteURL, name: `${emoteName}.png}`}]});
 	};
 	if(subEmotes["channels"][twChannel.toLowerCase()] !== undefined) {
     // sub emote
@@ -43,7 +43,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 			if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
 				emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
 				emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
-				return msg.channel.send('', {file: {attachment: emoteURL, name: emoteName + ".png"}});
+				return msg.channel.send({files: [{attachment: emoteURL, name: emoteName + ".png"}]});
 			};
 		};
 	};
@@ -60,7 +60,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 					if(emoteList["emoticons"][i]["name"] == emoteName && emoteID == "") {
 						emoteID = emoteList["emoticons"][i]["id"];
 						emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
-						return msg.channel.send('', {file: {attachment: emoteURL, name: emoteName + ".png"}});
+						return msg.channel.send({files: [{attachment: emoteURL, name: emoteName + ".png"}]});
 					};
 				};
 			};
@@ -74,17 +74,18 @@ exports.main = function(client, msg, msgArray, chalk) {
 			if(bttv["emotes"][i]["code"] == emoteName && emoteID == "") {
 				emoteID = bttv["emotes"][i]["id"];
 				emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
-				return msg.channel.send('', {file: {attachment: emoteURL, name: emoteName + "." + bttv["emotes"][i]["imageType"]}});
+				return msg.channel.send({files: [{attachment: emoteURL, name: emoteName + "." + bttv["emotes"][i]["imageType"]}]});
 			};
 		};
 	};
-	if(fs.existsSync(`./${customPath + twChannel.replace(/ /g,"_")}.png`) || fs.existsSync(`./${customPath + twChannel.replace(/ /g,"_")}.jpg`) || fs.existsSync(`./${customPath + twChannel.replace(/ /g,"_")}.gif`)) {
-    // local emote
-		if(fs.existsSync(`./${customPath + twChannel}.png`)) emoteURL = customPath + twChannel + ".png";
-		if(fs.existsSync(`./${customPath + twChannel}.jpg`)) emoteURL = customPath + twChannel + ".jpg";
-		if(fs.existsSync(`./${customPath + twChannel}.gif`)) emoteURL = customPath + twChannel + ".gif";
+	if(fs.existsSync(`${customPath + twChannel}.png`) || fs.existsSync(`${customPath + twChannel}.jpg`) || fs.existsSync(`${customPath + twChannel}.gif`)) {
+    // custom emote
+		console.log(twChannel);
+		if(fs.existsSync(`${customPath + twChannel}.png`)) emoteURL = customPath + twChannel + ".png";
+		if(fs.existsSync(`${customPath + twChannel}.jpg`)) emoteURL = customPath + twChannel + ".jpg";
+		if(fs.existsSync(`${customPath + twChannel}.gif`)) emoteURL = customPath + twChannel + ".gif";
 		emoteName = emoteURL.replace(customPath, '');
-		msg.channel.send('', {file: {attachment: emoteURL, name: emoteName}});
+		msg.channel.send({files: [{attachment: emoteURL, name: emoteName}]});
 	};
 	if(favs.hasOwnProperty(twChannel)) {
     // favs
@@ -98,7 +99,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 				if(bttv["emotes"][i]["code"] == emoteName && emoteID == "") {
 					emoteID = bttv["emotes"][i]["id"];
 					emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${emoteSize}x`;
-					return msg.channel.send('', {file: {attachment: emoteURL, name: emoteName + "." + bttv["emotes"][i]["imageType"]}});
+					return msg.channel.send({files: [{attachment: emoteURL, name: emoteName + "." + bttv["emotes"][i]["imageType"]}]});
 				};
 			};
 		}
@@ -115,7 +116,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 						if(emoteList["emoticons"][i]["name"] == emoteName && emoteID == "") {
 							emoteID = emoteList["emoticons"][i]["id"];
 							emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${emoteSize}`;
-							return msg.channel.send('', {file: {attachment: emoteURL, name: emoteName + ".png"}});
+							return msg.channel.send({files: [{attachment: emoteURL, name: emoteName + ".png"}]});
 						};
 					};
 				};
@@ -128,7 +129,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 				if(subEmotes["channels"][twChannel]["emotes"][i]["code"] == emoteName) {
 					emoteID = subEmotes["channels"][twChannel]["emotes"][i]["image_id"];
 					emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${emoteSize}`;
-					return msg.channel.send('', {file: {attachment: emoteURL, name: emoteName + ".png"}});
+					return msg.channel.send({files: [{attachment: emoteURL, name: emoteName + ".png"}]});
 				};
 			};
 		};
