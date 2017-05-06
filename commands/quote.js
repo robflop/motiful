@@ -36,7 +36,7 @@ exports.main = function(client, msg, msgArray, chalk) {
 		embed.setColor((Math.random() * 10e4).toFixed(5)) // randomize color
              .setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
              .setDescription(quoteMsg.content);
-		return msg.channel.send('', {embed: embed}).then(msg => {if(response) {msg.channel.send(response)}});
+		return msg.channel.send({embed: embed}).then(msg => {if(response) {msg.channel.send(response)}});
 	});
 };
 
