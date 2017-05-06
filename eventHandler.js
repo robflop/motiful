@@ -5,8 +5,7 @@ let timestamp;
 module.exports = {
 	"ready": function ready(client, chalk) {
 		timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
-		client.user.setStatus('invisible').then(() => console.log(`[${timestamp}]${chalk.green("[POWER]")} motiful ready! ${config.pm2?"(Using PM2)":""}`));
-		// appear offline when not online as actual user
+		console.log(`[${timestamp}]${chalk.green("[POWER]")} motiful ready! ${config.pm2?"(Using PM2)":""}`);
 	},
 	"error": function error(client, error, chalk) {
 		timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
