@@ -34,13 +34,13 @@ class ArgumentParser {
 	}
 
 	static toChannel(message, arg) {
-		return message.mentions.channels.first()
+		return message.guild.channels.get((arg.match(discordIDRegex) || [])[0])
 			|| message.guild.channels.get(arg)
 			|| message.guild.channels.find(channel => channel.name.toLowerCase().includes(arg.toLowerCase()));
 	}
 
 	static toRole(message, arg) {
-		return message.mentions.roles.first()
+		return message.guild.roles.get((arg.match(discordIDRegex) || [])[0])
 			|| message.guild.roles.get(arg)
 			|| message.guild.roles.find(role => role.name.toLowerCase().includes(arg.toLowerCase()));
 	}
