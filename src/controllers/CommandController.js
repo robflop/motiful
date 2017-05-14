@@ -10,7 +10,7 @@ class CommandController {
 	}
 
 	async handleCommand(message) {
-		if (message.author.id !== config.ownerID || !message.content.startsWith(config.commandPrefix)) return;
+		if (message.author.id !== message.client.config.ownerID || !message.content.startsWith(message.client.config.commandPrefix)) return;
 
 		const { commands, aliases, config, logger } = message.client;
 
