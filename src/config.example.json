@@ -1,7 +1,6 @@
 {
 	"token": "<fill in bot token here>",
 	"ownerID": "<fill in your ID here>",
-    "commandPath": "commands/",
     "commandPrefix": "--",
     "eval": false,
 	"pm2": false
