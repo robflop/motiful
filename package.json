@@ -1,13 +1,13 @@
 {
   "name": "motiful",
-  "version": "2.3.2",
+  "version": "3.0.0",
   "description": "Discord selfbot built with discord.js",
   "main": "motiful.js",
   "dependencies": {
     "chalk": "^1.1.3",
     "discord.js": "github:hydrabolt/discord.js",
     "moment": "^2.18.1",
-    "request": "^2.81.0"
+    "snekfetch": "^3.1.6"
   },
   "devDependencies": {},
   "scripts": {},
