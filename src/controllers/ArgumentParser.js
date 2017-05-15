@@ -13,7 +13,7 @@ const falsy = ['no', 'n', 'false', 'disable'];
 class ArgumentParser {
 	static parse(type, message, arg) {
 		if (type === 'string') return arg || null;
-		if (type === 'integer') return Number.parseInt(arg) || null;
+		if (type === 'number' || type === 'integer') return Number.parseInt(arg) || null; 
 		if (type === 'float') return Number.parseFloat(arg) || null;
 		if (type === 'boolean') return this.toBoolean(arg);
 		if (type === 'message') return this.toMessage(message, arg);
@@ -22,6 +22,7 @@ class ArgumentParser {
 		if (type === 'user') return this.toUser(message, arg);
 		if (type === 'member') return this.toMember(message, arg);
 		if (type === 'emoji') return this.toEmoji(message, arg);
+		throw new RangeError(`Invalid type detected at: '${type}'`);
 	}
 
 	static toBoolean(arg) {
