@@ -5,15 +5,17 @@ const emojiRanges = [
 
 const unicodeEmojiRegex = new RegExp(emojiRanges.join('|'), 'g');
 const discordEmojiRegex = /<:([a-zA-Z0-9_]+):(\d+)>/;
-const discordIDRegex = /!?[0-9]+/g;
-
-const truthy = ['yes', 'y', 'true', 'enable'];
-const falsy = ['no', 'n', 'false', 'disable'];
+const discordIDRegex = /<@!?(\d+)>/;
 
 class ArgumentParser {
+	constructor() {
+		this.truthy = ['yes', 'y', 'true', 'enable'];
+		this.falsy = ['no', 'n', 'false', 'disable'];
+	}
+
 	static parse(type, message, arg) {
 		if (type === 'string') return arg || null;
-		if (type === 'number' || type === 'integer') return Number.parseInt(arg) || null; 
+		if (type === 'number' || type === 'integer') return Number.parseInt(arg) || null;
 		if (type === 'float') return Number.parseFloat(arg) || null;
 		if (type === 'boolean') return this.toBoolean(arg);
 		if (type === 'message') return this.toMessage(message, arg);
@@ -26,34 +28,34 @@ class ArgumentParser {
 	}
 
 	static toBoolean(arg) {
-		return truthy.includes(arg.toLowerCase()) ? true : falsy.includes(arg.toLowerCase()) ? false : null;
+		return this.truthy.includes(arg.toLowerCase()) ? true : this.falsy.includes(arg.toLowerCase()) ? false : null;
 	}
 
 	static toMessage(message, arg) {
-		if (!/^[0-9]+$/.test(arg)) return Promise.resolve(null);
+		if (!/^\d+$/.test(arg)) return Promise.resolve(null);
 		return message.channel.fetchMessage(arg).catch(() => null);
 	}
 
 	static toChannel(message, arg) {
-		return message.guild.channels.get((arg.match(discordIDRegex) || [])[0])
+		return message.guild.channels.get((discordIDRegex.exec(arg) || [])[3])
 			|| message.guild.channels.get(arg)
 			|| message.guild.channels.find(channel => channel.name.toLowerCase().includes(arg.toLowerCase()));
 	}
 
 	static toRole(message, arg) {
-		return message.guild.roles.get((arg.match(discordIDRegex) || [])[0])
+		return message.guild.roles.get((discordIDRegex.exec(arg) || [])[3])
 			|| message.guild.roles.get(arg)
 			|| message.guild.roles.find(role => role.name.toLowerCase().includes(arg.toLowerCase()));
 	}
 
 	static toUser(message, arg) {
-		return message.mentions.users.get((arg.match(discordIDRegex) || [])[0])
+		return message.mentions.users.get((discordIDRegex.exec(arg) || [])[3])
 			|| message.client.users.get(arg)
 			|| message.client.users.find(user => user.username.toLowerCase().includes(arg.toLowerCase()));
 	}
 
 	static toMember(message, arg) {
-		return message.mentions.users.get((arg.match(discordIDRegex) || [])[0])
+		return message.guild.members.get((discordIDRegex.exec(arg) || [])[3])
 			|| message.guild.members.get(arg)
 			|| message.guild.members.find(member => member.displayName.toLowerCase().includes(arg.toLowerCase()));
 	}
