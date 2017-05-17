@@ -26,7 +26,7 @@ class CommandController {
 		if (this.disabledCommands.includes(command.name)) return;
 
 		if (command.args.length && args.length < command.args.length && !('defaultVal' in command.args.last())) {
-			const correctSyntax = `${config.commandPrefix} ${command.name} ${command.args.map(a => `<${a.name}>`).join(' ')}`;
+			const correctSyntax = `${config.commandPrefix}${command.name} ${command.args.map(a => `<${a.name}>`).join(' ')}`;
 			return message.edit(`you didn't provide enough arguments! The correct format would be:\n\`${correctSyntax}\``)
 			.then(msg => msg.delete(3000));
 		}
