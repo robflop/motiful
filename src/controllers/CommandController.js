@@ -33,6 +33,8 @@ class CommandController {
 
 		const parsedArgs = command.args.length ? await this.parseArguments(args, command, message) : args;
 
+		if (!parsedArgs) return;
+
 		return command.run(message, parsedArgs).catch(e => {
 			logger.error(inspect(e));
 			return message.edit(`an error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete(3000));
@@ -46,6 +48,8 @@ class CommandController {
 
 		for (const [i, arg] of beginning.concat(end).entries()) {
 			const { name, type, defaultVal } = command.args[i];
+			if (!name) throw Error(`No argument name supplied at command: ${command.name}`);
+			if (!type) throw Error(`No argument type supplied at command: ${command.name}`);
 
 			parsedArgs[name] = 'defaultVal' in command.args[i] && !arg ? defaultVal : ArgumentParser.parse(type, message, arg);
 
