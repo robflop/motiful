@@ -24,7 +24,7 @@ class SetGameCommand extends Command {
 		const action = args.input !== '' ? `set your game to \`${args.input}\`` : `cleared your game`;
 
 		message.client.user.setGame(args.input).then(user => {
-			message.edit(`Successfully ${action}!`).then(msg => msg.delete(3000));
+			message.edit(`Successfully ${action}!`).then(msg => msg.delete(2000));
 			message.client.logger.info(action.capitalize());
 		});
 	}

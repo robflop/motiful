@@ -38,7 +38,7 @@ class ToggleCommand extends Command {
 			disabledCommandList.push(args.targetCommand);
 			logger.writeJSON(disabledCommandList, './data/disabledCommands.json')
 				.then(disabledCommandList => message.edit(`The ${icb}${args.targetCommand}${icb} command has been disabled!`)
-					.then(msg => msg.delete(3000)))
+					.then(msg => msg.delete(2000)))
 				.catch(err => message.edit(`An error occurred writing to the file: ${cb}${err}${cb}`)
 					.then(msg => msg.delete(3000)));
 		}
@@ -46,7 +46,7 @@ class ToggleCommand extends Command {
 			disabledCommandList.splice(index, 1);
 			logger.writeJSON(disabledCommandList, './data/disabledCommands.json')
 				.then(disabledCommandList => message.edit(`The ${icb}${args.targetCommand}${icb} command has been enabled!`)
-					.then(msg => msg.delete(3000)))
+					.then(msg => msg.delete(2000)))
 				.catch(err => message.edit(`An error occurred writing to the file: ${cb}${err}${cb}`)
 					.then(msg => msg.delete(3000)));
 		}

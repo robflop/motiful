@@ -35,7 +35,13 @@ class CommandController {
 
 		if (!parsedArgs) return;
 
-		return command.run(message, parsedArgs).catch(e => {
+		const userData = ['addquote', 'sendquote', 'delquote', 'listquotes'].includes(command.name)
+		? { savedQuotes: require('../data/savedQuotes.json') }
+		: ['emote', 'addfav', 'delfav', 'listfavs'].includes(command.name)
+		? { favoriteEmotes: require('../data/favoriteEmotes.json') }
+		: null;
+
+		return command.run(message, parsedArgs, userData).catch(e => {
 			logger.error(inspect(e));
 			return message.edit(`an error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete(3000));
 		});
