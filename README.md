@@ -31,7 +31,7 @@ Use it with `<prefix> <command>`. It will also be listed in the `help` command.
 - The default command prefix is `--`.
 - Commands are case **insensitive**, emotes are case **sensitive**.
 - The `eval` command is disabled by default and needs to be activated in `config.json`. It is not toggleable using the `toggle` command until it is enabled in the config.
-- User config files (favorites, quotes, the bot config) are saved in the `data/` file.
+- User config files (favorites, quotes, toggled commands list, custom emote files) are saved in the `data/` file.
 
 #### License
 
@@ -42,10 +42,7 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 | Command       | Effect                                                                                            |
 |-------------  |-------------------------------------------------------------------------------------------------  |
 | help          | List all currently available commands (Spammy in public channels, use with caution)               |
-| setStatus     | Change your own playing status (only shows up for others)                                         |
-| setAvatar     | Change your own avatar                                                                            |
-| setUsername   | Change your own username                                                                          |
-| setNickname   | Change your own server-wide nickname                                                              |
+| setGame       | Change your own playing status (only shows up for others)                                         |
 | toggle        | Toggle a command (on/off)                                                                         |
 | shutdown      | Shut down the selfbot remotely                                                                    |
 | emote         | Post a global/subscriber twitch, frankerfacez, bettertwitchtv or custom emote into chat           |
