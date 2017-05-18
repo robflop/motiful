@@ -49,9 +49,14 @@ class ArgumentParser {
 	}
 
 	static toUser(message, arg) {
-		return message.mentions.users.get((discordIDRegex.exec(arg) || [])[3])
+		const found = message.mentions.users.get((discordIDRegex.exec(arg) || [])[3])
 			|| message.client.users.get(arg)
 			|| message.client.users.find(user => user.username.toLowerCase().includes(arg.toLowerCase()));
+		if (!found) {
+			const member = message.guild.members.find(m => m.nickname.toLowerCase().includes(arg.toLowerCase()));
+			return member ? member.user : null;
+		}
+		return found;
 	}
 
 	static toMember(message, arg) {
