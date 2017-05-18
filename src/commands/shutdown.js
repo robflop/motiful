@@ -12,7 +12,7 @@ class ShutdownCommand extends Command {
 	}
 
 	async run(message, args) {
-		message.edit('motiful shutting down! Bye!').then(msg => msg.delete(3000));
+		message.edit('motiful shutting down! Bye!').then(msg => msg.delete(2000));
 		message.client.logger.info(`motiful shutting down! (${message.author.tag} on '${message.guild}')`);
 
 		if (message.client.config.pm2) {
