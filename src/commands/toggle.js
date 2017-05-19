@@ -23,13 +23,11 @@ class ToggleCommand extends Command {
 		const cb = '```', icb = '``';
 
 		if (['help', 'toggle', 'shutdown'].includes(args.targetCommand)) {
-			return message.edit(`The ${icb}${args.targetCommand}${icb} command may not be toggled.`)
-			.then(msg => msg.delete(3000));
+			return message.edit(`The ${icb}${args.targetCommand}${icb} command may not be toggled.`).then(msg => msg.delete(3000));
 		}
 
 		if (!commands.has(args.targetCommand) && !aliases.has(args.targetCommand)) {
-			return message.edit(`The ${icb}${args.targetCommand}${icb} command does not exist.`)
-			.then(msg => msg.delete(3000));
+			return message.edit(`The ${icb}${args.targetCommand}${icb} command does not exist.`).then(msg => msg.delete(3000));
 		}
 
 		const disabledCommandList = require('../data/disabledCommands.json');

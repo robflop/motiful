@@ -37,10 +37,14 @@ class AddQuoteCommand extends Command {
 				.setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
 				.setDescription(quoteMsg.content);
 			savedQuotes[args.quotename] = { author: `${name} wrote on the ${date} at ${time}:`, content: quoteMsg.content, avatar: avatar };
-			return message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json').then(quotes => {
-				message.channel.send(`**__The following quote was successfully saved under the name \`${args.quotename}\`:__**`, { embed })
-					.then(msg => msg.delete(3000));
-			});
+			message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
+				.then(quotes => {
+					message.channel.send(`**__The following quote was successfully saved under the name \`${args.quotename}\`:__**`, { embed })
+						.then(msg => msg.delete(3000));
+				})
+				.catch(err => {
+					message.edit(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
+				});
 		});
 	}
 }
