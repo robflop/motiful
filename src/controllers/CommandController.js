@@ -43,7 +43,7 @@ class CommandController {
 
 		return command.run(message, parsedArgs, userData).catch(e => {
 			logger.error(inspect(e));
-			return message.edit(`an error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete(3000));
+			return message.edit(`An error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete(3000));
 		});
 	}
 

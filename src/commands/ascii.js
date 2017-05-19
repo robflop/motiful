@@ -24,7 +24,7 @@ class AsciiCommand extends Command {
 			message.edit(`\`\`\`${ascii.text}\`\`\``);
 		}).catch(err => {
 			const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
-			message.reply(`an error occurred sending the request: \`${err.code}: ${errorDetails}\``);
+			message.edit(`An error occurred sending the request: \`${err.code}: ${errorDetails}\``).then(msg => msg.delete(3000));
 			logger.error(inspect(err));
 		});
 	}
