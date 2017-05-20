@@ -39,13 +39,13 @@ class AddEmoteCommand extends Command {
 			.then(emote => {
 				writeFile(emotePath, emote.body, err => {
 					if (err) return message.edit(`Error writing file for the \`${args.emotename}\` emote!`).then(msg => msg.delete(3000));
-					else message.edit(`Successfully added emote \`${args.emotename}\`!`).then(msg => msg.delete(2000));
+					else return message.edit(`Successfully added emote \`${args.emotename}\`!`).then(msg => msg.delete(2000));
 				});
 			})
 			.catch(err => {
 				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
 				message.edit(`An error occurred getting the file: \`${err.code}: ${errorDetails}\``).then(msg => msg.delete(3000));
-				message.client.logger.error(err);
+				return message.client.logger.error(err);
 			});
 	}
 }

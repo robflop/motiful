@@ -21,12 +21,12 @@ class AsciiCommand extends Command {
 		snekfetch.get(`http://artii.herokuapp.com/make?text=${args.input}`)
 		.then(ascii => {
 			if (ascii.text.length > 1999) return message.edit('Output too long. Try shorter text.').then(message => message.delete(2000));
-			message.edit(`\`\`\`${ascii.text}\`\`\``);
+			return message.edit(`\`\`\`${ascii.text}\`\`\``);
 		})
 		.catch(err => {
 			const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
 			message.edit(`An error occurred sending the request: \`${err.code}: ${errorDetails}\``).then(msg => msg.delete(3000));
-			logger.error(inspect(err));
+			return logger.error(inspect(err));
 		});
 	}
 }
