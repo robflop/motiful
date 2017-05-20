@@ -1,57 +1,50 @@
 # Motiful
+
 A Discord selfbot written using discord.js.
 
-Motiful also uses the request and moment packages, plus some standard node modules.
+Motiful also uses the snekfetch, chalk and moment packages, plus some standard node modules.
 
 ## Self-hosting usage
+
 (It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 installed)
 
-- Rename config.example.json in the `userconfig/` folder to config.json
+- Rename `config.example.json` in the `src/` folder to `config.json`
 - Get your token from within Discord Dev Tools (Opened via CTRL+SHIFT+I/Command+Option+I inside Discord) -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
-- Fill out your token and change the ownerID in config.json to your devmode discord ID (Settings -> Appearance ->Toggle Developer Mode on -> Rightclick on yourself -> Press "Copy ID")
-- Adjust other config settings to your liking 
-- run ``npm install`` in a command window located in the directory you downloaded motiful in to install necessary packages
+- Fill out your token and change the ownerID in config.json to your devmode discord ID (Settings -> Appearance -> Toggle Developer Mode on -> Rightclick on yourself -> Press "Copy ID")
+- Adjust other config settings to your liking
+- run `npm install` in a command window located in the directory you downloaded motiful in to install necessary packages
 - (Feel free to ignore any "unmet dependency" warnings)
-- Start the bot using ``node motiful.js`` in a command window located in the directory you downloaded motiful in to!
-
-**IMPORTANT INFO:**
-
-If you change one of the folder paths, you actually have to create the folder aswell. 
-Otherwise the selfbot WILL crash. I will not provide support for such cases.
-
-A discord user ID (the ownerID you fill out above) will always be a (rather long) number. For example 153661862884409354. It does not contain letters or special symbols.
+- Start the bot using `node motiful.js` in a command window located in the directory you downloaded motiful in to!
 
 ### Adding commands
+
 Adding commands to Motiful is very easy. The command handler will automatically register any .js file within the commands folder so
-the only thing you have to do is make your command file, write the code for it(*), and restart the selfbot. 
+the only thing you have to do is make your command file, write the code for it(*), and restart the selfbot.
 
 That's all, now your command is available under the name you gave the js file. 
-Use it with ``<prefix> <command>``. It will also be listed in the 'help' command.
+Use it with `<prefix> <command>`. It will also be listed in the `help` command.
 
-###### (**) Your code must export the contents in a function which passes ``client, msg, msgArray, Commands, chalk`` under ``exports.main``, aswell as a command description under ``exports.desc`` and a command syntax under ``exports.syntax``, see existing commands for examples.*
+(\*) *Commands extend the Command class located in `structures/` and must at least provide the name property in the constructor aswell as a `run()` function outside the constructor or errors will happen. See existing commands for usage examples.*
 
 #### Information
-- The default version of the bot loads commands from ``commands/``.
-- The default command prefix is ``--``.
+
+- The default command prefix is `--`.
 - Commands are case **insensitive**, emotes are case **sensitive**.
-- The ``eval`` command is disabled by default and needs to be activated in ``config.json``. It is not toggleable using the ``toggle`` command until it is enabled in the config.
-- User config files (favorites, quotes, the bot config) are saved in the ``userconfig/`` file.
+- The `eval` command is disabled by default and needs to be activated in `config.json`. It is not toggleable using the `toggle` command until it is enabled in the config.
+- User config files (favorites, quotes, toggled commands list, custom emote files) are saved in the `data/` file.
 
 #### License
 
 Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/LICENSE.md).
 
-## Out-of-the-box Commands:
-| Command     	| Effect                                                                                    	    |
-|-------------	|-------------------------------------------------------------------------------------------------	|
-| help        	| List all currently available commands (Spammy in public channels, use with caution)               |
-| about       	| Get general info about the selfbot                                                               	|
-| setStatus     | Change your own playing status (only shows up for others)                                       	|
-| setAvatar   	| Change your own avatar                                                                           	|
-| setUsername   | Change your own username                                                                         	|
-| setNickname   | Change your own server-wide nickname                                                              |
+## Out-of-the-box Commands
+
+| Command       | Effect                                                                                            |
+|-------------  |-------------------------------------------------------------------------------------------------  |
+| help          | List all currently available commands (Spammy in public channels, use with caution)               |
+| setGame       | Change your own playing status (only shows up for others)                                         |
 | toggle        | Toggle a command (on/off)                                                                         |
-| shutdown    	| Shut down the selfbot remotely                                                                  	|
+| shutdown      | Shut down the selfbot remotely                                                                    |
 | emote         | Post a global/subscriber twitch, frankerfacez, bettertwitchtv or custom emote into chat           |
 | addEmote      | Add a custom emote                                                                                |
 | delEmote      | Delete a custom emote                                                                             |

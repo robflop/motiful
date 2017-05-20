@@ -4,11 +4,11 @@ logs
 npm-debug.log*
 .vscode
 
-# ignore custom emotes
-customemotes
+# ignore various user data
+src/config.json
+src/data
+!src/data/twitchemotes
 
-# ignore config files
-userconfig
 
 # Runtime data
 pids
