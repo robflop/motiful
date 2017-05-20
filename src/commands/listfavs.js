@@ -4,7 +4,7 @@ class ListFavsCommand extends Command {
 	constructor() {
 		super({
 			name: 'listfavs',
-			description: 'List all saved favorite commands'
+			description: 'List all saved favorite emotes'
 		});
 	}
 
