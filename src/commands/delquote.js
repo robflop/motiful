@@ -8,7 +8,7 @@ class DelQuoteCommand extends Command {
 			args: [
 				{
 					type: 'string',
-					name: 'quotename'
+					name: 'quoteName'
 				}
 			]
 		});
@@ -16,13 +16,13 @@ class DelQuoteCommand extends Command {
 
 	async run(message, args, userData) {
 		const { savedQuotes } = userData;
-		if (!savedQuotes.hasOwnProperty(args.quotename)) {
+		if (!savedQuotes.hasOwnProperty(args.quoteName)) {
 			return message.edit('Quote not found!').then(msg => msg.delete(3000));
 		}
-		delete savedQuotes[args.quotename];
+		delete savedQuotes[args.quoteName];
 		message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
 			.then(quotes => {
-				message.edit(`Quote \`${args.quotename}\` successfully deleted!`).then(msg => msg.delete(2000))
+				message.edit(`Quote \`${args.quoteName}\` successfully deleted!`).then(msg => msg.delete(2000))
 			})
 			.catch(err => {
 				message.edit(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));

@@ -10,7 +10,7 @@ class DelEmoteCommand extends Command {
 			args: [
 				{
 					type: 'string',
-					name: 'emotename'
+					name: 'emoteName'
 				}
 			]
 		});
@@ -19,17 +19,17 @@ class DelEmoteCommand extends Command {
 	async run(message, args) {
 		const emoteFolder = join(__dirname, '..', 'data', 'customemotes');
 		const extensions = ['png', 'jpg', 'gif', 'jpeg', 'webp'];
-		const emoteRegex = new RegExp(`${args.emotename}.(${extensions.join('|')})`);
+		const emoteRegex = new RegExp(`${args.emoteName}.(${extensions.join('|')})`);
 		const emote = readdirSync(emoteFolder).filter(file => emoteRegex.test(file))[0] || '';
 		if (emote) {
 			const emotePath = join(emoteFolder, emote);
 			unlink(emotePath, err => {
 				if (err) return message.edit(`Error deleting emote!: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
-				else return message.edit(`Successfully deleted emote \`${args.emotename}\`!`).then(msg => msg.delete(3000));
+				else return message.edit(`Successfully deleted emote \`${args.emoteName}\`!`).then(msg => msg.delete(3000));
 			});
 		}
 		else {
-			return message.edit(`Emote \`${args.emotename}\` not found!`).then(msg => msg.delete(3000));
+			return message.edit(`Emote \`${args.emoteName}\` not found!`).then(msg => msg.delete(3000));
 		}
 	}
 }

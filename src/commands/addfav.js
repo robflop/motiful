@@ -11,11 +11,11 @@ class AddFavCommand extends Command {
 			args: [
 				{
 					type: 'string',
-					name: 'channelname'
+					name: 'channelName'
 				},
 				{
 					type: 'string',
-					name: 'emotename'
+					name: 'emoteName'
 				}
 			]
 		});
@@ -23,32 +23,32 @@ class AddFavCommand extends Command {
 
 	async run(message, args, userData) {
 		const { favoriteEmotes } = userData;
-		if (favoriteEmotes.hasOwnProperty(args.emotename)) {
-			return message.edit(`Emote \`${args.emotename}\` is already on the favorites list!`).then(msg => msg.delete(3000));
+		if (favoriteEmotes.hasOwnProperty(args.emoteName)) {
+			return message.edit(`Emote \`${args.emoteName}\` is already on the favorites list!`).then(msg => msg.delete(3000));
 		}
 		let emote, emoteID; // placeholder
-		args.channelname = args.channelname.toLowerCase();
+		args.channelName = args.channelName.toLowerCase();
 
-		if (subEmotes.channels[args.channelname]) {
-			emote = subEmotes.channels[args.channelname].emotes.filter(emote => emote.code === args.emotename)[0] || '';
+		if (subEmotes.channels[args.channelName]) {
+			emote = subEmotes.channels[args.channelName].emotes.filter(emote => emote.code === args.emoteName)[0] || '';
 			if (!emote) {
-				return message.edit(`Emote \`${args.emotename}\` not found on the \`${args.channelname}\` channel!`).then(msg => msg.delete(3000));
+				return message.edit(`Emote \`${args.emoteName}\` not found on the \`${args.channelName}\` channel!`).then(msg => msg.delete(3000));
 			}
 			emoteID = emote.image_id;
 		}
-		else if (args.channelname === 'bttv') {
-			emote = bttv.emotes.filter(emote => emote.code === args.emotename)[0] || '';
+		else if (args.channelName === 'bttv') {
+			emote = bttv.emotes.filter(emote => emote.code === args.emoteName)[0] || '';
 			if (!emote) {
-				return message.edit(`Emote \`${args.emotename}\` not found on BetterTwitchTV!`).then(msg => msg.delete(3000));
+				return message.edit(`Emote \`${args.emoteName}\` not found on BetterTwitchTV!`).then(msg => msg.delete(3000));
 			}
 			emoteID = emote.id;
 		}
-		else if (args.channelname === 'ffz') {
+		else if (args.channelName === 'ffz') {
 			try {
-				const emotes = await snekfetch.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emotename}&page=1&private=on`);
-				emote = emotes.body.emoticons.filter(emote => emote.name === args.emotename)[0] || '';
+				const emotes = await snekfetch.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
+				emote = emotes.body.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
 				if (!emote) {
-					return message.edit(`Emote \`${args.emotename}\` not found on FrankerFaceZ!`).then(msg => msg.delete(3000));
+					return message.edit(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete(3000));
 				}
 				emoteID = emote.id;
 			}
@@ -59,15 +59,15 @@ class AddFavCommand extends Command {
 			}
 		}
 		else {
-			return message.edit(`Twitch channel / Extension \`${args.channelname}\` not found!`).then(msg => msg.delete(3000));
+			return message.edit(`Twitch channel / Extension \`${args.channelName}\` not found!`).then(msg => msg.delete(3000));
 		}
 
-		if (emote) favoriteEmotes[args.emotename] = { channelName: args.channelname, emoteName: args.emotename, emoteID: emoteID };
+		if (emote) favoriteEmotes[args.emoteName] = { channelName: args.channelName, emoteName: args.emoteName, emoteID: emoteID };
 		else return message.edit('Something went wrong fetching the emote!').then(msg => msg.delete(3000));
 
 		return message.client.logger.writeJSON(favoriteEmotes, './data/favoriteEmotes.json')
 			.then(favorites => {
-				message.edit(`Emote \`${args.emotename}\` successfully added to favorites!`).then(msg => msg.delete(2000));
+				message.edit(`Emote \`${args.emoteName}\` successfully added to favorites!`).then(msg => msg.delete(2000));
 			})
 			.catch(err => {
 				message.edit(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
