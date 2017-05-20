@@ -4,7 +4,7 @@ class PingCommand extends Command {
 	constructor() {
 		super({
 			name: 'ping',
-			description: 'Measure the delay between command call and execution.',
+			description: 'Measure the delay between command call and execution',
 			aliases: ['p']
 		});
 	}
