@@ -5,7 +5,7 @@ class NitroCommand extends Command {
 	constructor() {
 		super({
 			name: 'nitro',
-			description: 'Send a fake Discord Nitro embed',
+			description: 'Send a fake embed about Discord Nitro',
 		});
 	}
 

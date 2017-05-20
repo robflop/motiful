@@ -4,7 +4,7 @@ class IndicatorCommand extends Command {
 	constructor() {
 		super({
 			name: 'indicators',
-			description: 'Turn input text into indicator text',
+			description: 'Turn input text into indicator-emoji text',
 			args: [
 				{
 					type: 'string',

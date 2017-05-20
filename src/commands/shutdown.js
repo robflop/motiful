@@ -5,7 +5,7 @@ class ShutdownCommand extends Command {
 	constructor() {
 		super({
 			name: 'shutdown',
-			description: 'Shuts down motiful',
+			description: 'Shut down motiful',
 			aliases: ['kill'],
 			ownersOnly: true,
 		});
