@@ -12,3 +12,5 @@ class HelpCommand extends Command {
 		return message.edit('Refer to https://github.com/robflop/motiful/wiki/Usage for extensive Usage help.').then(msg => msg.delete(5000));
 	}
 }
+
+module.exports = HelpCommand;
