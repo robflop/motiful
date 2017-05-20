@@ -9,7 +9,7 @@ class SendQuoteCommand extends Command {
 			args: [
 				{
 					type: 'string',
-					name: 'quotename'
+					name: 'quoteName'
 				}
 			]
 		});
@@ -17,10 +17,10 @@ class SendQuoteCommand extends Command {
 
 	async run(message, args, userData) {
 		const { savedQuotes } = userData;
-		if (!savedQuotes.hasOwnProperty(args.quotename)) {
+		if (!savedQuotes.hasOwnProperty(args.quoteName)) {
 			return message.edit('Quote not found!').then(msg => msg.delete(2000));
 		}
-		const quote = savedQuotes[args.quotename];
+		const quote = savedQuotes[args.quoteName];
 		const embed = new RichEmbed()
 			.setColor('RANDOM')
 			.setAuthor(quote.author, quote.avatar)

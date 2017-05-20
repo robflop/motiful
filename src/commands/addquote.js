@@ -10,7 +10,7 @@ class AddQuoteCommand extends Command {
 			args: [
 				{
 					type: 'string',
-					name: 'quotename'
+					name: 'quoteName'
 				},
 				{
 					type: 'user',
@@ -36,10 +36,10 @@ class AddQuoteCommand extends Command {
 				.setColor('RANDOM')
 				.setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
 				.setDescription(quoteMsg.content);
-			savedQuotes[args.quotename] = { author: `${name} wrote on the ${date} at ${time}:`, content: quoteMsg.content, avatar: avatar };
+			savedQuotes[args.quoteName] = { author: `${name} wrote on the ${date} at ${time}:`, content: quoteMsg.content, avatar: avatar };
 			message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
 				.then(quotes => {
-					message.channel.send(`**__The following quote was successfully saved under the name \`${args.quotename}\`:__**`, { embed })
+					message.channel.send(`**__The following quote was successfully saved under the name \`${args.quoteName}\`:__**`, { embed })
 						.then(msg => msg.delete(3000));
 				})
 				.catch(err => {

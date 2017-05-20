@@ -6,7 +6,7 @@ class AsciiCommand extends Command {
 	constructor() {
 		super({
 			name: 'ascii',
-			description: 'Make your input a e s t h e t i c',
+			description: 'Turn your input into ascii text',
 			args: [
 				{
 					type: 'string',
