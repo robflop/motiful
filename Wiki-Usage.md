@@ -1,5 +1,7 @@
 # addEmote
 
+#### Description: Add a custom emote.
+
 #### Syntax: `addemote <emoteName> <url>`
 
 #### Explanation:
@@ -7,6 +9,8 @@
  - url: The link to the file you wish to save as emote -- if saving an attachment, url does not need to be provided.
 
 # addFav
+
+#### Description: Add an emote to the favorites list.
 
 #### Syntax: `addfav <channelName> <emoteName>`
 
@@ -17,6 +21,8 @@
 
 # addQuote
 
+#### Description: Save a quote of a message (Out of the last 100 overall messages).
+
 #### Syntax: `addquote <quoteName> <user> <snippet>`
 
 #### Explanation:
@@ -26,12 +32,16 @@
 
 # aesthetics
 
+#### Description: Make your input a e s t h e t i c.
+
 #### Syntax: `aesthetics <input>`
 
 #### Explanation:
  - input: The text you wish to turn a e s t h e t i c.
 
 # ascii
+
+#### Description: Turn your input into ascii text.
 
 #### Syntax: `ascii <input>`
 
@@ -40,12 +50,16 @@
 
 # delEmote
 
+#### Description: Delete a custom emote.
+
 #### Syntax: `delemote <emoteName>`
 
 #### Explanation:
  - emoteName: The name of the emote you wish to delete.
 
 # delFav
+
+#### Description: Delete an emote from the favorites list.
 
 #### Syntax: `delfav <emoteName>`
 
@@ -54,12 +68,16 @@
 
 # delQuote
 
+#### Description: Delete a saved quote.
+
 #### Syntax: `delquote <quoteName>`
 
 #### Explanation: 
  - quoteName: The name of the quote you wish to delete.
 
 # emote
+
+#### Description: Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat.
 
 #### Syntax: `emote <channelName> <emoteName> <emoteSize>`
 
@@ -77,6 +95,8 @@
 
 # eval
 
+#### Description: Evaluate javascript code.
+
 #### Syntax: `eval <asyncFlag> <code>`
 
 #### Explanation:
@@ -86,12 +106,16 @@
 
 # help
 
+#### Description: Get usage help.
+
 #### Syntax: `help`
 
 #### Explanation:
  - None
 
 # indicators
+
+#### Description: Turn input text into indicator-emoji text
 
 #### Syntax: `indicators <input>`
 
@@ -100,12 +124,16 @@
 
 # listEmotes
 
+#### Description: List all custom emotes.
+
 #### Syntax: `listemotes`
 
 #### Explanation:
  - None
 
 # listFavs
+
+#### Description: List all saved favorite emotes.
 
 #### Syntax: `listfavs`
 
@@ -114,12 +142,16 @@
 
 # listQuotes
 
+#### Description: List all saved quotes.
+
 #### Syntax: `listquotes`
 
 #### Explanation:
  - None
 
 # nitro
+
+#### Description: Send a fake embed about Discord Nitro.
 
 #### Syntax: `nitro`
 
@@ -128,12 +160,16 @@
 
 # ping
 
+#### Description: Measure the delay between command call and execution.
+
 #### Syntax: `ping`
 
 #### Explanation:
  - None
 
 # purge
+
+#### Description: Purge your messages (In the last 100 overall Messages).
 
 #### Syntax: `purge <amount>`
 
@@ -142,13 +178,17 @@
 
 # quote
 
+#### Description: Quote a message (Out of the last 100 overall messages).
+
 #### Syntax: `quote <user> <snippet>`
 
 #### Explanation:
  - user: A mention, start of the username, or ID of the user that wrote the message you wish to quote.
- - snippet: A part of the message you wish to quote.
+ - input: Both the snippet of the message you wish to quote and optionally a response to attach to the quote, the former and the latter seperated by a vertical line ('|').
 
 # sendQuote
+
+#### Description: Send a saved quote.
 
 #### Syntax: `sendquote <quoteName>`
 
@@ -157,12 +197,16 @@
 
 # setGame
 
+#### Description: Set the game you'll be shown to be playing.
+
 #### Syntax: `setgame <input>`
 
 #### Explanation:
 - input: The text you wish to set your `Playing ...` status to. Leaving this empty will clear your status.
 
 # shutdown
+
+#### Description: Shut down motiful.
 
 #### Syntax: `shutdown`
 
@@ -171,12 +215,16 @@
 
 # sub
 
+#### Description: Replace a part of one of your messages (Only from last 100 overall Messages).
+
 #### Syntax: `sub <input>`
 
 #### Explanation:
  - input: Both the parts you wish to replace, and what you wish to replace them with. Former and latter are seperated by a vertical bar (`|`), individual words or phrases in the former or latter are seperated by semicolons (`;`).
 
 # toggle
+
+#### Description: Toggle a command on or off.
 
 #### Syntax: `toggle <targetCommand>`
 
