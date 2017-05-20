@@ -4,7 +4,7 @@ class DelFavCommand extends Command {
 	constructor() {
 		super({
 			name: 'delfav',
-			description: 'Delete a favorite command',
+			description: 'Delete an emote from the favorites list',
 			args: [
 				{
 					type: 'string',
