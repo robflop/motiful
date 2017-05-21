@@ -28,6 +28,7 @@ class QuoteReactCommand extends Command {
 
 		const reactionTimeout = message.client.setTimeout(() => { // eslint-disable-line arrow-body-style
 			message.edit('No appropriate reaction (💬) was detected within the timeframe!').then(msg => msg.delete(300));
+			commandCalled = false;
 		}, 1000 * 30);
 
 		function reactionListener(messageReaction, user) {
