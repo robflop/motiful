@@ -44,30 +44,30 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | Command       | Effect                                                                                            |
 |-------------  |-------------------------------------------------------------------------------------------------  |
 | addEmote      | Add a custom emote                                                                                |
-| addFav        | Add an emote to your favorites list                                                               |
-| addQuote      | Save a quote of another user's post (out of last 100 overall messages)                            |
-| aesthetics    | Have the selfbot make a phrase aesthetic                                                          |
-| ascii         | Spell out your input in ascii art (Spammy, use with caution)                                      |
+| addFav        | Add an emote to the favorites list                                                                |
+| addQuote      | Save a quote of a message (Out of the last 100 overall messages)                                  |
+| aesthetics    | Make your input a e s t h e t i c                                                                 |
+| ascii         | Turn your input into ascii text                                                                   |
 | delEmote      | Delete a custom emote                                                                             |
-| delFav        | Remove an emote from your favorites list                                                          |
-| delQuote      | Delete a saved quote from the list                                                                |
-| emote         | Post a global/subscriber twitch, frankerfacez, bettertwitchtv or custom emote into chat           |
-| eval          | Have the selfbot evaluate javascript input and output the results (async possible)                |
-| help          | List all currently available commands (Spammy in public channels, use with caution)               |
-| indicators    | Have the selfbot spell a phrase in regional indicators                                            |
-| listEmotes    | List all currently available custom Emotes                                                        |
-| listFavs      | List all your favorite emotes                                                                     |
-| listQuotes    | Output a list of all saved quotes                                                                 |
-| nitro         | Have the selfbot post a fake embed about a "Nitro-only message"                                   |
-| ping          | Measure the delay between command calls and command execution in ms                               |
-| purge         | Purge a given amount of your own message out of the last 100 overall messages                     |
-| quote-id      | Quote another user's post using a message ID (with optional response)                             |
-| quote-react   | Quote another user's post using a message reaction (with optional response)                       |
-| quote         | Quote another user's post (out of 100 last overall messages) and optionally attach a reply to it  |
-| sendQuote     | Send a saved quote into the channel the command is used in                                        |
-| setGame       | Change your own playing status (only shows up for others)                                         |
-| shutdown      | Shut down the selfbot remotely                                                                    |
-| sub           | Replace a chosen part of one of your messages with another (out of 100 last overall messages)     |
-| toggle        | Toggle a command (on/off)                                                                         |
+| delFav        | Delete an emote from the favorites list                                                           |
+| delQuote      | Delete a saved quote                                                                              |
+| emote         | Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat      |
+| eval          | Evaluate javascript code                                                                          |
+| help          | Get usage help                                                                                    |
+| indicators    | Turn input text into indicator-emoji text                                                         |
+| listEmotes    | List all custom emotes                                                                            |
+| listFavs      | List all saved favorite emotes                                                                    |
+| listQuotes    | List all saved quotes                                                                             |
+| nitro         | Send a fake embed about Discord Nitro                                                             |
+| ping          | Measure the delay between command call and execution                                              |
+| purge         | Purge your messages (In the last 100 overall Messages)                                            |
+| quote-id      | Quote a message using a message ID                                                                |
+| quote-react   | Quote a message (Out of the last 100 overall messages) using a message reaction                   |
+| quote         | Quote a message (Out of the last 100 overall messages)                                            |
+| sendQuote     | Send a saved quote                                                                                |
+| setGame       | Set the game you\'ll be shown to be playing                                                       |
+| shutdown      | Shut down motiful                                                                                 |
+| sub           | Replace a part of one of your messages (Only from last 100 overall Messages)                      |
+| toggle        | Toggle a command on or off                                                                        |
 
 
