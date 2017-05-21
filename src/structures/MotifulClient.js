@@ -23,12 +23,15 @@ class MotifulClient extends Client {
 				if (this.aliases.has(alias)) {
 					throw Error(`Duplicate alias detected in the '${cmd.name}' command ('${alias}').`);
 				}
+				if (this.commands.has(alias)) {
+					throw Error(`'${alias}' is already registered as a command name.`);
+				}
 
 				this.aliases.set(alias, cmd.name);
 			}
 
 			if (this.commands.has(cmd.name)) {
-				throw Error(`Duplicate command detected at '${cmd.name}'.`);
+				throw Error(`Duplicate command name detected at '${cmd.name}'.`);
 			}
 
 			this.commands.set(cmd.name, cmd);
