@@ -212,18 +212,6 @@
 #### Explanation:
  - amount: The amount of your own messages you wish to purge.
 
-# quote
-
-#### Description: Quote a message (Out of the last 100 overall messages).
-
-#### Syntax: `quote <user> <snippet>`
-
-#### Aliases: `q`
-
-#### Explanation:
- - user: A mention, start of the username, or ID of the user that wrote the message you wish to quote.
- - input: Both the snippet of the message you wish to quote and optionally a response to attach to the quote, the former and the latter seperated by a vertical line ('|').
-
 # quote-id
 
 #### Description: Quote a message using a message ID
@@ -247,6 +235,18 @@
 #### Explanation:
  - response: An optional response to attach to the quote.
     * For clarity: The message selection happens by reacting to it, so no argument needs to be given.
+
+# quote
+
+#### Description: Quote a message (Out of the last 100 overall messages).
+
+#### Syntax: `quote <user> <snippet>`
+
+#### Aliases: `q`
+
+#### Explanation:
+ - user: A mention, start of the username, or ID of the user that wrote the message you wish to quote.
+ - input: Both the snippet of the message you wish to quote and optionally a response to attach to the quote, the former and the latter seperated by a vertical line ('|').
 
 # sendQuote
 
