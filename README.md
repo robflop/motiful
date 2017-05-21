@@ -39,29 +39,35 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 
 ## Out-of-the-box Commands
 
+Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) for more in-depth explanations.
+
 | Command       | Effect                                                                                            |
 |-------------  |-------------------------------------------------------------------------------------------------  |
-| help          | List all currently available commands (Spammy in public channels, use with caution)               |
-| setGame       | Change your own playing status (only shows up for others)                                         |
-| toggle        | Toggle a command (on/off)                                                                         |
-| shutdown      | Shut down the selfbot remotely                                                                    |
-| emote         | Post a global/subscriber twitch, frankerfacez, bettertwitchtv or custom emote into chat           |
 | addEmote      | Add a custom emote                                                                                |
-| delEmote      | Delete a custom emote                                                                             |
-| listEmotes    | List all currently available custom Emotes                                                        |
 | addFav        | Add an emote to your favorites list                                                               |
-| delFav        | Remove an emote from your favorites list                                                          |
-| listFavs      | List all your favorite emotes                                                                     |
-| eval          | Have the selfbot evaluate javascript input and output the results (async possible)                |
-| indicator     | Have the selfbot spell a phrase in regional indicators                                            |
-| ping          | Measure the delay between command calls and command execution in ms                               |
-| nitro         | Have the selfbot post a fake embed about a "Nitro-only message"                                   |
-| purge         | Purge a given amount of your own message out of the last 100 overall messages                     |
-| sub           | Replace a chosen part of one of your messages with another (out of 100 last overall messages)     |
-| quote         | Quote another user's post (out of 100 last overall messages) and optionally attach a reply to it  |
 | addQuote      | Save a quote of another user's post (out of last 100 overall messages)                            |
-| sendQuote     | Send a saved quote into the channel the command is used in                                        |
-| delQuote      | Delete a saved quote from the list                                                                |
-| listQuotes    | Output a list of all saved quotes                                                                 |
 | aesthetics    | Have the selfbot make a phrase aesthetic                                                          |
 | ascii         | Spell out your input in ascii art (Spammy, use with caution)                                      |
+| delEmote      | Delete a custom emote                                                                             |
+| delFav        | Remove an emote from your favorites list                                                          |
+| delQuote      | Delete a saved quote from the list                                                                |
+| emote         | Post a global/subscriber twitch, frankerfacez, bettertwitchtv or custom emote into chat           |
+| eval          | Have the selfbot evaluate javascript input and output the results (async possible)                |
+| help          | List all currently available commands (Spammy in public channels, use with caution)               |
+| indicators    | Have the selfbot spell a phrase in regional indicators                                            |
+| listEmotes    | List all currently available custom Emotes                                                        |
+| listFavs      | List all your favorite emotes                                                                     |
+| listQuotes    | Output a list of all saved quotes                                                                 |
+| nitro         | Have the selfbot post a fake embed about a "Nitro-only message"                                   |
+| ping          | Measure the delay between command calls and command execution in ms                               |
+| purge         | Purge a given amount of your own message out of the last 100 overall messages                     |
+| quote-id      | Quote another user's post using a message ID (with optional response)                             |
+| quote-react   | Quote another user's post using a message reaction (with optional response)                       |
+| quote         | Quote another user's post (out of 100 last overall messages) and optionally attach a reply to it  |
+| sendQuote     | Send a saved quote into the channel the command is used in                                        |
+| setGame       | Change your own playing status (only shows up for others)                                         |
+| shutdown      | Shut down the selfbot remotely                                                                    |
+| sub           | Replace a chosen part of one of your messages with another (out of 100 last overall messages)     |
+| toggle        | Toggle a command (on/off)                                                                         |
+
+
