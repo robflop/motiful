@@ -62,7 +62,7 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | ping          | Measure the delay between command call and execution                                              |
 | purge         | Purge your messages (In the last 100 overall Messages)                                            |
 | quote-id      | Quote a message using a message ID                                                                |
-| quote-react   | Quote a message (Out of the last 100 overall messages) using a message reaction                   |
+| quote-react   | Quote a message using a message reaction                                                          |
 | quote         | Quote a message (Out of the last 100 overall messages)                                            |
 | sendQuote     | Send a saved quote                                                                                |
 | setGame       | Set the game you\'ll be shown to be playing                                                       |
