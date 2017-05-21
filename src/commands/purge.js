@@ -5,6 +5,7 @@ class PurgeCommand extends Command {
 		super({
 			name: 'purge',
 			description: 'Purge your messages (In the last 100 overall Messages)',
+			aliases: ['prune', 'p'],
 			args: [
 				{
 					type: 'number',

@@ -5,7 +5,7 @@ class PingCommand extends Command {
 		super({
 			name: 'ping',
 			description: 'Measure the delay between command call and execution',
-			aliases: ['p']
+			aliases: ['delay']
 		});
 	}
 

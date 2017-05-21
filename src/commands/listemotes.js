@@ -7,6 +7,7 @@ class ListEmotesCommand extends Command {
 		super({
 			name: 'listemotes',
 			description: 'List all custom emotes',
+			aliases: ['le'],
 		});
 	}
 

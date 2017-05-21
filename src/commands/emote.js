@@ -11,6 +11,7 @@ class EmoteCommand extends Command {
 		super({
 			name: 'emote',
 			description: 'Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat',
+			aliases: ['em'],
 			args: [
 				{
 					type: 'string',

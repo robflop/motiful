@@ -8,6 +8,7 @@ class AddEmoteCommand extends Command {
 		super({
 			name: 'addemote',
 			description: 'Add a custom emote',
+			aliases: ['ae'],
 			args: [
 				{
 					type: 'string',

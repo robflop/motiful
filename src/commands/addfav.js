@@ -8,6 +8,7 @@ class AddFavCommand extends Command {
 		super({
 			name: 'addfav',
 			description: 'Add an emote to the favorites list',
+			aliases: ['af'],
 			args: [
 				{
 					type: 'string',

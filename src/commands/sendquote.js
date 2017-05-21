@@ -6,6 +6,7 @@ class SendQuoteCommand extends Command {
 		super({
 			name: 'sendquote',
 			description: 'Send a saved quote',
+			aliases: ['sq'],
 			args: [
 				{
 					type: 'string',

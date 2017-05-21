@@ -5,6 +5,7 @@ class ListQuotesCommand extends Command {
 		super({
 			name: 'listquotes',
 			description: 'List all saved quotes',
+			aliases: ['lq'],
 		});
 	}
 

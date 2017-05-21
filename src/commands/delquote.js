@@ -5,6 +5,7 @@ class DelQuoteCommand extends Command {
 		super({
 			name: 'delquote',
 			description: 'Delete a saved quote',
+			aliases: ['dq'],
 			args: [
 				{
 					type: 'string',

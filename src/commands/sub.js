@@ -5,6 +5,7 @@ class SubCommand extends Command {
 		super({
 			name: 'sub',
 			description: 'Replace a part of one of your messages (Only from last 100 overall Messages)',
+			aliases: ['s'],
 			args: [
 				{
 					type: 'string',
