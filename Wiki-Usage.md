@@ -226,7 +226,7 @@
 
 # quote-react
 
-#### Description: Quote a message using a message reaction
+#### Description: Quote a message by using a \'💬\' message reaction
 
 #### Syntax: `quote-react <response>`
 
@@ -234,7 +234,8 @@
 
 #### Explanation:
  - response: An optional response to attach to the quote.
-    * For clarity: The message selection happens by reacting to it, so no argument needs to be given.
+    * For clarity: The message selection happens by reacting to it, so no snippet, user or other arguments need to be given.
+	* You *must* react using the 💬 emoji for the command to progress.
 
 # quote
 
