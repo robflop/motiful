@@ -31,7 +31,6 @@ class QuoteCommand extends Command {
 		else {
 			snippet = args.input.trim();
 		}
-		await message.delete();
 		message.channel.fetchMessages({ limit: 100 }).then(messages => {
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(snippet)).first();
 			if (!quoteMsg) return message.channel.send('Message not found!').then(msg => msg.delete(2000));
@@ -39,9 +38,9 @@ class QuoteCommand extends Command {
 			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL();
 			const embed = new RichEmbed()
 				.setColor('RANDOM')
-				.setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
+				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
 				.setDescription(quoteMsg.content);
-			return message.channel.send({ embed }).then(msg => {
+			return message.edit({ embed }).then(msg => {
 				if (response) msg.channel.send(response);
 			});
 		});
