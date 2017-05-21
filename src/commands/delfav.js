@@ -5,6 +5,7 @@ class DelFavCommand extends Command {
 		super({
 			name: 'delfav',
 			description: 'Delete an emote from the favorites list',
+			aliases: ['df'],
 			args: [
 				{
 					type: 'string',

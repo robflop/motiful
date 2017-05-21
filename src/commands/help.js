@@ -4,7 +4,8 @@ class HelpCommand extends Command {
 	constructor() {
 		super({
 			name: 'help',
-			description: 'Get usage help'
+			description: 'Get usage help',
+			aliases: ['h', 'commands'],
 		});
 	}
 

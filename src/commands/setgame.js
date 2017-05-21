@@ -5,6 +5,7 @@ class SetGameCommand extends Command {
 		super({
 			name: 'setgame',
 			description: 'Set the game you\'ll be shown to be playing',
+			aliases: ['sg'],
 			args: [
 				{
 					type: 'string',

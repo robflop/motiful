@@ -7,6 +7,7 @@ class AddQuoteCommand extends Command {
 		super({
 			name: 'addquote',
 			description: 'Save a quote of a message (Out of the last 100 overall messages)',
+			aliases: ['aq'],
 			args: [
 				{
 					type: 'string',

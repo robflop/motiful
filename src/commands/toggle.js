@@ -5,6 +5,7 @@ class ToggleCommand extends Command {
 		super({
 			name: 'toggle',
 			description: 'Toggle a command on or off',
+			aliases: ['t'],
 			ownersOnly: true,
 			perms: {
 				member: ['KICK_MEMBERS', 'BAN_MEMBERS']

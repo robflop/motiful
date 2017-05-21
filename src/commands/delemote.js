@@ -7,6 +7,7 @@ class DelEmoteCommand extends Command {
 		super({
 			name: 'delemote',
 			description: 'Delete a custom emote',
+			aliases: ['de'],
 			args: [
 				{
 					type: 'string',

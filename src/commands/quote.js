@@ -7,6 +7,7 @@ class QuoteCommand extends Command {
 		super({
 			name: 'quote',
 			description: 'Quote a message (Out of the last 100 overall messages)',
+			aliases: ['q'],
 			args: [
 				{
 					type: 'user',
