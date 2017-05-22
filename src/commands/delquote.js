@@ -23,7 +23,7 @@ class DelQuoteCommand extends Command {
 		delete savedQuotes[args.quoteName];
 		message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
 			.then(quotes => {
-				message.edit(`Quote \`${args.quoteName}\` successfully deleted!`).then(msg => msg.delete(2000))
+				message.edit(`Quote \`${args.quoteName}\` successfully deleted!`).then(msg => msg.delete(2000));
 			})
 			.catch(err => {
 				message.edit(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
