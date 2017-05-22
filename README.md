@@ -1,5 +1,7 @@
 # Motiful
 
+ [![Build Status](https://travis-ci.org/robflop/motiful.svg?branch=master)](https://travis-ci.org/robflop/motiful)
+
 A Discord selfbot written using discord.js.
 
 Motiful also uses the snekfetch, chalk and moment packages, plus some standard node modules.
