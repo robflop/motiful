@@ -9,7 +9,9 @@
     "moment": "^2.18.1",
     "snekfetch": "^3.1.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+	  "eslint": "^3.19.0"
+  },
   "scripts": {
 	  "test": "eslint src"
   },
