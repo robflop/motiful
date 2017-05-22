@@ -249,6 +249,17 @@
  - user: A mention, start of the username, or ID of the user that wrote the message you wish to quote.
  - input: Both the snippet of the message you wish to quote and optionally a response to attach to the quote, the former and the latter seperated by a vertical line ('|').
 
+# reload
+
+#### Description: Reloads a command.
+
+#### Syntax: `reload <command>`
+
+#### Aliases: `rl`
+
+#### Explanation:
+ - command: The name of the command you wish to reload.
+
 # sendQuote
 
 #### Description: Send a saved quote.
