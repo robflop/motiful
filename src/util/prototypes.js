@@ -13,4 +13,3 @@ Array.prototype.last = function last() {
 Array.prototype.unique = function unique() {
 	return [...new Set(this)];
 };
-
