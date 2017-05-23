@@ -51,8 +51,9 @@ class CommandController {
 		const parsedArgs = {};
 		const beginning = args.slice(0, command.args.length - 1);
 		const end = args.slice(beginning.length, args.length).join(' ');
+		const entries = beginning.concat(end).entries();
 
-		for (const [i, arg] of beginning.concat(end).entries()) {
+		for (const [i, arg] of entries) {
 			const { name, type, defaultVal } = command.args[i];
 			if (!name) throw Error(`No argument name supplied at command: ${command.name}`);
 			if (!type) throw Error(`No argument type supplied at command: ${command.name}`);

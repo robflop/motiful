@@ -23,6 +23,7 @@ class MotifulClient extends Client {
 				if (this.aliases.has(alias)) {
 					throw Error(`Duplicate alias detected in the '${cmd.name}' command ('${alias}').`);
 				}
+
 				if (this.commands.has(alias)) {
 					throw Error(`'${alias}' is already registered as a command name.`);
 				}
@@ -44,6 +45,7 @@ class MotifulClient extends Client {
 		for (const file of eventFiles) {
 			const name = file.slice(0, -3);
 			const event = require(`${eventDir}/${name}`);
+
 			this.events.set(name, event);
 			this.on(name, (...args) => this.events.get(name)(this, ...args));
 		}
