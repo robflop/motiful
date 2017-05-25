@@ -86,7 +86,7 @@ class EmoteCommand extends Command {
 			args.emoteSize = emoteSizes.bttv[args.emoteSize] || emoteSizes.bttv.small;
 			const emote = bttv.emotes.filter(emote => emote.code === args.emoteName)[0] || '';
 			if (!emote) {
-				return message.channel.send(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete(3000));
+				return message.channel.send(`Emote \`${args.emoteName}\` not found on BetterTwitchTV!`).then(msg => msg.delete(3000));
 			}
 			const emoteID = emote.id;
 			const emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${args.emoteSize}x`;
