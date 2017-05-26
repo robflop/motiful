@@ -42,7 +42,7 @@ class QuoteReactCommand extends Command {
 			const embed = new RichEmbed()
 			.setColor('RANDOM')
 			.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
-			.setDescription(messageReaction.message.content);
+			.setDescription(`\`${messageReaction.message.content}\``);
 
 			return message.edit({ embed }).then(msg => {
 				if (args.response) msg.channel.send(args.response);

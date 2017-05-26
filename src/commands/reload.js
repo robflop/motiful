@@ -22,7 +22,7 @@ class ReloadCommand extends Command {
 		if (aliases.has(command)) command = aliases.get(command);
 
 		await this.reloadCommand(command, message);
-		return message.reply(`'${command}' command reloaded!`);
+		return message.edit(`\`${command.capitalize()}\` command reloaded!`).then(msg => msg.delete(2000));
 	}
 
 	reloadCommand(command, message) {
