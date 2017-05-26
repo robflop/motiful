@@ -1,5 +1,4 @@
 const { inspect } = require('util');
-const { Collection } = require('discord.js');
 
 require('../util/prototypes');
 const ArgumentParser = require('./ArgumentParser');

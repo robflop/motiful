@@ -22,7 +22,7 @@ class DelFavCommand extends Command {
 		}
 		delete favoriteEmotes[args.emoteName];
 		message.client.logger.writeJSON(favoriteEmotes, './data/favoriteEmotes.json')
-			.then(quotes => {
+			.then(favorites => {
 				message.edit(`Emote \`${args.emoteName}\` successfully removed from the favorites list!`).then(msg => msg.delete(2000));
 			})
 			.catch(err => {
