@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed, Collection } = require('discord.js');
+const { RichEmbed } = require('discord.js');
 const moment = require('moment');
 
 class QuoteIDCommand extends Command {
