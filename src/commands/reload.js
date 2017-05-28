@@ -27,6 +27,7 @@ class ReloadCommand extends Command {
 
 	reloadCommand(command, message) {
 		const { commands, aliases } = message.client;
+		if (!commands.has(command)) return;
 		const CommandClass = require(`./${command}.js`);
 		const cmd = new CommandClass();
 
