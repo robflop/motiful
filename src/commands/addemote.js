@@ -32,7 +32,7 @@ class AddEmoteCommand extends Command {
 		if (!validExts.includes(emoteExt)) {
 			return message.edit('Only PNGs, JP(E)Gs, WebPs and GIFs are accepted, sorry.').then(msg => msg.delete(3000));
 		}
-		const emotePath = join(__dirname, '..', 'data', 'customemotes', args.emoteName + emoteExt);
+		const emotePath = join(__dirname, '..', 'data', 'customemotes', `${args.emoteName}.${emoteExt}`);
 		if (existsSync(emotePath)) {
 			return message.edit('Emote with that name already exists!').then(msg => msg.delete(3000));
 		}
