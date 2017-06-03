@@ -53,7 +53,7 @@ class ArgumentParser {
 			|| message.client.users.get(arg)
 			|| message.client.users.find(user => user.username.toLowerCase().includes(arg.toLowerCase()));
 		if (!found) {
-			const member = message.guild.members.find(m => m.nickname.toLowerCase().includes(arg.toLowerCase()));
+			const member = message.guild.members.find(m => m.displayName.toLowerCase().includes(arg.toLowerCase()));
 			return member ? member.user : null;
 		}
 		return found;
