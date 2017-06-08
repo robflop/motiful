@@ -7,7 +7,7 @@
     "chalk": "^1.1.3",
     "discord.js": "github:hydrabolt/discord.js",
     "moment": "^2.18.1",
-    "snekfetch": "^3.1.7"
+    "snekfetch": "^3.1.8"
   },
   "devDependencies": {
 	  "eslint": "^3.19.0"
