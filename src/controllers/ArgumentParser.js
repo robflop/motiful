@@ -37,19 +37,19 @@ class ArgumentParser {
 	}
 
 	static toChannel(message, arg) {
-		return message.guild.channels.get((discordIDRegex.exec(arg) || [])[3])
+		return message.guild.channels.get((discordIDRegex.exec(arg) || [])[1])
 			|| message.guild.channels.get(arg)
 			|| message.guild.channels.find(channel => channel.name.toLowerCase().includes(arg.toLowerCase()));
 	}
 
 	static toRole(message, arg) {
-		return message.guild.roles.get((discordIDRegex.exec(arg) || [])[3])
+		return message.guild.roles.get((discordIDRegex.exec(arg) || [])[1])
 			|| message.guild.roles.get(arg)
 			|| message.guild.roles.find(role => role.name.toLowerCase().includes(arg.toLowerCase()));
 	}
 
 	static toUser(message, arg) {
-		const found = message.mentions.users.get((discordIDRegex.exec(arg) || [])[3])
+		const found = message.mentions.users.get((discordIDRegex.exec(arg) || [])[1])
 			|| message.client.users.get(arg)
 			|| message.client.users.find(user => user.username.toLowerCase().includes(arg.toLowerCase()));
 		if (!found) {
@@ -60,7 +60,7 @@ class ArgumentParser {
 	}
 
 	static toMember(message, arg) {
-		return message.guild.members.get((discordIDRegex.exec(arg) || [])[3])
+		return message.guild.members.get((discordIDRegex.exec(arg) || [])[1])
 			|| message.guild.members.get(arg)
 			|| message.guild.members.find(member => member.displayName.toLowerCase().includes(arg.toLowerCase()));
 	}
