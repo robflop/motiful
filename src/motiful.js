@@ -6,12 +6,8 @@ const client = new MotifulClient();
 const controller = new CommandController();
 
 client
-	.once('ready', () => {
-		client.logger.info('motiful ready!');
-	})
-	.on('message', message => {
-		controller.handleCommand(message);
-	})
+	.once('ready', () => client.logger.info('motiful ready!'))
+	.on('message', message => controller.handleCommand(message))
 	.login(client.config.token);
 
 process.on('unhandledRejection', err => {
