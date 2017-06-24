@@ -19,7 +19,7 @@ class IndicatorCommand extends Command {
 		const indicatorPhrase = [];
 		for (const char of args.input) {
 			indicators.includes(char.toLowerCase())
-			? indicatorPhrase.push(`:regional_indicator_${char}:`)
+			? indicatorPhrase.push(`:regional_indicator_${char.toLowerCase()}:`)
 			: indicatorPhrase.push(char);
 		}
 		if (indicatorPhrase.join(' ').length > 1999) return message.edit('Output too long. Try shorter text.').then(message => message.delete(2000));
