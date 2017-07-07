@@ -35,10 +35,10 @@ class CommandController {
 		if (!parsedArgs) return;
 
 		const userData = ['addquote', 'sendquote', 'delquote', 'listquotes'].includes(command.name)
-		? { savedQuotes: require('../data/savedQuotes.json') }
-		: ['emote', 'addfav', 'delfav', 'listfavs'].includes(command.name)
-		? { favoriteEmotes: require('../data/favoriteEmotes.json') }
-		: null;
+			? { savedQuotes: require('../data/savedQuotes.json') }
+			: ['emote', 'addfav', 'delfav', 'listfavs'].includes(command.name)
+				? { favoriteEmotes: require('../data/favoriteEmotes.json') }
+				: null;
 
 		return command.run(message, parsedArgs, userData).catch(e => {
 			logger.error(inspect(e));

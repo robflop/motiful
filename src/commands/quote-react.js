@@ -40,9 +40,9 @@ class QuoteReactCommand extends Command {
 			const time = moment(messageReaction.message.createdTimestamp).format('HH:mm:ss');
 			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL();
 			const embed = new RichEmbed()
-			.setColor('RANDOM')
-			.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
-			.setDescription(`\`${messageReaction.message.content}\``);
+				.setColor('RANDOM')
+				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
+				.setDescription(`\`${messageReaction.message.content}\``);
 
 			return message.edit({ embed }).then(msg => {
 				if (args.response) msg.channel.send(args.response);

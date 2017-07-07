@@ -74,11 +74,11 @@ class EvalCommand extends Command {
 			output = output.replace(tokenRegex, '[TOKEN]');
 
 			return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n📤\u2000**Output**${cb}js\n${output}\n${cb}`)
-			.then(message => {
-				evaled.errored = false;
-				evaled.output = output;
-				evaled.message = message;
-			});
+				.then(message => {
+					evaled.errored = false;
+					evaled.output = output;
+					evaled.message = message;
+				});
 		}).catch(err => {
 		// console.error(err);
 			err = err.toString();
