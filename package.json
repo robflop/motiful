@@ -4,13 +4,13 @@
   "description": "Discord selfbot built with discord.js",
   "main": "./src/motiful",
   "dependencies": {
-    "chalk": "^1.1.3",
-    "discord.js": "github:hydrabolt/discord.js",
+    "chalk": "^2.0.1",
+    "discord.js": "^11.1.0",
     "moment": "^2.18.1",
-    "snekfetch": "^3.1.8"
+    "snekfetch": "^3.2.3"
   },
   "devDependencies": {
-	  "eslint": "^3.19.0"
+	  "eslint": "^4.1.1"
   },
   "scripts": {
 	  "test": "eslint src"
