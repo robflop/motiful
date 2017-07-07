@@ -19,8 +19,8 @@ class AestheticsCommand extends Command {
 		const aestheticPhrase = [];
 		for (const char of args.input) {
 			aesthetics.hasOwnProperty(char)
-			? aestheticPhrase.push(aesthetics[char])
-			: aestheticPhrase.push(char);
+				? aestheticPhrase.push(aesthetics[char])
+				: aestheticPhrase.push(char);
 		}
 		if (aestheticPhrase.join(' ').length > 1999) return message.edit('Output too long. Try shorter text.').then(message => message.delete(2000));
 		message.edit(aestheticPhrase.join(' '));

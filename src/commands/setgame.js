@@ -19,7 +19,7 @@ class SetGameCommand extends Command {
 	async run(message, args) {
 		if (args.input && (args.input.length < 2 || args.input.length > 32)) {
 			return message.edit('New game may not be shorter than 2 or longer than 32 characters!')
-			.then(msg => msg.delete(3000));
+				.then(msg => msg.delete(3000));
 		}
 
 		const action = args.input !== '' ? `set your game to \`${args.input}\`` : `cleared your game`;
