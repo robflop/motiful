@@ -42,6 +42,7 @@ class EmoteCommand extends Command {
 
 		message.delete();
 		args.emoteSize ? args.emoteSize = args.emoteSize.toLowerCase() : null;
+
 		if (globalEmotes.emotes[args.channelName] || subEmotes.channels[args.channelName]) {
 			let emote, actualChannel;
 			if (globalEmotes.emotes[args.channelName]) {

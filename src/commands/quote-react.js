@@ -38,7 +38,7 @@ class QuoteReactCommand extends Command {
 			messageReaction.remove();
 			const date = moment(messageReaction.message.createdTimestamp).format('Do MMM YYYY');
 			const time = moment(messageReaction.message.createdTimestamp).format('HH:mm:ss');
-			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL();
+			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL;
 			const embed = new RichEmbed()
 				.setColor('RANDOM')
 				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
