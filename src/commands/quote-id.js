@@ -24,7 +24,7 @@ class QuoteIDCommand extends Command {
 
 	async run(message, args) {
 		const date = moment(args.message.createdTimestamp).format('Do MMM YYYY'), time = moment(args.message.createdTimestamp).format('HH:mm:ss');
-		const name = args.message.author.username, avatar = args.message.author.avatarURL();
+		const name = args.message.author.username, avatar = args.message.author.avatarURL;
 		const embed = new RichEmbed()
 			.setColor('RANDOM')
 			.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)

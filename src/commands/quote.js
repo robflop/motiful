@@ -35,7 +35,7 @@ class QuoteCommand extends Command {
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(snippet)).first();
 			if (!quoteMsg) return message.channel.send('Message not found!').then(msg => msg.delete(2000));
 			const date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'), time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
-			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL();
+			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL;
 			const embed = new RichEmbed()
 				.setColor('RANDOM')
 				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
