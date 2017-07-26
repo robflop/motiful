@@ -3,14 +3,14 @@ const snekfetch = require('snekfetch');
 const { join } = require('path');
 const { readdirSync } = require('fs');
 const globalEmotes = require('../data/twitchemotes/global.json');
-const subEmotes = require('../data/twitchemotes/subscriber.json');
+// const subEmotes = require('../data/twitchemotes/subscriber.json');
 const bttv = require('../data/twitchemotes/bttv.json');
 
 class EmoteCommand extends Command {
 	constructor() {
 		super({
 			name: 'emote',
-			description: 'Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat',
+			description: 'Post a twitch (global or subscriber [sub disabled]), FrankerFaceZ, BetterTwitchTV or custom emote into chat',
 			aliases: ['em'],
 			args: [
 				{
@@ -43,28 +43,29 @@ class EmoteCommand extends Command {
 		message.delete();
 		args.emoteSize ? args.emoteSize = args.emoteSize.toLowerCase() : null;
 
-		if (globalEmotes.emotes[args.channelName] || subEmotes.channels[args.channelName]) {
+		if (globalEmotes[args.channelName] /* || subEmotes.channels[args.channelName] */) {
 			let emote, actualChannel;
-			if (globalEmotes.emotes[args.channelName]) {
+			if (globalEmotes[args.channelName]) {
 				args.emoteSize = emoteSizes.globalAndSub[args.emoteName] || emoteSizes.globalAndSub.small;
 				args.emoteName = args.channelName;
 				delete args.channelName;
 				// shift arguments because global doesn't take channel name
-				emote = globalEmotes.emotes[args.emoteName];
+				emote = globalEmotes[args.emoteName];
 			}
-			else if (subEmotes.channels[args.channelName]) {
-				actualChannel = true;
-				emote = subEmotes.channels[args.channelName.toLowerCase()].emotes.filter(emote => emote.code === args.emoteName)[0] || '';
-				args.emoteSize = emoteSizes.globalAndSub[args.emoteSize] || emoteSizes.globalAndSub.small;
-			}
+			// else if (subEmotes.channels[args.channelName]) {
+			// 	actualChannel = true;
+			// 	emote = subEmotes.channels[args.channelName.toLowerCase()].emotes.filter(emote => emote.code === args.emoteName)[0] || '';
+			// 	args.emoteSize = emoteSizes.globalAndSub[args.emoteSize] || emoteSizes.globalAndSub.small;
+			// }
 			const wasActualChannel = actualChannel ? ` on the \`${args.channelName}\` channel` : '';
 			if (!emote) {
 				return message.channel.send(`Emote \`${args.emoteName}\` not found${wasActualChannel}!`).then(msg => msg.delete(3000));
 			}
-			const emoteID = emote.image_id;
+			const emoteID = emote.id;
 			const emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${args.emoteSize}`;
 			return message.channel.send({ files: [{ attachment: emoteURL, name: `${args.emoteName}.png}` }] });
 		}
+		// twitchemotes.com subscriber emotes disabled until a search endpoint is implemented
 		else if (args.channelName === 'ffz') {
 			try {
 				args.emoteSize = emoteSizes.ffz[args.emoteSize] || emoteSizes.ffz.small;

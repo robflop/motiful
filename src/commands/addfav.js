@@ -1,6 +1,6 @@
 const Command = require('../structures/Command');
 const snekfetch = require('snekfetch');
-const subEmotes = require('../data/twitchemotes/subscriber.json');
+// const subEmotes = require('../data/twitchemotes/subscriber.json');
 const bttv = require('../data/twitchemotes/bttv.json');
 
 class AddFavCommand extends Command {
@@ -30,14 +30,14 @@ class AddFavCommand extends Command {
 		let emote, emoteID; // placeholder
 		args.channelName = args.channelName.toLowerCase();
 
-		if (subEmotes.channels[args.channelName]) {
+		/* if (subEmotes.channels[args.channelName]) {
 			emote = subEmotes.channels[args.channelName].emotes.filter(emote => emote.code === args.emoteName)[0] || '';
 			if (!emote) {
 				return message.edit(`Emote \`${args.emoteName}\` not found on the \`${args.channelName}\` channel!`).then(msg => msg.delete(3000));
 			}
 			emoteID = emote.image_id;
-		}
-		else if (args.channelName === 'bttv') {
+		} // twitchemotes.com subscriber emotes disabled until a search endpoint is implemented
+		else */if (args.channelName === 'bttv') {
 			emote = bttv.emotes.filter(emote => emote.code === args.emoteName)[0] || '';
 			if (!emote) {
 				return message.edit(`Emote \`${args.emoteName}\` not found on BetterTwitchTV!`).then(msg => msg.delete(3000));
