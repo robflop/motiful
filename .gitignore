@@ -6,8 +6,10 @@ npm-debug.log*
 
 # ignore various user data
 src/config.json
-src/data
-!src/data/twitchemotes
+src/data/customemotes
+src/data/disabledCommands.json
+src/data/favoriteEmotes.json
+src/data/savedQuotes.json
 
 
 # Runtime data
