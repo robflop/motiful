@@ -15,7 +15,8 @@ Motiful also uses the snekfetch, chalk and moment packages, plus some standard n
 - Fill out your token and change the ownerID in config.json to your devmode discord ID (Settings -> Appearance -> Toggle Developer Mode on -> Rightclick on yourself -> Press "Copy ID")
 - Adjust other config settings to your liking
 - run `npm install` in a command window located in the directory you downloaded motiful in to install necessary packages
-- (Feel free to ignore any "unmet dependency" warnings)
+- (Feel free to ignore any "unmet peer dependency" or "... requires a peer of..." warnings)
+- Navigate into the `/src` folder
 - Start the bot using `node motiful.js` in a command window located in the directory you downloaded motiful in to!
 
 ### Adding commands
