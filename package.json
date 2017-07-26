@@ -1,16 +1,16 @@
 {
   "name": "motiful",
-  "version": "3.0.0",
+  "version": "3.2.0",
   "description": "Discord selfbot built with discord.js",
   "main": "./src/motiful",
   "dependencies": {
     "chalk": "^2.0.1",
     "discord.js": "^11.1.0",
     "moment": "^2.18.1",
-    "snekfetch": "^3.2.3"
+    "snekfetch": "^3.2.4"
   },
   "devDependencies": {
-	  "eslint": "^4.1.1"
+	  "eslint": "^4.3.0"
   },
   "scripts": {
 	  "test": "eslint src"
