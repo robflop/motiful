@@ -6,7 +6,7 @@ const client = new MotifulClient();
 const controller = new CommandController();
 
 client
-	.once('ready', () => client.logger.info('motiful ready!'))
+	.once('ready', () => client.logger.info(`motiful ready! (As ${client.user.tag})`))
 	.on('message', message => controller.handleCommand(message))
 	.login(client.config.token);
 
