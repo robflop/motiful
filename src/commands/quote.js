@@ -32,7 +32,8 @@ class QuoteCommand extends Command {
 			snippet = args.input.trim();
 		}
 		message.channel.fetchMessages({ limit: 100 }).then(messages => {
-			messages.delete(message.id); // delete command call from collection
+			messages.has(message.id) ? messages.delete(message.id) : null;
+			// delete command call from collection if it exists within
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(snippet)).first();
 			if (!quoteMsg) return message.edit('Message not found!').then(msg => msg.delete(2000));
 			const date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'), time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
