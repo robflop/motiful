@@ -54,7 +54,7 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | delEmote      | Delete a custom emote                                                                             |
 | delFav        | Delete an emote from the favorites list                                                           |
 | delQuote      | Delete a saved quote                                                                              |
-| emote         | Post a twitch (global or subscriber), FrankerFaceZ, BetterTwitchTV or custom emote into chat      |
+| emote         | Post a twitch (global or subscriber [sub disabled]), FrankerFaceZ, BetterTwitchTV or custom emote into chat      |
 | eval          | Evaluate javascript code                                                                          |
 | help          | Get usage help                                                                                    |
 | indicators    | Turn input text into indicator-emoji text                                                         |
@@ -67,11 +67,9 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | quote-id      | Quote a message using a message ID                                                                |
 | quote-react   | Quote a message by using a 💬 message reaction                                                    |
 | quote         | Quote a message (Out of the last 100 overall messages)                                            |
-| reload        | Reload a command
+| reload        | Reload a command                                                                                  |
 | sendQuote     | Send a saved quote                                                                                |
 | setGame       | Set the game you\'ll be shown to be playing                                                       |
 | shutdown      | Shut down motiful                                                                                 |
 | sub           | Replace a part of one of your messages (Only from last 100 overall Messages)                      |
 | toggle        | Toggle a command on or off                                                                        |
-
-

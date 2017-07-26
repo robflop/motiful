@@ -21,6 +21,7 @@
 #### Explanation:
  - channelName: The name of the channel on twitch, e.g. robflop98 OR name of the extension.
     * Supported extensions: ffz and bttv standing for FrankerFacez and BetterTwitchTV respectively.
+    * _Subscriber emotes disabled until further notice. [26-07-2017]_
  - emoteName: The name of the emote itself. It is **case-sensitive**.
 
 # addQuote
@@ -103,6 +104,7 @@
  - channelName: The name of the channel on twitch, e.g. robflop98 OR name of the extension.
     * Supported extensions: `ffz` and `bttv` standing for FrankerFacez and BetterTwitchTV respectively.
     * If posting a global, favorite or custom emote, this value is replaced by emoteName.
+    * _Subscriber emotes disabled until further notice. [26-07-2017]_
  - emoteName: The name of the emote itself. It is **case-sensitive**.
     * If posting a global or favorite emote, this value is replaced by emoteSize.
     * If posting a custom emote, this value does not exist.
