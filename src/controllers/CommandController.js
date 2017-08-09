@@ -57,7 +57,9 @@ class CommandController {
 			? { savedQuotes: require('../data/savedQuotes.json') }
 			: ['emote', 'addfav', 'delfav', 'listfavs'].includes(command.name)
 				? { favoriteEmotes: require('../data/favoriteEmotes.json') }
-				: null;
+				: command.name === 'managetags'
+					? { tags: this.tags }
+					: null;
 
 		return command.run(message, parsedArgs, userData).catch(e => {
 			logger.error(inspect(e));
