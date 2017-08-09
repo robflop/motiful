@@ -21,7 +21,7 @@ class CommandController {
 			tags.forEach(tag => {
 				tagged = (tag.length === 2) // eslint-disable-line no-extra-parens
 					? (tagged || message.content).replace(`[${tag.join(': ')}]`, eval(tag[1]))
-					: (tagged || message.content).replace(`[${tag[0]}]`, this.tags[tag[0]] || `[${tag[0]}]`);
+					: (tagged || message.content).replace(`[${tag[0]}]`, eval(this.tags[tag[0]]) || `[${tag[0]}]`);
 			});
 
 			tagged !== message.content ? message.edit(tagged) : null;
