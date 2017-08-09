@@ -6,10 +6,38 @@ const ArgumentParser = require('./ArgumentParser');
 class CommandController {
 	constructor() {
 		this.disabledCommands = require('../data/disabledCommands.json');
+		this.tags = require('../data/tags.json');
+		this.tagRegex = /\[([^[\]\s]*) ?([^[\]]*?)\]/g;
 	}
 
 	async handleCommand(message) {
-		if (message.author.id !== message.client.config.ownerID || !message.content.startsWith(message.client.config.commandPrefix)) return;
+		if (message.author.id !== message.client.config.ownerID) return;
+
+		if (!message.content.startsWith(message.client.config.commandPrefix) && this.tagRegex.test(message.content)) {
+			const tags = message.content.match(this.tagRegex).map(tag => tag.split(':').map(t => t.replace(/[[\]\s]/g, '')));
+			// get matches and split them into tag name / eval input if there is any, plus trimming brackets and whitespaces
+			let tagged;
+
+			console.log(tags);
+
+			tags.forEach(tag => {
+				if (tag.length === 2) {
+					tagged
+						? tagged = tagged.replace(`[${tag.join(': ')}]`, eval(tag[1]))
+						: tagged = message.content.replace(`[${tag.join(': ')}]`, eval(tag[1]));
+				}
+				else {
+					tagged
+						? tagged = tagged.replace(`[${tag[0]}]`, this.tags[tag[0]] || `[${tag[0]}]`)
+						: tagged = message.content.replace(`[${tag[0]}]`, this.tags[tag[0]] || `[${tag[0]}]`);
+				}
+			});
+
+			tagged !== message.content ? message.edit(tagged) : null;
+		} // tags
+
+		else if (!message.content.startsWith(message.client.config.commandPrefix)) { return; }
+		// no tag + no prefix
 
 		const { commands, aliases, config, logger } = message.client;
 
