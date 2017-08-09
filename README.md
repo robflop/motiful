@@ -43,6 +43,7 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 ## Out-of-the-box Commands
 
 Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) for more in-depth explanations.
+*In addition: Motiful also includes a tag system not listed here. Refer to above Usage page.*
 
 | Command       | Effect                                                                                                     |
 |-------------  |----------------------------------------------------------------------------------------------------------- |
