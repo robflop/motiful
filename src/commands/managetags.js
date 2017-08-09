@@ -1,4 +1,5 @@
 const Command = require('../structures/Command');
+const { RichEmbed } = require('discord.js');
 
 class ManageTagsCommand extends Command {
 	constructor() {
@@ -43,7 +44,7 @@ class ManageTagsCommand extends Command {
 				});
 		}
 
-		if (args.selector === 'delete') {
+		else if (args.selector === 'delete') {
 			if (args.tagName === 'none') return message.edit('Specify a target name!').then(msg => msg.delete(3000));
 			if (!tags.hasOwnProperty(args.tagName)) return message.edit('Tag with that name doesn\'t exist!').then(msg => msg.delete(3000));
 			delete tags[args.tagName];
@@ -56,12 +57,15 @@ class ManageTagsCommand extends Command {
 				});
 		}
 
-		if (args.selector === 'info') {
+		else if (args.selector === 'info') {
 			if (!tags.hasOwnProperty(args.tagName)) return message.edit('Tag with that name doesn\'t exist!').then(msg => msg.delete(3000));
-			message.edit(`\`\`\`${args.tagName}\`\`\` => \`\`\`${tags[args.tagName]}\`\`\``).then(msg => msg.delete(5000));
+			const embed = new RichEmbed()
+				.setAuthor(`Motiful Tag info for tag '${args.tagName}'`, message.client.user.displayAvatarURL)
+				.setDescription(`\`\`\`js\n${tags[args.tagName]}\`\`\``);
+			message.edit({ embed }).then(msg => msg.delete(10000));
 		}
 
-		if (args.selector === 'list') {
+		else if (args.selector === 'list') {
 			if (Object.keys(tags).length === 0) return message.edit('No tags have been saved!').then(msg => msg.delete(3000));
 			message.edit(`**__Available tags are:__**\`\`\`${Object.keys(tags).join(', ')}\`\`\``).then(msg => msg.delete(10000));
 		}
