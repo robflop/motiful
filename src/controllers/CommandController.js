@@ -19,16 +19,9 @@ class CommandController {
 			let tagged;
 
 			tags.forEach(tag => {
-				if (tag.length === 2) {
-					tagged
-						? tagged = tagged.replace(`[${tag.join(': ')}]`, eval(tag[1]))
-						: tagged = message.content.replace(`[${tag.join(': ')}]`, eval(tag[1]));
-				}
-				else {
-					tagged
-						? tagged = tagged.replace(`[${tag[0]}]`, this.tags[tag[0]] || `[${tag[0]}]`)
-						: tagged = message.content.replace(`[${tag[0]}]`, this.tags[tag[0]] || `[${tag[0]}]`);
-				}
+				tag.length === 2
+					? tagged = (tagged || message.content).replace(`[${tag.join(': ')}]`, eval(tag[1]))
+					: tagged = (tagged || message.content).replace(`[${tag[0]}]`, this.tags[tag[0]] || `[${tag[0]}]`)
 			});
 
 			tagged !== message.content ? message.edit(tagged) : null;
