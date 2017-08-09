@@ -181,6 +181,21 @@
 #### Explanation:
  - None
 
+# managetags
+
+#### Description: Manage your tags (add, delete, info, list selectors).
+
+#### Syntax: `managetags <selector> <tagName> <tagContent>`
+
+#### Aliases: `mt`
+
+#### Explanation:
+ - selector: The action you wish to take (add, delete, info or list).
+ - tagName: The name of the tag you wish to manage.
+    * Not present if you are using the `list` selector.
+ - tagContent: The content of the tag you wish to create.
+    * Only present when using the `add` selector.
+
 # nitro
 
 #### Description: Send a fake embed about Discord Nitro.

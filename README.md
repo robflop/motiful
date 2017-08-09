@@ -44,32 +44,33 @@ Licensed under the [MIT License](https://github.com/robflop/motiful/blob/master/
 
 Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) for more in-depth explanations.
 
-| Command       | Effect                                                                                            |
-|-------------  |-------------------------------------------------------------------------------------------------  |
-| addEmote      | Add a custom emote                                                                                |
-| addFav        | Add an emote to the favorites list                                                                |
-| addQuote      | Save a quote of a message (Out of the last 100 overall messages)                                  |
-| aesthetics    | Make your input a e s t h e t i c                                                                 |
-| ascii         | Turn your input into ascii text                                                                   |
-| delEmote      | Delete a custom emote                                                                             |
-| delFav        | Delete an emote from the favorites list                                                           |
-| delQuote      | Delete a saved quote                                                                              |
-| emote         | Post a twitch (global or subscriber [sub disabled]), FrankerFaceZ, BetterTwitchTV or custom emote into chat      |
-| eval          | Evaluate javascript code                                                                          |
-| help          | Get usage help                                                                                    |
-| indicators    | Turn input text into indicator-emoji text                                                         |
-| listEmotes    | List all custom emotes                                                                            |
-| listFavs      | List all saved favorite emotes                                                                    |
-| listQuotes    | List all saved quotes                                                                             |
-| nitro         | Send a fake embed about Discord Nitro                                                             |
-| ping          | Measure the delay between command call and execution                                              |
-| purge         | Purge your messages (In the last 100 overall Messages)                                            |
-| quote-id      | Quote a message using a message ID                                                                |
-| quote-react   | Quote a message by using a 💬 message reaction                                                    |
-| quote         | Quote a message (Out of the last 100 overall messages)                                            |
-| reload        | Reload a command                                                                                  |
-| sendQuote     | Send a saved quote                                                                                |
-| setGame       | Set the game you\'ll be shown to be playing                                                       |
-| shutdown      | Shut down motiful                                                                                 |
-| sub           | Replace a part of one of your messages (Only from last 100 overall Messages)                      |
-| toggle        | Toggle a command on or off                                                                        |
+| Command       | Effect                                                                                                     |
+|-------------  |----------------------------------------------------------------------------------------------------------- |
+| addEmote      | Add a custom emote                                                                                         |
+| addFav        | Add an emote to the favorites list                                                                         |
+| addQuote      | Save a quote of a message (Out of the last 100 overall messages)                                           |
+| aesthetics    | Make your input a e s t h e t i c                                                                          |
+| ascii         | Turn your input into ascii text                                                                            |
+| delEmote      | Delete a custom emote                                                                                      |
+| delFav        | Delete an emote from the favorites list                                                                    |
+| delQuote      | Delete a saved quote                                                                                       |
+| emote         | Post a twitch (global or subscriber [sub disabled]), FrankerFaceZ, BetterTwitchTV or custom emote into chat|
+| eval          | Evaluate javascript code                                                                                   |
+| help          | Get usage help                                                                                             |
+| indicators    | Turn input text into indicator-emoji text                                                                  |
+| listEmotes    | List all custom emotes                                                                                     |
+| listFavs      | List all saved favorite emotes                                                                             |
+| listQuotes    | List all saved quotes                                                                                      |
+| managetags    | Manage your tags (add, delete, info, list selectors)                                                       |
+| nitro         | Send a fake embed about Discord Nitro                                                                      |
+| ping          | Measure the delay between command call and execution                                                       |
+| purge         | Purge your messages (In the last 100 overall Messages)                                                     |
+| quote-id      | Quote a message using a message ID                                                                         |
+| quote-react   | Quote a message by using a 💬 message reaction                                                             |
+| quote         | Quote a message (Out of the last 100 overall messages)                                                     |
+| reload        | Reload a command                                                                                           |
+| sendQuote     | Send a saved quote                                                                                         |
+| setGame       | Set the game you\'ll be shown to be playing                                                                |
+| shutdown      | Shut down motiful                                                                                          |
+| sub           | Replace a part of one of your messages (Only from last 100 overall Messages)                               |
+| toggle        | Toggle a command on or off                                                                                 |
