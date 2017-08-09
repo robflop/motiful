@@ -18,8 +18,6 @@ class CommandController {
 			// get matches and split them into tag name / eval input if there is any, plus trimming brackets and whitespaces
 			let tagged;
 
-			console.log(tags);
-
 			tags.forEach(tag => {
 				if (tag.length === 2) {
 					tagged
