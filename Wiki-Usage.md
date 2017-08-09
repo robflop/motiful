@@ -1,3 +1,23 @@
+# Tags:
+Tags in motiful are a feature seperate from commands -- *they **_don't_** use the command prefix, nor do they have a specific "command name" that tells motiful to use them -- all it listens to is the format in which things are written.*
+
+To trigger a tag, just place it in your message alongside your other content enclosed by brackets, e.g. `My name is [name]!`. This will result in motiful trying to find a tag called `name`, replacing the tag call with the output this tag results in.
+
+Assuming you have a tag called `name`, with value `robflop`, the result of the above would be: 
+
+`My name is robflop!`.
+
+If a tag cannot be found (e.g. you do *not* have a tag called `name`), motiful will simply ignore this and leave the text as-is, because you don't always want to use a tag when you use brackets. This is to avoid complications when trying to type text unrelated to the tags system.
+
+In addition to this, it is possible to use on-the-fly evaluation using the `eval` keyword as tag name. To evaluate using this, provide the tag in a fashion such as this:
+
+`My name is [eval: client.user.username]!`.
+
+Motiful will then evaluate the code behind the keyword, resulting in a text of `My name is robflop`, if we assume that your username is `robflop`.
+
+(Using any other tag keyword along with eval-like syntax will simply erase the eval-like input and output either a saved tag of that name or the tag call as-is.)
+___
+
 # addEmote
 
 #### Description: Add a custom emote.
@@ -195,6 +215,7 @@
     * Not present if you are using the `list` selector.
  - tagContent: The content of the tag you wish to create.
     * Only present when using the `add` selector.
+    * Tag content must be provided **exactly** how it would be interpreted by JavaScript. If you want to output the letter `a`, you must provide it as a String. If you do not, it will likely result in an error when trying to use the tag due to errors about undefined variables.
 
 # nitro
 
