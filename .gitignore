@@ -10,6 +10,7 @@ src/data/customemotes
 src/data/disabledCommands.json
 src/data/favoriteEmotes.json
 src/data/savedQuotes.json
+src/data/tags.json
 
 
 # Runtime data
