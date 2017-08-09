@@ -19,9 +19,13 @@ class CommandController {
 			let tagged;
 
 			tags.forEach(tag => {
+				let evaled;
+				try { evaled = tag[1] ? eval(tag[1]) : eval(this.tags[tag[0]]); }
+				catch (e) { evaled = '[<Tag errored>]'; }
+
 				tagged = (tag.length === 2) // eslint-disable-line no-extra-parens
-					? (tagged || message.content).replace(`[${tag.join(': ')}]`, eval(tag[1]))
-					: (tagged || message.content).replace(`[${tag[0]}]`, eval(this.tags[tag[0]]) || `[${tag[0]}]`);
+					? (tagged || message.content).replace(`[${tag.join(': ')}]`, evaled)
+					: (tagged || message.content).replace(`[${tag[0]}]`, evaled || `[${tag[0]}]`);
 			});
 
 			tagged !== message.content ? message.edit(tagged) : null;
