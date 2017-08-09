@@ -181,7 +181,7 @@
 #### Explanation:
  - None
 
-# managetags
+# manageTags
 
 #### Description: Manage your tags (add, delete, info, list selectors).
 
