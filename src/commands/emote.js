@@ -31,7 +31,7 @@ class EmoteCommand extends Command {
 		});
 	}
 
-	async run(message, args, userData) {
+	async run(message, args, userData) { // eslint-disable-line complexity
 		const { favoriteEmotes } = userData;
 		const customEmoteFolder = join(__dirname, '..', 'data', 'customemotes');
 		const emoteSizes = {
