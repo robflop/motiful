@@ -44,7 +44,7 @@ class AddQuoteCommand extends Command {
 						.then(msg => msg.delete(3000));
 				})
 				.catch(err => {
-					message.edit(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
+					message.channel.send(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
 				});
 		});
 	}
