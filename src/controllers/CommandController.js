@@ -14,18 +14,16 @@ class CommandController {
 		if (message.author.id !== message.client.config.ownerID) return;
 
 		if (!message.content.startsWith(message.client.config.commandPrefix) && this.tagRegex.test(message.content)) {
-			const tags = message.content.match(this.tagRegex).map(tag => tag.split(':').map(t => t.replace(/[[\]\s]/g, '')));
+			const tags = message.content.match(this.tagRegex).map(tag => tag.split(':').map(t => t.trim().replace(/[[\]]/g, '')));
 			// get matches and split them into nested array of tag name and possible eval input
 			let tagged;
 
 			tags.forEach(tag => {
 				let evaled;
-				try { evaled = tag[0] === 'eval' && tag[1] ? eval(tag[1]) : eval(this.tags[tag[0]]); }
+				try { evaled = (tag[0] === 'eval' && tag[1]) ? eval(tag[1]) : eval(this.tags[tag[0]]); } // eslint-disable-line no-extra-parens
 				catch (e) { evaled = '[<Tag errored>]'; }
 
-				tagged = (tag.length === 2) // eslint-disable-line no-extra-parens
-					? (tagged || message.content).replace(`[${tag.join(': ')}]`, evaled || `[${tag[0]}]`)
-					: (tagged || message.content).replace(`[${tag[0]}]`, evaled || `[${tag[0]}]`);
+				tagged = (tagged || message.content).replace(`[${tag.join(': ')}]`, evaled || `[${tag[0]}]`);
 			});
 
 			return tagged !== message.content ? message.edit(tagged) : null;
