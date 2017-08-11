@@ -61,7 +61,6 @@ class CommandController {
 				}
 
 				if (evaled) tagged = (tagged || message.content).replace(tagCall[i - 1].tag, evaled);
-
 			}
 
 			return tagged !== message.content ? message.edit(tagged) : null;
