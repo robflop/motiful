@@ -1,6 +1,5 @@
 {
 	"token": "<fill in bot token here>",
-    "commandPrefix": "--",
-    "eval": false,
+	"commandPrefix": "--",
 	"pm2": false
 }
