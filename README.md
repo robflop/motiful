@@ -33,7 +33,6 @@ Use it with `<prefix> <command>`. It will also be listed in the `help` command.
 
 - The default command prefix is `--`.
 - Commands are case **insensitive**, emotes are case **sensitive**.
-- The `eval` command is disabled by default and needs to be activated in `config.json`. It is not toggleable using the `toggle` command until it is enabled in the config.
 - User config files (favorites, quotes, toggled commands list, custom emote files) are saved in the `data/` file.
 
 #### License
