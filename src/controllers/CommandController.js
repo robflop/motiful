@@ -11,7 +11,7 @@ class CommandController {
 	}
 
 	async handleCommand(message) {
-		if (message.author.id !== message.client.config.ownerID) return;
+		if (message.author.id !== message.client.user.id) return;
 
 		if (!message.content.startsWith(message.client.config.commandPrefix) && this.tagRegex.test(message.content)) {
 			const tags = message.content.match(this.tagRegex).map(tag => tag.split(':').map(t => t.trim().replace(/[[\]]/g, '')));
