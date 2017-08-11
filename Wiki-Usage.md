@@ -15,7 +15,26 @@ In addition to this, it is possible to use on-the-fly evaluation using the `eval
 
 Motiful will then evaluate the code behind the keyword, resulting in a text of `My name is robflop`, if we assume that your username is `robflop`.
 
-(Using any other tag keyword along with eval-like syntax will simply erase the eval-like input and output either a saved tag of that name or the tag call as-is.)
+If you write more complex tag functions to for example fetch a guild and get any of its properties, you can pass parameters to your function in the same way as you would pass it to eval, each parameter being comma seperated.
+
+For example let's take the above eval and turn it into a tag with parameter:
+
+Your tag function would look like this: 
+```js
+name => `My name is ${name}!`
+```
+
+and would be used like this: `[name: robflop]`, resulting in the same as the above eval.
+
+**Important notices**:
+
+Only **one** tag is possible per message. This is due to internal workings of scanning the message for tags with complex inputs such as arrays, objects etc.
+ 
+Also, the tags system is generally only meant for simple-ish functions, not a fully flexed eval command or an entire standalone command. Keep this in mind when writing tags.
+
+You will likely encounter errors if you go too deep into nesting aswell.
+
+
 ___
 
 # addEmote
