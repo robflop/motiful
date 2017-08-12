@@ -45,7 +45,8 @@ class CommandController {
 
 			try {
 				if (tag[0] === 'eval' && tag[1]) {
-					evaled = tag[1]; // was already evaluated above
+					evaled = eval(tag[1]);
+					// eval again to properly be able to return errors etc
 				}
 				else if (typeof this.tags[tag[0]] === 'function') {
 					evaled = await this.tags[tag[0]](...tag[1] || '');
