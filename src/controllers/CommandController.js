@@ -15,6 +15,7 @@ class CommandController {
 
 		if (!message.content.startsWith(message.client.config.commandPrefix) && this.tagRegex.test(message.content)) {
 			const tagCall = message.content.match(this.tagRegex)[0];
+			// save original call to replace in message later
 			const tag = tagCall.split(/:(?![^{]*[}])/).map(t => {
 				// split by colon if not inside json
 				t = t.trim();
@@ -26,12 +27,12 @@ class CommandController {
 				t = t.split(/,(?![^([{]*[\])}])/g).map(p => typeof p === 'string' ? p.trim() : null).map(tagValue => {
 					// split by comma if not inside object, array, etc
 					try {
-						// if (!isNaN(parseInt(tagValue))) return tagValue;
-						// // don't eval if it's a number-as-string cause it'll turn into number
 						return eval(tagValue);
+						// try evaluating to get references to existing objects like message or client
 					}
 					catch (e) {
 						return tagValue;
+						// return plain value if evaluating yielded no result (e.g. value is a non-quoted string)
 					}
 				});
 				return t.length === 1 ? t[0] : t;
