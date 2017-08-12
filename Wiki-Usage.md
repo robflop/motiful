@@ -339,16 +339,16 @@ ___
 #### Explanation:
 - input: The text you wish to set your `Playing ...` status to. Leaving this empty will clear your status.
 
-# shutdown
+# power
 
-#### Description: Shut down motiful.
+#### Description: Restart or shutdown motiful.
 
-#### Syntax: `shutdown`
+#### Syntax: `power <action>`
 
-#### Aliases: `kill`
+#### Aliases: `pw`
 
 #### Explanation:
- - None
+ - action: The action you wish to take, either `shutdown` or `restart`.
 
 # sub
 
