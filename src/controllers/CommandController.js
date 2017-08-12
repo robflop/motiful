@@ -27,6 +27,8 @@ class CommandController {
 				t = t.split(/,(?![^([{]*[\])}])/g).map(p => typeof p === 'string' ? p.trim() : null).map(tagValue => {
 					// split by comma if not inside object, array, etc
 					try {
+						if (tagValue.match(/^["'`]\d*["'`]$/)) return tagValue = tagValue.replace(/["'`]/g, '');
+						// don't evaluate if number enclosed by strings and remove extra quotes
 						return eval(tagValue);
 						// try evaluating to get references to existing objects like message or client
 					}
