@@ -72,6 +72,6 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | reload        | Reload a command                                                                                           |
 | sendQuote     | Send a saved quote                                                                                         |
 | setGame       | Set the game you\'ll be shown to be playing                                                                |
-| shutdown      | Shut down motiful                                                                                          |
+| power         | Restart or shutdown motiful                                                                                |
 | sub           | Replace a part of one of your messages (Only from last 100 overall Messages)                               |
 | toggle        | Toggle a command on or off                                                                                 |
