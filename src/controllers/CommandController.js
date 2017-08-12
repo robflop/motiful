@@ -14,54 +14,51 @@ class CommandController {
 		if (message.author.id !== message.client.user.id) return;
 
 		if (!message.content.startsWith(message.client.config.commandPrefix) && this.tagRegex.test(message.content)) {
-			const tagCall = [];
-			let i = 0;
-			const tags = message.content.match(this.tagRegex).map(tag => { // eslint-disable-line arrow-body-style
-				++i && tagCall.push({ i, tag }); // update index and save original tag to later replace
-				return tag.split(/:(?![^{]*[}])/).map(t => {
-					// split by colon if not inside json
-					t = t.trim();
-					if (t[t.length - 1] === ']') t = t.replace(t[t.length - 1], '');
-					if (t[0] === '[') t = t.replace(t[0], '');
-					// filter out brackets from beginning and end
-					t = t.split(/,(?![^([{]*[\])}])/g).map(p => typeof p === 'string' ? p.trim() : null);
+			const tagCall = message.content.match(this.tagRegex)[0];
+			const tag = tagCall.split(/:(?![^{]*[}])/).map(t => {
+				// split by colon if not inside json
+				t = t.trim();
+				if (t[t.length - 1] === ']') t = t.replace(t[t.length - 1], '');
+				if (t[0] === '[') t = t.replace(t[0], '');
+				// filter out brackets from beginning and end
+				if (this.tags[t] || t === 'eval') return t;
+				// don't eval tag keywords or the eval keyword
+				t = t.split(/,(?![^([{]*[\])}])/g).map(p => typeof p === 'string' ? p.trim() : null).map(tagValue => {
 					// split by comma if not inside object, array, etc
-					return t.map(tagValue => {
-						try {
-							if (!isNaN(parseInt(tagValue))) return tagValue;
-							// don't eval if it's a number-as-string cause it'll turn into number
-							return eval(tagValue);
-						}
-						catch (e) {
-							return tagValue;
-						}
-					});
+					try {
+						// if (!isNaN(parseInt(tagValue))) return tagValue;
+						// // don't eval if it's a number-as-string cause it'll turn into number
+						return eval(tagValue);
+					}
+					catch (e) {
+						return tagValue;
+					}
 				});
-			}); // get matches and split them into nested array of tag name and possible eval input
-			let tagged;
+				return t.length === 1 ? t[0] : t;
+				// avoid nesting array too deep cause it's annoying
+			});
 
-			for (const tag of tags) {
-				let evaled, tagError;
-				try {
-					if (tag[0] === 'eval' && tag[1]) {
-						evaled = eval(tag[1]);
-					}
-					else if (typeof this.tags[tag[0]] === 'function') {
-						evaled = await this.tags[tag[0]](...tag[1] || '');
-					}
-					else {
-						evaled = this.tags[tag[0]];
-					}
-				}
-				catch (e) {
-					if (this.tags.hasOwnProperty(tag[0]) || tag[0] === 'eval') {
-						evaled = '[<Tag errored>]';
-						message.client.logger.error(`Tag '${tag[0]}' errored!:\n${tagError || e}\nWere you trying to use more than 1 tag at once?`);
-					} // only record error if the tag actually exists or is an eval tag
-				}
+			let tagged, evaled, tagError;
 
-				if (evaled) tagged = (tagged || message.content).replace(tagCall[i - 1].tag, evaled);
+			try {
+				if (tag[0] === 'eval' && tag[1]) {
+					evaled = tag[1]; // was already evaluated above
+				}
+				else if (typeof this.tags[tag[0]] === 'function') {
+					evaled = await this.tags[tag[0]](...tag[1] || '');
+				}
+				else {
+					evaled = this.tags[tag[0]];
+				}
 			}
+			catch (e) {
+				if (this.tags.hasOwnProperty(tag[0]) || tag[0] === 'eval') {
+					evaled = '[<Tag errored>]';
+					message.client.logger.error(`Tag '${tag[0]}' errored!:\n${tagError || e}\nWere you trying to use more than 1 tag at once?`);
+				} // only record error if the tag actually exists or is an eval tag
+			}
+
+			if (evaled) tagged = (tagged || message.content).replace(tagCall, evaled);
 
 			return tagged !== message.content ? message.edit(tagged) : null;
 		} // tags
