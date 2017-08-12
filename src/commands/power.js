@@ -7,7 +7,6 @@ class PowerCommand extends Command {
 			name: 'power',
 			description: 'Restart or shutdown motiful',
 			aliases: ['pw'],
-			ownersOnly: true,
 			args: [
 				{
 					type: 'string',

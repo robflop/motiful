@@ -6,7 +6,6 @@ class ReloadCommand extends Command {
 			name: 'reload',
 			description: 'Reload a command',
 			aliases: ['rl'],
-			ownersOnly: true,
 			args: [
 				{
 					type: 'string',
