@@ -6,6 +6,10 @@ A Discord selfbot written using discord.js.
 
 Motiful also uses the snekfetch, chalk and moment packages, plus some standard node modules.
 
+# Important Disclaimer: Use at your own risk
+
+Selfbots along with some features provided by these bot are not allowed by the Discord Terms of Service. Usage of this selfbot is completely on your own liability. I am not responsible for _**anything**_ you do on your own using it.
+
 ## Self-hosting usage
 
 (It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 installed)
