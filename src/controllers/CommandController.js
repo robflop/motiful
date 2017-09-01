@@ -93,7 +93,7 @@ class CommandController {
 
 		if (!parsedArgs) return;
 
-		const userData = ['addquote', 'sendquote', 'delquote', 'listquotes'].includes(command.name)
+		const userData = ['addquote', 'addquote-id', 'sendquote', 'delquote', 'listquotes'].includes(command.name)
 			? { savedQuotes: require('../data/savedQuotes.json') }
 			: ['emote', 'addfav', 'delfav', 'listfavs'].includes(command.name)
 				? { favoriteEmotes: require('../data/favoriteEmotes.json') }

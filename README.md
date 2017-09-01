@@ -54,6 +54,7 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | addEmote      | Add a custom emote                                                                                         |
 | addFav        | Add an emote to the favorites list                                                                         |
 | addQuote      | Save a quote of a message (Out of the last 100 overall messages)                                           |
+| addQuote-id   | Save a quote of a message using a messageID                                                                |
 | aesthetics    | Make your input a e s t h e t i c                                                                          |
 | ascii         | Turn your input into ascii text                                                                            |
 | delEmote      | Delete a custom emote                                                                                      |
