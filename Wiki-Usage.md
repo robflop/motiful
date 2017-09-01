@@ -185,7 +185,7 @@ ___
 #### Aliases: None
 
 #### Explanation:
- - input: The text you to spell out in indicator emotes.
+ - input: The text you wish to spell out in indicator emotes.
 
 # listEmotes
 
