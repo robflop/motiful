@@ -76,6 +76,18 @@ ___
  - user: A mention, start of the username, or ID of the user that wrote the message you wish to quote.
  - snippet: A part of the message you wish to quote.
 
+# addQuote-id
+
+#### Description: Save a quote of a message using a messageID.
+
+#### Syntax: `addquote-id <quoteName> <messageID>`
+
+#### Aliases: `aqi`
+
+#### Explanation:
+ - quoteName: The name you wish to save the quote under.
+ - messageID: ID of the message to save as quote.
+
 # aesthetics
 
 #### Description: Make your input a e s t h e t i c.
