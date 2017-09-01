@@ -292,7 +292,7 @@ ___
 #### Explanation:
  - response: An optional response to attach to the quote.
     * For clarity: The message selection happens by reacting to it, so no snippet, user or other arguments need to be given.
-	* You *must* react using the 💬 emoji for the command to progress.
+	* You *must* react using the 💬 (:speech_balloon:) emoji for the command to progress.
 
 # quote
 
