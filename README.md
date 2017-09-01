@@ -12,7 +12,7 @@ Selfbots along with some features provided by these bot are not allowed by the D
 
 ## Self-hosting usage
 
-(It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 installed)
+(It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 as well as [git](https://git-scm.com) installed)
 
 - Rename `config.example.json` in the `src/` folder to `config.json`
 - Get your token from within Discord Dev Tools (Opened via CTRL+SHIFT+I/Command+Option+I inside Discord) -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
