@@ -298,7 +298,7 @@ ___
 
 #### Description: Quote a message (Out of the last 100 overall messages).
 
-#### Syntax: `quote <user> <snippet>`
+#### Syntax: `quote <user> <input>`
 
 #### Aliases: `q`
 
