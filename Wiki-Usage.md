@@ -11,7 +11,7 @@ If a tag cannot be found (e.g. you do *not* have a tag called `name`), motiful w
 
 In addition to this, it is possible to use on-the-fly evaluation using the `eval` keyword as tag name. To evaluate using this, provide the tag in a fashion such as this:
 
-`My name is [eval: client.user.username]!`.
+`My name is [eval: message.client.user.username]!`.
 
 Motiful will then evaluate the code behind the keyword, resulting in a text of `My name is robflop`, if we assume that your username is `robflop`.
 
@@ -30,7 +30,7 @@ and would be used like this: `[name: robflop]`, resulting in the same as the abo
 
 Only **one** tag is possible per message. This is due to internal workings of scanning the message for tags with complex inputs such as arrays, objects etc.
  
-Also, the tags system is generally only meant for simple-ish functions, not a fully flexed eval command or an entire standalone command. Keep this in mind when writing tags.
+Also, the tags system is generally only meant for simple-ish functions, not a fully fleshed eval command or an entire standalone command. Keep this in mind when writing tags.
 
 You will likely encounter errors if you go too deep into nesting aswell.
 
