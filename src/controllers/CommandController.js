@@ -8,6 +8,11 @@ class CommandController {
 		this.disabledCommands = require('../data/disabledCommands.json');
 		this.tags = require('../data/tags.js');
 		this.tagRegex = /\[([^[\]:]*)(?::?\s*(.*))\]/g;
+		this.userData = {
+			savedQuotes: require('../data/savedQuotes.json'),
+			favoriteEmotes: require('../data/favoriteEmotes.json'),
+			tags: this.tags
+		};
 	}
 
 	async handleCommand(message) { // eslint-disable-line complexity
@@ -22,7 +27,7 @@ class CommandController {
 				if (t[t.length - 1] === ']') t = t.replace(t[t.length - 1], '');
 				if (t[0] === '[') t = t.replace(t[0], '');
 				// filter out brackets from beginning and end
-				if (this.tags[t] || t === 'eval') return t;
+				if (this.tags.hasOwnProperty(t) || t === 'eval') return t;
 				// don't eval tag keywords or the eval keyword
 				t = t.split(/,(?![^([{]*[\])}])/g).map(p => typeof p === 'string' ? p.trim() : null).map(tagValue => {
 					// split by comma if not inside object, array, etc
@@ -49,7 +54,9 @@ class CommandController {
 					// eval again to properly be able to return errors etc
 				}
 				else if (typeof this.tags[tag[0]] === 'function') {
-					evaled = await this.tags[tag[0]](...tag[1] || '');
+					evaled = tag[1]
+						? await this.tags[tag[0]](message, ...tag[1])
+						: await this.tags[tag[0]](message);
 				}
 				else {
 					evaled = this.tags[tag[0]];
@@ -93,15 +100,7 @@ class CommandController {
 
 		if (!parsedArgs) return;
 
-		const userData = ['addquote', 'addquote-id', 'sendquote', 'delquote', 'listquotes'].includes(command.name)
-			? { savedQuotes: require('../data/savedQuotes.json') }
-			: ['emote', 'addfav', 'delfav', 'listfavs'].includes(command.name)
-				? { favoriteEmotes: require('../data/favoriteEmotes.json') }
-				: command.name === 'managetags'
-					? { tags: this.tags }
-					: null;
-
-		return command.run(message, parsedArgs, userData).catch(e => {
+		return command.run(message, parsedArgs, this.userData).catch(e => {
 			logger.error(inspect(e));
 			return message.edit(`An error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete(3000));
 		});
