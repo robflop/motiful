@@ -75,7 +75,7 @@ class CommandController {
 
 			if (evaled) tagged = (tagged || message.content).replace(tagCall, evaled);
 
-			return tagged !== message.content ? message.edit(tagged) : null;
+			return tagged && tagged !== message.content ? message.edit(tagged) : null;
 		} // tags
 
 		else if (!message.content.startsWith(message.client.config.commandPrefix)) { return; }
