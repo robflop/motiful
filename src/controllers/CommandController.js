@@ -49,17 +49,21 @@ class CommandController {
 			let tagged, evaled, tagError;
 
 			try {
+				const actualTag = this.tags[tag[0]];
+
 				if (tag[0] === 'eval' && tag[1]) {
 					evaled = eval(tag[1]);
 					// eval again to properly be able to return errors etc
 				}
-				else if (typeof this.tags[tag[0]] === 'function') {
+				else if (typeof actualTag === 'function') {
 					evaled = tag[1]
-						? await this.tags[tag[0]](message, ...tag[1])
-						: await this.tags[tag[0]](message);
+						? typeof tag[1] === 'string'
+							? await actualTag(message, tag[1])
+							: await actualTag(message, ...tag[1])
+						: await actualTag(message);
 				}
 				else {
-					evaled = this.tags[tag[0]];
+					evaled = actualTag;
 				}
 			}
 			catch (e) {
