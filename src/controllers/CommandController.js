@@ -73,7 +73,7 @@ class CommandController {
 				} // only record error if the tag actually exists or is an eval tag
 			}
 
-			if (evaled) tagged = (tagged || message.content).replace(tagCall, evaled);
+			if (typeof evaled !== 'undefined') tagged = (tagged || message.content).replace(tagCall, evaled);
 
 			return tagged && tagged !== message.content ? message.edit(tagged) : null;
 		} // tags
