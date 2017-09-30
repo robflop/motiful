@@ -57,7 +57,7 @@ class CommandController {
 				}
 				else if (typeof actualTag === 'function') {
 					evaled = tag[1]
-						? typeof tag[1] === 'string'
+						? ['string', 'number'].includes(typeof tag[1])
 							? await actualTag(message, tag[1])
 							: await actualTag(message, ...tag[1])
 						: await actualTag(message);
