@@ -21,12 +21,15 @@ For example let's take the above eval and turn it into a tag with parameter:
 
 Your tag function would look like this: 
 ```js
-name => `My name is ${name}!`
+(message, name) => `My name is ${name}!`
 ```
 
 and would be used like this: `[name: robflop]`, resulting in the same as the above eval.
 
 **Important notices**:
+
+A tag function _always_ passes the message as first param like above. 
+In usage you don't need to pass it (done automatically), but in the tag's code you do.
 
 Only **one** tag is possible per message. This is due to internal workings of scanning the message for tags with complex inputs such as arrays, objects etc.
  
