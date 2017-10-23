@@ -235,22 +235,6 @@ ___
 #### Explanation:
  - None
 
-# manageTags
-
-#### Description: Manage your tags (add, delete, info, list selectors).
-
-#### Syntax: `managetags <selector> <tagName> <tagContent>`
-
-#### Aliases: `mt`
-
-#### Explanation:
- - selector: The action you wish to take (add, delete, info or list).
- - tagName: The name of the tag you wish to manage.
-    * Not present if you are using the `list` selector.
- - tagContent: The content of the tag you wish to create.
-    * Only present when using the `add` selector.
-    * Tag content must be provided **exactly** how it would be interpreted by JavaScript. If you want to output the letter `a`, you must provide it as a String. If you do not, it will likely result in an error when trying to use the tag due to errors about undefined variables.
-
 # nitro
 
 #### Description: Send a fake embed about Discord Nitro.
