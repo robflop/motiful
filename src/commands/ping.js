@@ -12,9 +12,9 @@ class PingCommand extends Command {
 	async run(message, args) {
 		return message.edit('Pinging...').then(msg => {
 			const delay = msg.editedAt - msg.createdAt;
-			if (delay / 100 > 1980) return msg.edit(`Pong! (${delay}ms)`);
+			if (delay > 198500) return msg.edit(`Pong! (${delay}ms)`);
 			// failsafe for massive ping that would exceed 2k char count, lol
-			return msg.edit(`P${'o'.repeat(delay / 100)}ng! (${delay}ms)`);
+			return msg.edit(`P${'o'.repeat(Math.ceil(delay / 100))}ng! (${delay}ms)`);
 		});
 	}
 }
