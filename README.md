@@ -67,7 +67,6 @@ Refer to the [Wiki Usage page](https://github.com/robflop/motiful/wiki/Usage) fo
 | listEmotes    | List all custom emotes                                                                                     |
 | listFavs      | List all saved favorite emotes                                                                             |
 | listQuotes    | List all saved quotes                                                                                      |
-| managetags    | Manage your tags (add, delete, info, list selectors)                                                       |
 | nitro         | Send a fake embed about Discord Nitro                                                                      |
 | ping          | Measure the delay between command call and execution                                                       |
 | purge         | Purge your messages (In the last 100 overall Messages)                                                     |
