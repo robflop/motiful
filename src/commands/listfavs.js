@@ -11,8 +11,10 @@ class ListFavsCommand extends Command {
 
 	async run(message, args, userData) {
 		const { favoriteEmotes } = userData;
-		if (Object.keys(favoriteEmotes).length === 0) return message.edit('No emotes have been favorited!').then(msg => msg.delete(3000));
-		message.edit(`**__Available quotes are:__**\`\`\`${Object.keys(favoriteEmotes).join(', ')}\`\`\``).then(msg => msg.delete(5000));
+		if (Object.keys(favoriteEmotes).length === 0) {
+			return message.edit('No emotes have been favorited!').then(msg => msg.delete({ timeout: 3000 }));
+		}
+		message.edit(`**__Available quotes are:__**\`\`\`${Object.keys(favoriteEmotes).join(', ')}\`\`\``).then(msg => msg.delete({ timeout: 5000 }));
 	}
 }
 

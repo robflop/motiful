@@ -1,12 +1,15 @@
 const MotifulClient = require('./structures/MotifulClient');
 const CommandController = require('./controllers/CommandController');
-const DiscordAPIError = require('discord.js/src/client/rest/DiscordAPIError');
+const DiscordAPIError = require('discord.js/src/rest/DiscordAPIError');
 
 const client = new MotifulClient();
 const controller = new CommandController();
 
 client
-	.once('ready', () => client.logger.info(`motiful ready! (As ${client.user.tag})`))
+	.once('ready', () => {
+		client.user.setStatus('invisible');
+		client.logger.info(`motiful ready! (As ${client.user.tag})`);
+	})
 	.on('message', message => controller.handleCommand(message))
 	.login(client.config.token);
 

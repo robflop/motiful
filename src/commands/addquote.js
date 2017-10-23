@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
 
 class AddQuoteCommand extends Command {
@@ -28,12 +28,12 @@ class AddQuoteCommand extends Command {
 	async run(message, args, userData) {
 		const { savedQuotes } = userData;
 		await message.delete();
-		message.channel.fetchMessages({ limit: 100 }).then(messages => {
+		message.channel.messages.fetch({ limit: 100 }).then(messages => {
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(args.snippet)).first();
-			if (!quoteMsg) return message.channel.send('Message not found!').then(msg => msg.delete(2000));
+			if (!quoteMsg) return message.channel.send('Message not found!').then(msg => msg.delete({ timeout: 2000 }));
 			const date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'), time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
-			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL;
-			const embed = new RichEmbed()
+			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL({ format: 'png', size: 128 });
+			const embed = new MessageEmbed()
 				.setColor('RANDOM')
 				.setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
 				.setDescription(quoteMsg.content);
@@ -41,10 +41,10 @@ class AddQuoteCommand extends Command {
 			message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
 				.then(quotes => {
 					message.channel.send(`**__The following quote was successfully saved under the name \`${args.quoteName}\`:__**`, { embed })
-						.then(msg => msg.delete(3000));
+						.then(msg => msg.delete({ timeout: 3000 }));
 				})
 				.catch(err => {
-					message.channel.send(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
+					message.channel.send(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete({ timeout: 3000 }));
 				});
 		});
 	}

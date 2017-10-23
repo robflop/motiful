@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
 
 class QuoteReactCommand extends Command {
@@ -27,7 +27,7 @@ class QuoteReactCommand extends Command {
 		*/
 
 		const reactionTimeout = message.client.setTimeout(() => { // eslint-disable-line arrow-body-style
-			message.edit('No appropriate reaction (💬) was detected within the timeframe!').then(msg => msg.delete(300));
+			message.edit('No appropriate reaction (💬) was detected within the timeframe!').then(msg => msg.delete({ timeout: 300 }));
 			commandCalled = false;
 		}, 1000 * 30);
 
@@ -38,8 +38,8 @@ class QuoteReactCommand extends Command {
 			messageReaction.remove();
 			const date = moment(messageReaction.message.createdTimestamp).format('Do MMM YYYY');
 			const time = moment(messageReaction.message.createdTimestamp).format('HH:mm:ss');
-			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL;
-			const embed = new RichEmbed()
+			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL({ format: 'png', size: 128 });
+			const embed = new MessageEmbed()
 				.setColor('RANDOM')
 				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
 				.setDescription(`\`${messageReaction.message.content}\``);
