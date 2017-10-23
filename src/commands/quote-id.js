@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
 
 class QuoteIDCommand extends Command {
@@ -24,8 +24,8 @@ class QuoteIDCommand extends Command {
 
 	async run(message, args) {
 		const date = moment(args.message.createdTimestamp).format('Do MMM YYYY'), time = moment(args.message.createdTimestamp).format('HH:mm:ss');
-		const name = args.message.author.username, avatar = args.message.author.avatarURL;
-		const embed = new RichEmbed()
+		const name = args.message.author.username, avatar = args.message.author.avatarURL({ format: 'png', size: 128 });
+		const embed = new MessageEmbed()
 			.setColor('RANDOM')
 			.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
 			.setDescription(`\`${args.message.content}\``);

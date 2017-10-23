@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
 
 class QuoteCommand extends Command {
@@ -31,14 +31,14 @@ class QuoteCommand extends Command {
 		else {
 			snippet = args.input.trim();
 		}
-		message.channel.fetchMessages({ limit: 100 }).then(messages => {
+		message.channel.messages.fetch({ limit: 100 }).then(messages => {
 			if (messages.has(message.id)) messages.delete(message.id);
 			// delete command call from collection if it exists within
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(snippet)).first();
-			if (!quoteMsg) return message.edit('Message not found!').then(msg => msg.delete(2000));
+			if (!quoteMsg) return message.edit('Message not found!').then(msg => msg.delete({ timeout: 2000 }));
 			const date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'), time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
-			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL;
-			const embed = new RichEmbed()
+			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL({ format: 'png', size: 128 });
+			const embed = new MessageEmbed()
 				.setColor('RANDOM')
 				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
 				.setDescription(`\`${quoteMsg.content}\``);

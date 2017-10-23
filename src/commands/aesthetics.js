@@ -22,7 +22,9 @@ class AestheticsCommand extends Command {
 				? aestheticPhrase.push(aesthetics[char])
 				: aestheticPhrase.push(char);
 		}
-		if (aestheticPhrase.join(' ').length > 1999) return message.edit('Output too long. Try shorter text.').then(message => message.delete(2000));
+		if (aestheticPhrase.join(' ').length > 1999) {
+			return message.edit('Output too long. Try shorter text.').then(msg => msg.delete({ timeout: 2000 }));
+		}
 		message.edit(aestheticPhrase.join(' '));
 	}
 }

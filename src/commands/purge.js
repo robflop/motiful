@@ -17,7 +17,7 @@ class PurgeCommand extends Command {
 
 	async run(message, args) {
 		await message.delete();
-		message.channel.fetchMessages({ limit: 100 }).then(messages => {
+		message.channel.messages.fetch({ limit: 100 }).then(messages => {
 			messages = messages.filterArray(message => message.author.id === message.client.user.id).slice(0, args.amount);
 			for (const message of messages) message.delete();
 		});

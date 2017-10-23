@@ -22,7 +22,9 @@ class IndicatorCommand extends Command {
 				? indicatorPhrase.push(`:regional_indicator_${char.toLowerCase()}:`)
 				: indicatorPhrase.push(char);
 		}
-		if (indicatorPhrase.join(' ').length > 1999) return message.edit('Output too long. Try shorter text.').then(message => message.delete(2000));
+		if (indicatorPhrase.join(' ').length > 1999) {
+			return message.edit('Output too long. Try shorter text.').then(msg => msg.delete({ timeout: 2000 }));
+		}
 		message.edit(indicatorPhrase.join(' '));
 	}
 }

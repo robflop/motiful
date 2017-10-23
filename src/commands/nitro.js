@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 class NitroCommand extends Command {
 	constructor() {
@@ -10,7 +10,7 @@ class NitroCommand extends Command {
 	}
 
 	async run(message, args) {
-		const embed = new RichEmbed()
+		const embed = new MessageEmbed()
 			.setColor(5267072)
 			.setAuthor(`Discord Nitro Message`, 'https://cdn.discordapp.com/emojis/264287569687216129.png ')
 			.setDescription('[Discord Nitro](https://discordapp.com/nitro) is **required** to view this message.')
