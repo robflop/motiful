@@ -15,7 +15,7 @@ Selfbots along with some features provided by these bot are not allowed by the D
 (It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 as well as [git](https://git-scm.com) installed)
 
 - Rename `config.example.json` in the `src/` folder to `config.json`
-- Get your token from within Discord Dev Tools (Opened via CTRL+SHIFT+I/Command+Option+I inside Discord) -> Instructions [here](http://i.imgur.com/OhBVCoA.png)
+- Get your token from within Discord Dev Tools (see below for instructions on how to do this)
 - Fill out your token in `config.json`
 - Adjust other config settings to your liking
 - run `npm install` in a command window located in the directory you downloaded motiful in to install necessary packages
@@ -38,6 +38,7 @@ Use it with `<prefix> <command>`. It will also be listed in the `help` command.
 - The default command prefix is `--`.
 - Commands are case **insensitive**, emotes are case **sensitive**.
 - User config files (favorites, quotes, toggled commands list, custom emote files) are saved in the `data/` file.
+- Follow the image instructions to get your token: ![Token instructions](token_instructions.png) (All credits for the image to [TheRacingLion](https://github.com/TheRacingLion/Discord-SelfBot/wiki/Discord-Token-Tutorial))
 
 #### License
 
