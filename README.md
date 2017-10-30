@@ -14,14 +14,14 @@ Selfbots along with some features provided by these bot are not allowed by the D
 
 (It is assumed you have [node.js](https://nodejs.org/en/) on at least version 7.6 as well as [git](https://git-scm.com) installed)
 
-- Rename `config.example.json` in the `src/` folder to `config.json`
+- Navigate into the `src/` folder of your motiful folder for all of the following steps
+- Rename the `config.example.json` file to `config.json`
 - Get your token from within Discord Dev Tools (see below for instructions on how to do this)
-- Fill out your token in `config.json`
+- Open `config.json` in a text editor of your choice and fill out the token you got using the instructions below
 - Adjust other config settings to your liking
 - run `npm install` in a command window located in the directory you downloaded motiful in to install necessary packages
 - (Feel free to ignore any `unmet peer dependency` or `... requires a peer of...` warnings)
-- Navigate into the `src/` folder to set the working directory of motiful correctly
-- Start the bot using `node motiful.js` in a command window located in the directory you downloaded motiful in to!
+- Start the bot using `node motiful.js` in a command window located in the `src/` directory of your motiful folder
 
 ### Adding commands
 
