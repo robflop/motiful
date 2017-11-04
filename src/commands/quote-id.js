@@ -24,6 +24,7 @@ class QuoteIDCommand extends Command {
 
 	async run(message, args) {
 		if (!args.message.member) args.message.member = await args.message.guild.members.fetch(args.message.author.id);
+
 		const name = args.message.author.username, avatar = args.message.author.avatarURL({ format: 'png', size: 128 });
 		const embed = new MessageEmbed()
 			.setColor(args.message.member.displayHexColor)
