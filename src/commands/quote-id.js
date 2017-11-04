@@ -23,12 +23,14 @@ class QuoteIDCommand extends Command {
 	}
 
 	async run(message, args) {
-		const date = moment(args.message.createdTimestamp).format('Do MMM YYYY'), time = moment(args.message.createdTimestamp).format('HH:mm:ss');
+		if (!args.message.member) args.message.member = await args.message.guild.members.fetch(args.message.author.id);
 		const name = args.message.author.username, avatar = args.message.author.avatarURL({ format: 'png', size: 128 });
 		const embed = new MessageEmbed()
-			.setColor('RANDOM')
-			.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
-			.setDescription(`\`${args.message.content}\``);
+			.setColor(args.message.member.displayHexColor)
+			.setAuthor(name, avatar)
+			.setDescription(args.message.content)
+			.setFooter(`#${args.message.channel.name}`)
+			.setTimestamp();
 		return message.edit({ embed }).then(msg => {
 			if (args.response) msg.channel.send(args.response);
 		});
