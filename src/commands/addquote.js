@@ -28,16 +28,23 @@ class AddQuoteCommand extends Command {
 	async run(message, args, userData) {
 		const { savedQuotes } = userData;
 		await message.delete();
-		message.channel.messages.fetch({ limit: 100 }).then(messages => {
+
+		message.channel.messages.fetch({ limit: 100 }).then(async messages => {
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(args.snippet)).first();
+
 			if (!quoteMsg) return message.channel.send('Message not found!').then(msg => msg.delete({ timeout: 2000 }));
-			const date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'), time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
+			if (!quoteMsg.member) quoteMsg.member = await quoteMsg.guild.members.fetch(quoteMsg.author.id);
+
 			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL({ format: 'png', size: 128 });
 			const embed = new MessageEmbed()
-				.setColor('RANDOM')
-				.setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
-				.setDescription(quoteMsg.content);
-			savedQuotes[args.quoteName] = { author: `${name} wrote on the ${date} at ${time}:`, content: quoteMsg.content, avatar: avatar };
+				.setColor(quoteMsg.member.displayHexColor)
+				.setAuthor(name, avatar)
+				.setDescription(quoteMsg.content)
+				.setFooter(`#${quoteMsg.channel.name}`)
+				.setTimestamp();
+
+			savedQuotes[args.quoteName] = embed;
+
 			message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
 				.then(quotes => {
 					message.channel.send(`**__The following quote was successfully saved under the name \`${args.quoteName}\`:__**`, { embed })

@@ -18,15 +18,14 @@ class SendQuoteCommand extends Command {
 
 	async run(message, args, userData) {
 		const { savedQuotes } = userData;
+
 		if (!savedQuotes.hasOwnProperty(args.quoteName)) {
 			return message.edit('Quote not found!').then(msg => msg.delete({ timeout: 2000 }));
 		}
+
 		const quote = savedQuotes[args.quoteName];
-		const embed = new MessageEmbed()
-			.setColor('RANDOM')
-			.setAuthor(quote.author, quote.avatar)
-			.setDescription(quote.content);
-		return message.edit({ embed });
+
+		return message.edit({ embed: quote });
 	}
 }
 
