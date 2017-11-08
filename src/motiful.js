@@ -2,7 +2,12 @@ const MotifulClient = require('./structures/MotifulClient');
 const CommandController = require('./controllers/CommandController');
 const DiscordAPIError = require('discord.js/src/rest/DiscordAPIError');
 
-const client = new MotifulClient();
+const client = new MotifulClient({
+	disabledEvents: ['GUILD_SYNC', 'GUILD_CREATE', 'GUILD_DELETE', 'GUILD_UPDATE', 'GUILD_MEMBER_ADD', 'GUILD_MEMBER_REMOVE', 'GUILD_MEMBER_UPDATE',
+		'GUILD_MEMBERS_CHUNK', 'GUILD_ROLE_CREATE', 'GUILD_ROLE_DELETE', 'GUILD_ROLE_UPDATE', 'GUILD_BAN_ADD', 'GUILD_BAN_REMOVE', 'CHANNEL_CREATE',
+		'CHANNEL_DELETE', 'CHANNEL_UPDATE', 'CHANNEL_PINS_UPDATE', 'USER_UPDATE', 'USER_NOTE_UPDATE', 'USER_SETTINGS_UPDATE', 'PRESENCE_UPDATE',
+		'VOICE_STATE_UPDATE', 'TYPING_START', 'VOICE_SERVER_UPDATE', 'RELATIONSHIP_ADD', 'RELATIONSHIP_REMOVE']
+});
 const controller = new CommandController();
 
 client
