@@ -19,6 +19,8 @@ Selfbots along with some features provided by these bot are not allowed by the D
 - Get your token from within Discord Dev Tools (see below for instructions on how to do this)
 - Open `config.json` in a text editor of your choice and fill out the token you got using the instructions below
 - Adjust other config settings to your liking
+- Move into the `data/` directory (full path is `/src/data`)
+- Remove the `.default` from these three filenames: `disabledCommands.default.json`, `favoriteEmotes.default.json`, `savedQuotes.default.json`
 - run `npm install` in a command window located in the directory you downloaded motiful in to install necessary packages
 - (Feel free to ignore any `unmet peer dependency` or `... requires a peer of...` warnings)
 - Start the bot using `node motiful.js` in a command window located in the `src/` directory of your motiful folder
