@@ -71,7 +71,7 @@ class EmoteCommand extends Command {
 			try {
 				args.emoteSize = emoteSizes.ffz[args.emoteSize] || emoteSizes.ffz.small;
 				const ffzEmotes = await axios.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
-				const emote = ffzEmotes.body.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
+				const emote = ffzEmotes.data.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
 				if (!emote) {
 					return message.channel.send(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete({ timeout: 3000 }));
 				}
@@ -80,10 +80,8 @@ class EmoteCommand extends Command {
 				return message.channel.send(new MessageAttachment(emoteURL, `${args.emoteName}.png`));
 			}
 			catch (err) {
-				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
 				message.client.logger.error(err);
-				return message.channel.send(`An error occurred sending the request: \`${err.code}: ${errorDetails}\``)
-					.then(msg => msg.delete({ timeout: 3000 }));
+				return message.channel.send(`An error occurred sending the request: \`${err.message}\``).then(msg => msg.delete({ timeout: 3000 }));
 			}
 		}
 		else if (args.channelName === 'bttv') {

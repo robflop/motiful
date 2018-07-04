@@ -20,10 +20,10 @@ class AsciiCommand extends Command {
 		const { logger } = message.client;
 		axios.get(`http://artii.herokuapp.com/make?text=${args.input}`)
 			.then(ascii => {
-				if (ascii.text.length > 1999) {
+				if (ascii.data.length > 1999) {
 					return message.edit('Output too long. Try shorter text.').then(msg => msg.delete({ timeout: 2000 }));
 				}
-				return message.edit(`\`\`\`${ascii.text}\`\`\``);
+				return message.edit(`\`\`\`${ascii.data}\`\`\``);
 			})
 			.catch(err => {
 				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
