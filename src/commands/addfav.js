@@ -47,18 +47,16 @@ class AddFavCommand extends Command {
 		}
 		else if (args.channelName === 'ffz') {
 			try {
-				const emotes = await axios.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
-				emote = emotes.body.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
+				const ffzEmotes = await axios.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
+				emote = ffzEmotes.data.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
 				if (!emote) {
 					return message.edit(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete({ timeout: 3000 }));
 				}
 				emoteID = emote.id;
 			}
 			catch (err) {
-				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
 				message.client.logger.error(err);
-				return message.edit(`An error occurred sending the request: \`${err.code}: ${errorDetails}\``)
-					.then(msg => msg.delete({ timeout: 3000 }));
+				return message.edit(`An error occurred sending the request: \`${err.message}\``).then(msg => msg.delete({ timeout: 3000 }));
 			}
 		}
 		else {
