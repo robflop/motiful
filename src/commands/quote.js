@@ -1,6 +1,5 @@
 const Command = require('../structures/Command');
 const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
 
 class QuoteCommand extends Command {
 	constructor() {
