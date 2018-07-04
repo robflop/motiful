@@ -1,6 +1,6 @@
 const Command = require('../structures/Command');
 const { MessageAttachment } = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
 const { join } = require('path');
 const { readdirSync } = require('fs');
 const globalEmotes = require('../data/twitchemotes/global.json');
@@ -70,7 +70,7 @@ class EmoteCommand extends Command {
 		else if (args.channelName === 'ffz') {
 			try {
 				args.emoteSize = emoteSizes.ffz[args.emoteSize] || emoteSizes.ffz.small;
-				const ffzEmotes = await snekfetch.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
+				const ffzEmotes = await axios.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
 				const emote = ffzEmotes.body.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
 				if (!emote) {
 					return message.channel.send(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete({ timeout: 3000 }));

@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
 const { join } = require('path');
 const { existsSync, writeFile } = require('fs');
 
@@ -36,7 +36,7 @@ class AddEmoteCommand extends Command {
 		if (existsSync(emotePath)) {
 			return message.edit('Emote with that name already exists!').then(msg => msg.delete({ timeout: 3000 }));
 		}
-		snekfetch.get(args.url)
+		axios.get(args.url)
 			.then(emote => {
 				writeFile(emotePath, emote.body, err => {
 					if (err) {
