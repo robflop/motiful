@@ -4,7 +4,7 @@
 
 A Discord selfbot written using discord.js.
 
-Motiful also uses the snekfetch, chalk and moment packages, plus some standard node modules.
+Motiful also uses the axios, chalk and moment packages, plus some standard node modules.
 
 # Important Disclaimer: Use at your own risk
 

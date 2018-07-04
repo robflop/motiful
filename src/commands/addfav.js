@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
 // const subEmotes = require('../data/twitchemotes/subscriber.json');
 const bttv = require('../data/twitchemotes/bttv.json');
 
@@ -47,7 +47,7 @@ class AddFavCommand extends Command {
 		}
 		else if (args.channelName === 'ffz') {
 			try {
-				const emotes = await snekfetch.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
+				const emotes = await axios.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
 				emote = emotes.body.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
 				if (!emote) {
 					return message.edit(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete({ timeout: 3000 }));
