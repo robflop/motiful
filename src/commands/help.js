@@ -18,7 +18,7 @@ class HelpCommand extends Command {
 
 	async run(message, args) {
 		return message.edit(`Refer to https://github.com/robflop/motiful/wiki/Usage#${args.command} for extensive Usage help.`)
-			.then(msg => msg.delete(5000));
+			.then(msg => msg.delete({ timeout: 5000 }));
 	}
 }
 

@@ -1,6 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
-const moment = require('moment');
+const { MessageEmbed } = require('discord.js');
 
 class QuoteCommand extends Command {
 	constructor() {
@@ -24,6 +23,7 @@ class QuoteCommand extends Command {
 
 	async run(message, args) {
 		let snippet, response;
+
 		if (message.content.includes('|')) {
 			snippet = args.input.substring(0, args.input.indexOf('|') - 1).trim();
 			response = args.input.substring(args.input.indexOf('|') + 1).trim();
@@ -31,17 +31,23 @@ class QuoteCommand extends Command {
 		else {
 			snippet = args.input.trim();
 		}
-		message.channel.fetchMessages({ limit: 100 }).then(messages => {
+
+		message.channel.messages.fetch({ limit: 100 }).then(async messages => {
 			if (messages.has(message.id)) messages.delete(message.id);
 			// delete command call from collection if it exists within
 			const quoteMsg = messages.filter(msg => msg.author.id === args.user.id && msg.content.toLowerCase().includes(snippet)).first();
-			if (!quoteMsg) return message.edit('Message not found!').then(msg => msg.delete(2000));
-			const date = moment(quoteMsg.createdTimestamp).format('Do MMM YYYY'), time = moment(quoteMsg.createdTimestamp).format('HH:mm:ss');
-			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL;
-			const embed = new RichEmbed()
-				.setColor('RANDOM')
-				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
-				.setDescription(`\`${quoteMsg.content}\``);
+
+			if (!quoteMsg) return message.edit('Message not found!').then(msg => msg.delete({ timeout: 2000 }));
+			if (!quoteMsg.member) quoteMsg.member = await quoteMsg.guild.members.fetch(quoteMsg.author.id);
+
+			const name = quoteMsg.author.username, avatar = quoteMsg.author.avatarURL({ format: 'png', size: 128 });
+			const embed = new MessageEmbed()
+				.setColor(quoteMsg.member.displayHexColor)
+				.setAuthor(name, avatar)
+				.setDescription(quoteMsg.content)
+				.setFooter(`#${quoteMsg.channel.name}`)
+				.setTimestamp();
+
 			return message.edit({ embed }).then(msg => {
 				if (response) msg.channel.send(response);
 			});

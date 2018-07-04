@@ -1,9 +1,11 @@
 # Tags:
 Tags in motiful are a feature seperate from commands -- *they **_don't_** use the command prefix, nor do they have a specific "command name" that tells motiful to use them -- all it listens to is the format in which things are written.*
 
+They are saved in a file called ``tags.js`` within the ``src/data`` folder and to update the loaded tags, motiful needs to be restarted.
+
 To trigger a tag, just place it in your message alongside your other content enclosed by brackets, e.g. `My name is [name]!`. This will result in motiful trying to find a tag called `name`, replacing the tag call with the output this tag results in.
 
-Assuming you have a tag called `name`, with value `robflop`, the result of the above would be: 
+Assuming you have a tag called `name`, with value `'robflop'`, the result of the above would be: 
 
 `My name is robflop!`.
 
@@ -29,7 +31,7 @@ and would be used like this: `[name: robflop]`, resulting in the same as the abo
 **Important notices**:
 
 A tag function _always_ passes the message as first param like above. 
-In usage you don't need to pass it (done automatically), but in the tag's code you do.
+In usage you don't need to pass it (this is done automatically), but in the tag's code you do. See how it's done in the above example tag, that is how you need to do it too.
 
 Only **one** tag is possible per message. This is due to internal workings of scanning the message for tags with complex inputs such as arrays, objects etc.
  
@@ -234,22 +236,6 @@ ___
 
 #### Explanation:
  - None
-
-# manageTags
-
-#### Description: Manage your tags (add, delete, info, list selectors).
-
-#### Syntax: `managetags <selector> <tagName> <tagContent>`
-
-#### Aliases: `mt`
-
-#### Explanation:
- - selector: The action you wish to take (add, delete, info or list).
- - tagName: The name of the tag you wish to manage.
-    * Not present if you are using the `list` selector.
- - tagContent: The content of the tag you wish to create.
-    * Only present when using the `add` selector.
-    * Tag content must be provided **exactly** how it would be interpreted by JavaScript. If you want to output the letter `a`, you must provide it as a String. If you do not, it will likely result in an error when trying to use the tag due to errors about undefined variables.
 
 # nitro
 

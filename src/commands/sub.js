@@ -20,7 +20,7 @@ class SubCommand extends Command {
 		const replaceWith = args.input.substring(args.input.indexOf('|') + 1).trim().split(';');
 		await message.delete();
 
-		message.channel.fetchMessages({ limit: 100 }).then(messages => {
+		message.channel.messages.fetch({ limit: 100 }).then(messages => {
 			const targetMessage = messages.filter(msg => {
 				msg.author.id === msg.client.user.id;
 				return toReplace.every(word => msg.content.toLowerCase().includes(word.toLowerCase()));

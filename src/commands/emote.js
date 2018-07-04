@@ -1,6 +1,6 @@
 const Command = require('../structures/Command');
-const { Attachment } = require('discord.js');
-const snekfetch = require('snekfetch');
+const { MessageAttachment } = require('discord.js');
+const axios = require('axios');
 const { join } = require('path');
 const { readdirSync } = require('fs');
 const globalEmotes = require('../data/twitchemotes/global.json');
@@ -60,40 +60,39 @@ class EmoteCommand extends Command {
 			// }
 			const wasActualChannel = actualChannel ? ` on the \`${args.channelName}\` channel` : '';
 			if (!emote) {
-				return message.channel.send(`Emote \`${args.emoteName}\` not found${wasActualChannel}!`).then(msg => msg.delete(3000));
+				return message.channel.send(`Emote \`${args.emoteName}\` not found${wasActualChannel}!`).then(msg => msg.delete({ timeout: 3000 }));
 			}
 			const emoteID = emote.id;
 			const emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${args.emoteSize}`;
-			return message.channel.send(new Attachment(emoteURL, `${args.emoteName}.png`));
+			return message.channel.send(new MessageAttachment(emoteURL, `${args.emoteName}.png`));
 		}
 		// twitchemotes.com subscriber emotes disabled until a search endpoint is implemented
 		else if (args.channelName === 'ffz') {
 			try {
 				args.emoteSize = emoteSizes.ffz[args.emoteSize] || emoteSizes.ffz.small;
-				const ffzEmotes = await snekfetch.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
-				const emote = ffzEmotes.body.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
+				const ffzEmotes = await axios.get(`http://api.frankerfacez.com/v1/emoticons?q=${args.emoteName}&page=1&private=on`);
+				const emote = ffzEmotes.data.emoticons.filter(emote => emote.name === args.emoteName)[0] || '';
 				if (!emote) {
-					return message.channel.send(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete(3000));
+					return message.channel.send(`Emote \`${args.emoteName}\` not found on FrankerFaceZ!`).then(msg => msg.delete({ timeout: 3000 }));
 				}
 				const emoteID = emote.id;
 				const emoteURL = `http://cdn.frankerfacez.com/emoticon/${emoteID}/${args.emoteSize}`;
-				return message.channel.send(new Attachment(emoteURL, `${args.emoteName}.png`));
+				return message.channel.send(new MessageAttachment(emoteURL, `${args.emoteName}.png`));
 			}
 			catch (err) {
-				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
 				message.client.logger.error(err);
-				return message.channel.send(`An error occurred sending the request: \`${err.code}: ${errorDetails}\``).then(msg => msg.delete(3000));
+				return message.channel.send(`An error occurred sending the request: \`${err.message}\``).then(msg => msg.delete({ timeout: 3000 }));
 			}
 		}
 		else if (args.channelName === 'bttv') {
 			args.emoteSize = emoteSizes.bttv[args.emoteSize] || emoteSizes.bttv.small;
 			const emote = bttv.emotes.filter(emote => emote.code === args.emoteName)[0] || '';
 			if (!emote) {
-				return message.channel.send(`Emote \`${args.emoteName}\` not found on BetterTwitchTV!`).then(msg => msg.delete(3000));
+				return message.channel.send(`Emote \`${args.emoteName}\` not found on BetterTwitchTV!`).then(msg => msg.delete({ timeout: 3000 }));
 			}
 			const emoteID = emote.id;
 			const emoteURL = `https://cdn.betterttv.net/emote/${emoteID}/${args.emoteSize}x`;
-			return message.channel.send(new Attachment(emoteURL, `${args.emoteName}.${emote.imageType}`));
+			return message.channel.send(new MessageAttachment(emoteURL, `${args.emoteName}.${emote.imageType}`));
 		}
 		else if (favoriteEmotes.hasOwnProperty(args.channelName)) {
 			const favorite = favoriteEmotes[args.channelName];
@@ -104,18 +103,18 @@ class EmoteCommand extends Command {
 			if (favorite.channelName === 'ffz') {
 				args.emoteSize = emoteSizes.ffz[args.emoteSize] || emoteSizes.ffz.small;
 				const emoteURL = `http://cdn.frankerfacez.com/emoticon/${favorite.emoteID}/${args.emoteSize}`;
-				return message.channel.send(new Attachment(emoteURL, `${favorite.emoteName}.png`));
+				return message.channel.send(new MessageAttachment(emoteURL, `${favorite.emoteName}.png`));
 			}
 			else if (favorite.channelName === 'bttv') {
 				args.emoteSize = emoteSizes.bttv[args.emoteSize] || emoteSizes.bttv.small;
 				const emoteURL = `https://cdn.betterttv.net/emote/${favorite.emoteID}/${args.emoteSize}x`;
 				const imageType = bttv.emotes.filter(emote => emote.code === favorite.emoteName)[0].imageType;
-				return message.channel.send(new Attachment(emoteURL, `${favorite.emoteName}.${imageType}`));
+				return message.channel.send(new MessageAttachment(emoteURL, `${favorite.emoteName}.${imageType}`));
 			}
 			else {
 				args.emoteSize = emoteSizes.globalAndSub[args.emoteSize] || emoteSizes.globalAndSub.small;
 				const emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${favorite.emoteID}/${args.emoteSize}`;
-				return message.channel.send(new Attachment(emoteURL, `${favorite.emoteName}.png`));
+				return message.channel.send(new MessageAttachment(emoteURL, `${favorite.emoteName}.png`));
 			}
 		}
 		else {
@@ -128,11 +127,11 @@ class EmoteCommand extends Command {
 			const customEmote = readdirSync(customEmoteFolder).filter(file => customEmoteRegex.test(file))[0] || '';
 			if (customEmote) {
 				const emotePath = join(customEmoteFolder, customEmote);
-				return message.channel.send(new Attachment(emotePath, customEmote));
+				return message.channel.send(new MessageAttachment(emotePath, customEmote));
 			}
 			else {
 				return message.channel.send(`Emote \`${args.emoteName}\` not found in your custom emotes, on Twitch, FrankerFacez or BetterTwitchTV.`)
-					.then(msg => msg.delete(3000));
+					.then(msg => msg.delete({ timeout: 3000 }));
 			}
 		}
 	}

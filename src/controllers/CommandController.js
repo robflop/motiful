@@ -89,7 +89,7 @@ class CommandController {
 		if (!command) return;
 
 		if (command.guildOnly && message.channel.type !== 'text') {
-			return message.edit(`The ${command.name} command is only available on servers.`).then(msg => msg.delete(3000));
+			return message.edit(`The ${command.name} command is only available on servers.`).then(msg => msg.delete({ timeout: 3000 }));
 		}
 
 		if (this.disabledCommands.includes(command.name)) return;
@@ -97,7 +97,7 @@ class CommandController {
 		if (command.args.length && args.length < command.args.length && !('defaultVal' in command.args.last())) {
 			const correctSyntax = `${config.commandPrefix}${command.name} ${command.args.map(a => `<${a.name}>`).join(' ')}`;
 			return message.edit(`you didn't provide enough arguments! The correct format would be:\n\`${correctSyntax}\``)
-				.then(msg => msg.delete(3000));
+				.then(msg => msg.delete({ timeout: 3000 }));
 		}
 
 		const parsedArgs = command.args.length ? await this.parseArguments(args, command, message) : args;
@@ -106,7 +106,7 @@ class CommandController {
 
 		return command.run(message, parsedArgs, this.userData).catch(e => {
 			logger.error(inspect(e));
-			return message.edit(`An error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete(3000));
+			return message.edit(`An error occurred while executing the \`${command.name}\` command.`).then(msg => msg.delete({ timeout: 3000 }));
 		});
 	}
 
@@ -128,7 +128,7 @@ class CommandController {
 			}
 
 			if (parsedArgs[name] === null) {
-				message.edit(`invalid input for the \`${name}\` argument! Expected \`${type}\`.`).then(msg => msg.delete(3000));
+				message.edit(`invalid input for the \`${name}\` argument! Expected \`${type}\`.`).then(msg => msg.delete({ timeout: 3000 }));
 				return undefined;
 			}
 		}

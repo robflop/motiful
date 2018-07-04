@@ -1,6 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
-const moment = require('moment');
+const { MessageEmbed } = require('discord.js');
 
 class AddQuoteCommand extends Command {
 	constructor() {
@@ -24,22 +23,26 @@ class AddQuoteCommand extends Command {
 	async run(message, args, userData) {
 		const { savedQuotes } = userData;
 		await message.delete();
-		const date = moment(args.message.createdTimestamp).format('Do MMM YYYY'), time = moment(args.message.createdTimestamp).format('HH:mm:ss');
-		const name = args.message.author.username, avatar = args.message.author.avatarURL;
 
-		const embed = new RichEmbed()
-			.setColor('RANDOM')
-			.setAuthor(`${name} wrote on the ${date} at ${time}:`, avatar)
-			.setDescription(args.message.content);
+		if (!args.message.member) args.message.member = await args.message.guild.members.fetch(args.message.author.id);
 
-		savedQuotes[args.quoteName] = { author: `${name} wrote on the ${date} at ${time}:`, content: args.message.content, avatar: avatar };
+		const name = args.message.author.username, avatar = args.message.author.avatarURL({ format: 'png', size: 128 });
+		const embed = new MessageEmbed()
+			.setColor(args.message.member.displayHexColor)
+			.setAuthor(name, avatar)
+			.setDescription(args.message.content)
+			.setFooter(`#${args.message.channel.name}`)
+			.setTimestamp();
+
+		savedQuotes[args.quoteName] = embed;
+
 		message.client.logger.writeJSON(savedQuotes, './data/savedQuotes.json')
 			.then(quotes => {
 				message.channel.send(`**__The following quote was successfully saved under the name \`${args.quoteName}\`:__**`, { embed })
-					.then(msg => msg.delete(3000));
+					.then(msg => msg.delete({ timeout: 3000 }));
 			})
 			.catch(err => {
-				message.channel.send(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
+				message.channel.send(`An error occurred writing to the file: \`\`\`${err}\`\`\``).then(msg => msg.delete({ timeout: 3000 }));
 			});
 	}
 }

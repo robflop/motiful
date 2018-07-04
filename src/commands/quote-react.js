@@ -1,6 +1,5 @@
 const Command = require('../structures/Command');
-const { RichEmbed } = require('discord.js');
-const moment = require('moment');
+const { MessageEmbed } = require('discord.js');
 
 class QuoteReactCommand extends Command {
 	constructor() {
@@ -20,37 +19,39 @@ class QuoteReactCommand extends Command {
 
 	async run(message, args) {
 		message.edit('Response saved, react to a message using the 💬 emoji within the next 30 seconds to quote it.');
-		let commandCalled = true;
-		/* hacky af but i can't be bothered to mess around
-			with trying to remove the listener any longer
-			maybe fix this in the future idk
-		*/
 
-		const reactionTimeout = message.client.setTimeout(() => { // eslint-disable-line arrow-body-style
-			message.edit('No appropriate reaction (💬) was detected within the timeframe!').then(msg => msg.delete(300));
-			commandCalled = false;
+		const reactionTimeout = message.client.setTimeout(() => {
+			message.edit('No appropriate reaction (💬) was detected within the timeframe!').then(msg => msg.delete({ timeout: 3000 }));
+			message.client.removeListener('messageReactionAdd', reactionListener);
 		}, 1000 * 30);
 
-		function reactionListener(messageReaction, user) {
-			if (!messageReaction.me || messageReaction.emoji.name !== '💬' || !commandCalled) return;
-			else clearTimeout(reactionTimeout);
+		async function reactionListener(messageReaction, user) {
+			if (!messageReaction.me || messageReaction.emoji.name !== '💬') return;
+			else {
+				clearTimeout(reactionTimeout);
+				message.client.removeListener('messageReactionAdd', reactionListener);
+			}
 
 			messageReaction.remove();
-			const date = moment(messageReaction.message.createdTimestamp).format('Do MMM YYYY');
-			const time = moment(messageReaction.message.createdTimestamp).format('HH:mm:ss');
-			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL;
-			const embed = new RichEmbed()
-				.setColor('RANDOM')
-				.setAuthor(`${name} wrote on the ${date} at ${time}`, avatar)
-				.setDescription(`\`${messageReaction.message.content}\``);
+
+			if (!messageReaction.message.member) {
+				messageReaction.message.member = await messageReaction.message.guild.members.fetch(messageReaction.message.author.id);
+			}
+
+			const name = messageReaction.message.author.username, avatar = messageReaction.message.author.avatarURL({ format: 'png', size: 128 });
+			const embed = new MessageEmbed()
+				.setColor(messageReaction.message.member.displayHexColor)
+				.setAuthor(name, avatar)
+				.setDescription(messageReaction.message.content)
+				.setFooter(`#${messageReaction.message.channel.name}`)
+				.setTimestamp();
 
 			return message.edit({ embed }).then(msg => {
 				if (args.response) msg.channel.send(args.response);
-				commandCalled = false;
 			});
 		}
 
-		return message.client.on('messageReactionAdd', (messageReaction, user) => reactionListener(messageReaction, user));
+		return message.client.on('messageReactionAdd', reactionListener);
 	}
 }
 

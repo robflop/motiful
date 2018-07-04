@@ -25,12 +25,12 @@ class DelEmoteCommand extends Command {
 		if (emote) {
 			const emotePath = join(emoteFolder, emote);
 			unlink(emotePath, err => {
-				if (err) return message.edit(`Error deleting emote!: \`\`\`${err}\`\`\``).then(msg => msg.delete(3000));
-				else return message.edit(`Successfully deleted emote \`${args.emoteName}\`!`).then(msg => msg.delete(3000));
+				if (err) return message.edit(`Error deleting emote!: \`\`\`${err}\`\`\``).then(msg => msg.delete({ timeout: 3000 }));
+				else return message.edit(`Successfully deleted emote \`${args.emoteName}\`!`).then(msg => msg.delete({ timeout: 3000 }));
 			});
 		}
 		else {
-			return message.edit(`Emote \`${args.emoteName}\` not found!`).then(msg => msg.delete(3000));
+			return message.edit(`Emote \`${args.emoteName}\` not found!`).then(msg => msg.delete({ timeout: 3000 }));
 		}
 	}
 }

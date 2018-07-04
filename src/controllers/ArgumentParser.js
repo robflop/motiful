@@ -33,7 +33,7 @@ class ArgumentParser {
 
 	static toMessage(message, arg) {
 		if (!/^\d+$/.test(arg)) return Promise.resolve(null);
-		return message.channel.fetchMessage(arg).catch(() => null);
+		return message.channel.messages.fetch(arg).catch(() => null);
 	}
 
 	static toChannel(message, arg) {

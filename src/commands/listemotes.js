@@ -18,8 +18,8 @@ class ListEmotesCommand extends Command {
 			.filter(file => validExts.includes(file.substr(file.lastIndexOf('.') + 1)))
 			.map(file => file.replace(/\.[^/.]+$/, ''))
 			.join(', ');
-		if (!emotes.length) return message.edit('No custom emotes have been added.').then(msg => msg.delete(20000));
-		else return message.edit(`Available custom emotes are: \`\`\`${emotes}\`\`\``).then(msg => msg.delete(20000));
+		if (!emotes.length) return message.edit('No custom emotes have been added.').then(msg => msg.delete({ timeout: 20000 }));
+		else return message.edit(`Available custom emotes are: \`\`\`${emotes}\`\`\``).then(msg => msg.delete({ timeout: 20000 }));
 	}
 }
 
