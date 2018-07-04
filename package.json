@@ -1,41 +1,41 @@
 {
-  "name": "motiful",
-  "version": "4.0.0",
-  "description": "Discord selfbot built with discord.js",
-  "main": "./src/motiful",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "chalk": "^2.4.1",
-    "discord.js": "github:hydrabolt/discord.js#master",
-    "erlpack": "^0.1.2",
-    "moment": "^2.22.2",
-    "uws": "^10.148.1",
-    "zlib-sync": "^0.1.4"
-  },
-  "devDependencies": {
-    "eslint": "^5.0.1"
-  },
-  "scripts": {
-    "test": "eslint src"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/robflop/motiful.git"
-  },
-  "keywords": [
-    "discordapp",
-    "discord.js",
-    "selfbot",
-    "emotes",
-    "node"
-  ],
-  "author": "robflop",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/robflop/motiful/issues"
-  },
-  "homepage": "https://github.com/robflop/motiful#readme",
-  "engines": {
-    "node": ">=8.0.0"
-  }
+	"name": "motiful",
+	"version": "4.0.2",
+	"description": "Discord selfbot built with discord.js",
+	"main": "./src/motiful",
+	"dependencies": {
+		"axios": "^0.18.0",
+		"chalk": "^2.4.1",
+		"discord.js": "github:hydrabolt/discord.js#master",
+		"erlpack": "^0.1.2",
+		"moment": "^2.22.2",
+		"uws": "^10.148.1",
+		"zlib-sync": "^0.1.4"
+	},
+	"devDependencies": {
+		"eslint": "^5.0.1"
+	},
+	"scripts": {
+		"test": "eslint src"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/robflop/motiful.git"
+	},
+	"keywords": [
+		"discordapp",
+		"discord.js",
+		"selfbot",
+		"emotes",
+		"node"
+	],
+	"author": "robflop",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/robflop/motiful/issues"
+	},
+	"homepage": "https://github.com/robflop/motiful#readme",
+	"engines": {
+		"node": ">=8.0.0"
+	}
 }
